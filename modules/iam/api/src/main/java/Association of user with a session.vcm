@@ -1,0 +1,84 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000008 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 10bd1000 
+	"Association of user with a session"
+	""
+	""
+	""
+	{
+		/{ class CClass/ 
+			01 000b 32479003 /Location/ 0000001e 0000001e 0000023a 00000172 
+			{
+			}
+			/UOID/ 02 10bd1000 00 377b9921 
+			"AbstractUserSession"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"Methods for associated an implementation of this class with a given user."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 0ba21004 0001 00 00 
+					"IUser"
+					"getUser"
+					"Returns the user"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 16880005 0001 00 00 
+					"void"
+					"setUser"
+					"Sets the IUser"
+					0000 01 00000000 00 01 01 00 0003 
+					"IUser iUser"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2a4df006 0001 00 00 
+					"IEntity"
+					"getEntity"
+					"Returns entity."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1abc9007 0001 00 00 
+					"void"
+					"setEntity"
+					"Sets the iEntity."
+					0000 01 00000000 00 01 01 00 0003 
+					"IEntity iEntity"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+	}
+	0065 
+	"com\\sas\\framework\\system"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 09705002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

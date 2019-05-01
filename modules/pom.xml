@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.expojo</groupId>
+		<artifactId>expojo-parent</artifactId>
+		<version>3.2.1</version>	
+		<relativePath>../</relativePath>		
+	</parent>	
+
+
+	<groupId>com.expojo</groupId>
+	<artifactId>expojo-modules-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Expojo - Modules</name>
+
+	<description>
+		Parent pom file for Step Ahead Software's Expojo framework modules.
+	</description>
+  
+	<properties>
+		<expojo.version>3.2.1</expojo.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>javax.jdo</artifactId>
+				<version>${jdo.api.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-api-jdo</artifactId>
+				<version>${datanucleus.api.jdo.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sas.framework.expojo</groupId>
+				<artifactId>expojo-jdo</artifactId>
+				<version>${expojo.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>javax.jdo</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-api-jdo</artifactId>
+		</dependency>
+	</dependencies>
+
+
+  	<profiles>
+		<profile>
+			<id>build</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+ 				<module>iam</module>
+				<module>web</module>
+			</modules>
+		</profile>
+	</profiles>
+  
+	<build>
+		<plugins>
+			
+			<!--
+				This is the highest project in the pom hierarchy that contains persistent classes so it
+				defines usage of the maven resource plugin customized for DN and also the DN plugin
+				to perform enhancement on both main and test classes
+			-->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				
+	            <groupId>org.datanucleus</groupId>
+	            <artifactId>datanucleus-maven-plugin</artifactId>
+	            <version>5.0.2</version>
+	            <configuration>
+					<fork>false</fork>
+                    <api>JDO</api>
+					<props>${basedir}/src/test/resources/datanucleus.properties</props>
+                    <log4jConfiguration>${basedir}/src/test/resources/log4j2-test.yaml</log4jConfiguration>
+	                <verbose>true</verbose>
+	            </configuration>
+	            <executions>
+	                <execution>
+	                    <id>process-classes</id>
+	                    <phase>process-classes</phase>
+	                    <goals>
+	                        <goal>enhance</goal>
+	                    </goals>
+	                </execution>
+	                
+	                <!-- IMPORTANT - this is how we get persistent test classes enhanced by DataNucleus -->
+	                <execution>
+	                    <id>process-test-classes</id>
+	                    <phase>process-test-classes</phase>
+	                    <goals>
+	                        <goal>enhance</goal>
+	                    </goals>
+	                    <configuration>
+	                        <metadataDirectory>${project.build.testOutputDirectory}</metadataDirectory>
+	                    </configuration>
+	                </execution>
+        		</executions>	
+
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.logging.log4j</groupId>
+						<artifactId>log4j-core</artifactId>
+						<version>${log4j.version}</version>
+					</dependency>
+				</dependencies>
+
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

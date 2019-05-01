@@ -1,0 +1,1 @@
+To build: make sure you change the jdoDir variable to the directory containing your JDO jar files.

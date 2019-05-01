@@ -1,0 +1,726 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000005a 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 2c6bc000 
+	"Core website page and panel"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 2dc73003 /Location/ 0000017c 0000001e 00000294 00000082 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37197b17 
+			"WebPage"
+			"RENAME"
+			"org\\apache\\wicket\\markup\\html"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 10323004 /Location/ 0000001e 0000010e 000003f2 000004ba 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 3718b8a3 
+			"WebsitePage"
+			"RENAME"
+			"com\\expojo\\app\\wexpojo\\ui\\aspect"
+			"WexPOJO supports multiple website within the one app.
+
+Website is a page that is aware of the website that it is rendering for.
+"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 390bc005 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 2dc73003 00 /UOID/ 02 10323004 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 3199b048 0002 00 00 
+					"WebMarkupContainer"
+					"body"
+					"MarkupContainer for the entire body. This is used to enable us to do attribute modification on the body tag if required."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0acc1049 0001 01 01 
+					"String"
+					"bodyId"
+					"ID of the body component in markup."
+					0000 01 00 7f 01 01 
+					"\"body\""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 2e03c006 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 1f5b1015 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"PageParameters parameters"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 034fa04a 0001 00 00 
+					"WebMarkupContainer"
+					"getBody"
+					"Returns body"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1265502a 0002 00 00 
+					"void"
+					"onInitialize"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 285d7055 0001 00 00 
+					"boolean"
+					"isProtected"
+					"Returns true if the page should only be accessed by authenticated users or false if the page is not protected i.e. can be accessed by unauthenticated users."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1ce9c02b 0001 00 00 
+					"void"
+					"injectHeaderData"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2e1a9007 0001 00 00 
+					"IWebsite"
+					"getWebsiteFromDomainName"
+					"Derives the Website object from the domain name."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 095de029 0001 00 00 
+					"String"
+					"getVariation"
+					"Returns the variation (if any) for the associated website."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1ba7403b 0001 00 00 
+					"IUser"
+					"getUser"
+					"Attempts to derive the user from the session."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2d44a057 0001 00 00 
+					"IWexpojoSession"
+					"getWexpojoSession"
+					"Returns the current session."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 118ed04b 0001 00 00 
+					"boolean"
+					"isAuthenticatePage"
+					"Pages returning true will not be redirected to log in page.
+
+This should only ever be overridden by the page used for authenticating the user eg., a page with a log on form."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0aef9059 0001 00 00 
+					"String"
+					"getProtocolAndDomain"
+					"Returns protocol and domain name eg., https://mywebsite.com"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 390bc005 
+		/{ class CClass/ 
+			01 000b 02aad008 /Location/ 000005aa 000002f8 000006ae 0000035c 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 371a2f7b 
+			"IWebsite"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 2c16b009 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 320f000a 00000316 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 2c99e00b 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 320f000a 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2306c00c 00000316 
+					{
+					}
+					01 0002 01 01 0002 0080 03 
+					"website"
+					/{ class RoleText/ 
+						01 0071 0f10100d ffffff36 00000021 00000006 00000062 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 2306c00c 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2c99e00b /UOID/ 02 0f10100d 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 02aad008 /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 1658b00f /Location/ 0000051e 0000024e 00000726 000002b2 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 3718ccd0 
+			"WexpojoApplication"
+			"RENAME"
+			"com\\expojo\\app\\wexpojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 1234d010 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 240ca011 00000276 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 0dcd8012 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 240ca011 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3b3cc013 00000276 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 344d8014 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 3b3cc013 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0dcd8012 /UOID/ 02 344d8014 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1658b00f /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0f1b8030 /Location/ 00000866 0000029e 00000b72 000003f2 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 3729a2c7 
+			"WebsitePanel"
+			"RENAME"
+			"com\\expojo\\app\\wexpojo\\ui\\aspect"
+			"Base class for all panels that can have a specific website context."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 18efe031 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 1c518032 /Location/ 00000988 0000003c 00000a50 000000a0 
+						{
+						}
+						/UOID/ 02 2c6bc000 00 372923ec 
+						"Panel"
+						"RENAME"
+						"org\\apache\\wicket\\markup\\html\\panel"
+						"Describe here"
+						"h"
+						"java"
+						0000 
+						""
+						01 0001 0000 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 0f1b8030 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 16f14035 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"String id"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 0fe4a034 0001 00 00 
+					"IWebsite"
+					"getWebsite"
+					"Returns the IWebsite for the WebsitePage that this WebsitePanel is part of."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3a0ad033 0001 00 00 
+					"WebsitePage"
+					"getWebsitePage"
+					"Returns the WebsitePage that this page is a direct or indirect child of."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3c07a058 0001 00 00 
+					"String"
+					"getProtocolAndDomain"
+					"Returns protocol and domain name eg., https://mywebsite.com"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 1c518032 /UOID/ 02 18efe031 
+		/{ class AssociationChain/ 
+			01 0069 04571036 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 16bbe037 00000316 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 02db0038 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 2e393130 /UOID/ 02 16bbe037 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3b92c039 00000316 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 34ab603a 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 52746573 /UOID/ 02 3b92c039 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 02db0038 /UOID/ 02 34ab603a 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 02aad008 /UOID/ 02 0f1b8030 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 1496603c /Location/ 000005b4 0000014a 00000668 000001ae 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 372cfd2a 
+			"IUser"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 0003303d 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1812c03e 0000017c 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 0cf1403f 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 1812c03e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 32dc7040 0000017c 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 0843e041 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 32dc7040 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0cf1403f /UOID/ 02 0843e041 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1496603c /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 22f0b042 /Location/ 0000053c 000001cc 00000708 00000230 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 372f88c4 
+			"IWexpojoSession"
+			"RENAME"
+			"com\\expojo\\app\\wexpojo\\ui\\session"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 34eb7043 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 27952044 00000212 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 178e3045 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 65746172 /UOID/ 02 27952044 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 01761046 00000212 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 2a4d9047 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 2e393130 /UOID/ 02 01761046 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 178e3045 /UOID/ 02 2a4d9047 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 22f0b042 /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 264d404c /Location/ 00000294 0000050a 000003fc 000005e6 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37328453 
+			"LogoutPage"
+			"RENAME"
+			"com\\expojo\\app\\wexpojo\\ui\\aspect\\logout"
+			"Page that invalidates the session and returns to the logout destination page."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 3fb0704d 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 10323004 00 /UOID/ 02 264d404c 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 3819304e 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 0961004f 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"PageParameters parameters"
+					0000 
+					""
+				/} class FConstructor/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 3fb0704d 
+		/{ class CClass/ 
+			01 000b 3f279051 /Location/ 00000032 0000050a 0000023a 00000622 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 3748c68d 
+			"ProtectedPage"
+			"RENAME"
+			"com\\expojo\\app\\wexpojo\\ui\\aspect"
+			"A page whose access is protected from unauthenticated access.
+If a browser attempts to view such a page and there is no currently authenticated user associated with the session then the browser will be redirected to the authentication page. After successful log in they will be redirected back to the page they were attempting to view.
+While it is possible to make any class protected by overriding isProtected() this class acts as both a convenience and a marker class - any protected class can simply derive from this class to make it obvious to developers viewing the code that is is protected."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 30672052 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 10323004 00 /UOID/ 02 3f279051 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 0a383053 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 1ff3c054 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"PageParameters parameters"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 2dbe1056 0001 00 00 
+					"boolean"
+					"isProtected"
+					"Returns true if the page should only be accessed by authenticated users or false if the page is not protected i.e. can be accessed by unauthenticated users."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 30672052 
+	}
+	0074 
+	"com\\sas\\app\\wexpojo\\ui"
+	0000 
+	/{ class GuiMgdRelationGen/ 
+		01 04b0 02f9300e 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class GuiMgdRelationGen/ 
+/} class ClassDiagram/ 

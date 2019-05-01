@@ -1,0 +1,2011 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001af 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 394d7000 
+	"Expojo Foundation, ServletFilter"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 28e0e003 /Location/ 0000001e 0000001e 00000532 000007c6 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000065 
+			"ModelExposer"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Central class for implementing the \"Exposed Model\" pattern.
+Supports the 'availability' of the ModelExposer to all objects in a thread via attachment to the thread ie., dependency injection. In most scenarios threads are shared resources (eg., servlet environment) and so should not be permanently attached to a ModelExposer. attachThread and detachThread are provided and work with the ThreadLocal attribute to provide almost 'singleton' like (without the bad bits) access to the model exposer from within a thread that has been attached.
+No automatic attachment/detachment takes place in the constructor, init or destroy methods because no assumptions are made that these methods are running in the thread that is the one that should be attached to the ModelExposer.
+Typically in a web app environment the developer will configure the ExpojoServletFilter in web.xml and this will perform the dependency injection automatically. This is designed to work perfectly with the \"OpenPersistenceManagerInView\" and \"OpenSessionInView\" strategies.
+
+See web/web.xml for an example web.xml file that configures the ExpojoServletContextListener and ExpojoServletFilter for a typical web application.
+@see com.sas.framework.expojo.servlet.ExpojoServletContextListener
+@see com.sas.framework.expojo.servlet.ExpojoServletFilter
+
+
+IBound detachment feature option
+Some UI frameworks (eg., Wicket) provide built in detachment of model objects and so registering them via ExPOJO is not necessary as the UI framework will already be detaching them.
+Some UI frameworks do not provide a built in detachment mechanism. ExPOJO's IBound registration feature can provide that in this scenario.
+ModelExposer can store references to individual IBoundS. When detachBounds is called (by ExpojoServletFilter after servicing HTTP request but before committing transaction) all IBoundS that have been registered with the ModelExposer will have their detach method's called. When a UI element is used again later the getObject method of any IModelReference (extends IBound) implementation knows how to re-attach to a valid reference to the model object (implementation varies depending on persistence technology used (eg., Hibernate, JDO, JPA).
+IBoundS are registered using weak refrences and so will automatically be released soon after there are no strong references to a particular IBound object any more."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 1cf0a0ab 0003 01 00 
+					"ThreadLocal"
+					"threadLocalModelExposer"
+					"A thread local used to store the persistence provider per thread. This has an initialization construct so we can always assume that the threadLocalModelExposer is not null."
+					0000 01 00 7f 01 00 
+					"new ThreadLocal()"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 1e7300af 0002 00 00 
+					"boolean"
+					"traceTxDepth"
+					"If true dumps information about the transaction depth each time begin, commit or rollback are called."
+					0000 01 00 7f 01 01 
+					"false"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 15c840f0 0003 00 00 
+					"int"
+					"activeThreads"
+					"Number of active threads currently associated with this ModelExposer. There can be no more than one."
+					0000 01 00 7f 01 01 
+					"0"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0a87b159 0003 00 00 
+					"WeakHashMap<IBound, Integer>"
+					"boundRegistrations"
+					"Stores references to registered IBoundS."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1d7a800d 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"PersistenceProvider iPersistenceProvider"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 316d4060 0001 00 00 
+					"void"
+					"init"
+					"This should be called after construction to allow initialization of the exposer components that have been added. Calls init on each ModelExposerComponent that has been added.
+They may override ModelExposerComponent.init to set up references to other services or repositories as required - in this case the super class init() must be called at the end of the overwritten init() method."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 03a30022 0001 00 00 
+					"void"
+					"destroy"
+					"Destroys this model exposer instance, closing it's PersistenceProvider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3d33c09a 0002 00 00 
+					"void"
+					"finalize"
+					"Called to destroy the ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0381a0b0 0001 00 00 
+					"boolean"
+					"getTraceTxDepth"
+					"Returns traceTxDepth"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2688c0b1 0001 00 00 
+					"void"
+					"setTraceTxDepth"
+					"Sets traceTxDepth"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean traceTxDepth"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 32253109 0001 00 00 
+					"void"
+					"setThreadBindListener"
+					"Sets a listener on the binding of this ModelExposer to a thread via attachThread/detachThread."
+					0000 01 00000000 00 01 00 00 0003 
+					"ThreadBindListener iThreadBindListener"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 314bc0ac 0001 00 00 
+					"void"
+					"attachThread"
+					"Implements Dependency Injection:
+Attaches this ModelExposer to the current thread. This is called automatically by the ExpojoServletFilter prior to servicing a HTTP request so that model objects can call ModelExposer.get() and get this model exposer during the servicing of that HTTP request.
+This eliminates the need to manually inject a ModelExposer dependency into various objects that might need one because the ModelExposer is available to all objects in the current thread via ModelExposer.get()."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1dc880ad 0001 00 00 
+					"void"
+					"detachThread"
+					"Detaches a ModelExposer from the current thread - enabling it to be garbage collected if necessary (assuming ThreadLocal had the last remaining reference to the ModelExposer).
+This is called automatically by the ExpojoServletFilter after the current HTTP request has been serviced."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0faac0f1 0001 00 00 
+					"int"
+					"getActiveThreads"
+					"Returns activeThreads"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1647b0f2 0001 00 00 
+					"void"
+					"setActiveThreads"
+					"Sets activeThreads"
+					0000 01 00000000 00 01 00 00 0003 
+					"int activeThreads"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 046bd03e 0001 01 00 
+					"ModelExposer"
+					"get"
+					"Returns the ModelExposer for the current thread. Each thread has its own seperate set of instances of the ModelExposer and its components - thus avoiding issues with the Singleton pattern."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 151c80fe 0001 01 00 
+					"ModelExposerComponent"
+					"get"
+					"Returns the ModelExposerComponent with the given Id.
+This method should not be called prior to a ModelExposer being completely initialized. This means that when ModelExposerComponent's are being initialized themselves they must use getComponent on the ModelInstance provided to their init method instead of using the static get method. "
+					0000 01 00000000 00 01 00 00 0003 
+					"Object id"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 236bc10c 0001 01 00 
+					"PersistenceProvider"
+					"pp"
+					"Static convenience method to return a persistence provider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 23563059 0001 00 00 
+					"PersistenceProvider"
+					"getPersistenceProvider"
+					"Returns a ThreadLocal version of the appropriate PersistenceProvider. Each thread that calls this will then end up with a unique connection to the persistence service with which to access the data store."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0ab8f01f 0001 00 00 
+					"void"
+					"addService"
+					"Adds a service component to the model exposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServiceComponent serviceComponent"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c0cc020 0001 00 00 
+					"void"
+					"addRepository"
+					"Adds a repository to the model exposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"RepositoryComponent repositoryComponent"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 044db0ff 0002 00 00 
+					"void"
+					"addComponent"
+					"Adds a component to the ModelExposer"
+					0000 01 00000000 00 01 00 00 0003 
+					"ModelExposerComponent component"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 06fe2100 0001 00 00 
+					"ModelExposerComponent"
+					"getComponent"
+					"Returns the ModelExposerComponent with the given ID."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object id"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 02742057 0001 00 00 
+					"ServiceComponent"
+					"getService"
+					"Returns the service of the given name or null if not found."
+					0000 01 00000000 00 01 00 00 0003 
+					"String serviceName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 320d8058 0001 00 00 
+					"RepositoryComponent"
+					"getRepository"
+					"Returns a repository of the given name or null if not found."
+					0000 01 00000000 00 01 00 00 0003 
+					"String repositoryName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b67b121 0001 00 00 
+					"void"
+					"executeWrapped"
+					"Wraps an operation inside an open transaction with this ModelExposer attached to the current thread.
+After execution the transaction is committed (or rolled back on exception) and this ModelExposer is detached from the thread."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWrappedOperation operation, Object param1, Object param2"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2c775170 0001 01 00 
+					"void"
+					"executeWrappedCreate"
+					"Wrapping operations within the context of an open transaction and managing the commit or rollback is a very common requirement in enterprise applications and the executeWrappedCreate method enables this pattern to be implemented without having to explicitly rewrite the entire transaction management construct each time.
+If no ModelExposer is associated with the current thread then it creates one and calls executeWrapped on it. If a ModelExposer was created then before returning it destroys it.
+This method does not take parameters that are to be passed to the IWrappedOperation because typical usage involves an anonymous class that can access attributes of the class it is instantiated in or final locals.
+
+ModelExposer.executeWrappedCreate assumes that no transaction context is present already and so creates a new ModelExposer, attaches it to the current thread and then executes the provided implementation of IWrappedOperation. This can be provided as an anonymous class or an explicit class. The call to the 'execute' method is wrapped within a 'begin transaction' and 'commit transaction' and all are within a try block whose catch will perform a rollback.  The finally block detaches the ModelExposer from the thread and then destroys it."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWrappedOperation operation"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 39769175 0001 01 00 
+					"void"
+					"executeWrappedCreate"
+					"Wrapping operations within the context of an open transaction and managing the commit or rollback is a very common requirement in enterprise applications and the executeWrappedCreate method enables this pattern to be implemented without having to explicitly rewrite the entire transaction management construct each time.
+If no ModelExposer is associated with the current thread then it creates one and calls executeWrapped on it. If a ModelExposer was created then before returning it destroys it.
+This method does not take parameters that are to be passed to the IWrappedOperation because typical usage involves an anonymous class that can access attributes of the class it is instantiated in or final locals.
+
+ModelExposer.executeWrappedCreate assumes that no transaction context is present already and so creates a new ModelExposer, attaches it to the current thread and then executes the provided implementation of IWrappedOperation. This can be provided as an anonymous class or an explicit class. The call to the 'execute' method is wrapped within a 'begin transaction' and 'commit transaction' and all are within a try block whose catch will perform a rollback.  The finally block detaches the ModelExposer from the thread and then destroys it."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWrappedOperation operation, Object param1, Object param2"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 36ccd13c 0001 00 00 
+					"String"
+					"toString"
+					"Returns a summary of the ModelExposer including statistics from the PersistenceProvider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2981415a 0001 00 00 
+					"void"
+					"registerBound"
+					"Registers an IBound. All registered IBoundS will have their detach method called when detachThread is called on this ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"IBound bound"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 11b80160 0001 00 00 
+					"void"
+					"detachBounds"
+					"Calls detach on all registerd IBoundS"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 354d8011 /Location/ 00000064 000008a2 000003e8 00000fd2 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000006b 
+			"PersistenceProvider"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Superclass for all persistence providers. This class is extended to provide persistence engine specific implementations. eg., HibernatePersistenceProvider and JdoPersistenceProvider. These objects are typically kept 'open' throughout multiple HTTP requests, for each request a transaction is begun at the start and commited (or rolled back) at the end. This implements the 'OpenSessionInView' (hibernate) or 'OpenPersistenceManagerInView' pattern.
+A future possible enhancement is to add an optional \"free persistence provider' mechanism at the end of each HTTP request."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 31a79097 0002 00 00 
+					"int"
+					"depth"
+					"Depth of the deepest transaction. 0 = no active transaction.
+beginTx increments and commitTx and rollbackTx decrement depth.
+See rollbackTx for more information."
+					0000 01 00 7f 01 01 
+					"0"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 18a400b2 0001 00 00 
+					"void"
+					"setModelExposer"
+					"Sets the owning ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"ModelExposer iModelExposer"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 12d8210b 0001 01 00 
+					"PersistenceProvider"
+					"get"
+					"Static method that returns the PersistenceManager of the ModelExposer attached to the current thread."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1f5ce0ea 0001 00 00 
+					"int"
+					"getTxDepth"
+					"Returns the transaction depth. This does not infer support for nested transactions (they would have to be supported by the underlying ORM) but it does allow for more than one call to beginTx without a corresponding commitTx or rollbackTx so long as the beginTx calls eventually matches the sum of the commitTx and rollbackTx calls."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ee060ef 0001 00 00 
+					"void"
+					"flushChanges"
+					"Not normally required. Causes all of the uncommitted changes to be committed to the database. Occassionally it is desirable or sometimes even necessary to get all changes to your model up to a certain point commited to the database prior to proceeding further  - regardless of the current transaction depth. This method will do a forced commit and return with the transaction depth at the same level it was at when called."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c2d607d 0001 00 00 
+					"void"
+					"open"
+					"Opens a persistence provider."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 08701015 0001 00 00 
+					"void"
+					"beginTx"
+					"Begins a transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3e1a2016 0001 00 00 
+					"void"
+					"commitTx"
+					"Commits a transaction if the transaction depth is 1, otherwise merely decreases the transaction depth. To force a real commit regardless of the current transaction depth use forceCommitTx."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0f785137 0001 00 00 
+					"void"
+					"forceCommitTx"
+					"Forces a real commit, regardless of the current transaction depth. Afterwards the transaction is reopened and the txDepth is restored to its previous value less 1."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2458f144 0001 00 00 
+					"void"
+					"forceRollbackTx"
+					"Forces a real rollback, regardless of the current transaction depth. Afterwards the transaction is reopened and the txDepth is restored to its previous value less 1."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0efc4017 0001 00 00 
+					"void"
+					"rollbackTx"
+					"Rolls back a transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0ef4a0f8 0001 00 00 
+					"void"
+					"flush"
+					"Flushes all object modifications to SQL (as yet uncommitted) that makes newly created objects and changes available to DB queries within the current transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 38b520f3 0001 00 00 
+					"void"
+					"clearTx"
+					"Rollsback any active transaction and sets the tx depth back to 0."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 398c70bc 0001 00 00 
+					"boolean"
+					"hasActiveTx"
+					"Returns true if the PersistenceProvider has an active transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 10a0305a 0001 00 00 
+					"Object"
+					"persist"
+					"Makes the given object persistent."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 10916136 0001 00 00 
+					"Object"
+					"attach"
+					"Reattaches the given unattached object to the PersistenceProvider"
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c04c139 0001 00 00 
+					"Object"
+					"detachCopy"
+					"Returns a detached copy of the given persistent object."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 013e405b 0001 00 00 
+					"void"
+					"delete"
+					"Deletes the persistent object from the datastore."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 32cee143 0001 00 00 
+					"void"
+					"deleteAll"
+					"Deletes the persistent objects contained in the collection."
+					0000 01 00000000 00 01 00 00 0003 
+					"Collection toDelete"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b595073 0001 00 00 
+					"void"
+					"close"
+					"Closes the persistence provider. It can no longer be used after being closed."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 37ce40ed 0001 00 00 
+					"void"
+					"refresh"
+					"Refreshes a single object instance."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 173890ee 0001 00 00 
+					"void"
+					"refreshAll"
+					"Refresh all transactional instances - only has effect if within the context of an open transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 00b380e6 0001 00 00 
+					"void"
+					"evict"
+					"Evicts a persistent object from the PersistenceProvider's cache."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3a4890e7 0001 00 00 
+					"void"
+					"evictAll"
+					"Evicts all objects from the PersistenceManager's cache."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ff2907a 0001 00 00 
+					"RuntimeException"
+					"processException"
+					"Processes an exception thrown while in a transaction. The exception could be relevent to the persistence technology or a generic RuntimeException. If it's an optimistic verification exception (optimistic locking check failed) then no exception is thrown and the persistence technology may or may not need clean. In the case of JDO a rollback as already been performed."
+					0000 01 00000000 00 01 01 00 0003 
+					"RuntimeException e"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3515313b 0001 00 00 
+					"String"
+					"getStatistics"
+					"Returns a summary of the statistics regarding the PersistenceProvider. Typically this will be a count of the number of objects it is currently managing in it's L1 cache."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2312c162 0001 00 00 
+					"long"
+					"getObjectId"
+					"Returns the numeric portion of the OID for the given object."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 20970163 0001 00 00 
+					"Object"
+					"getObject"
+					"Returns the object of the given class and oid."
+					0000 01 00000000 00 01 01 00 0003 
+					"Class cls, long oid"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0de68181 0001 00 00 
+					"void"
+					"detectAttachedRelationships"
+					"Detects if the given object related directly or indirectly to any attached objects. Typically used when re-detaching an supposedly already detached object graph to ensure that there are no references to attached objects."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3c318024 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 05b93025 0000023a 
+					{
+					}
+					01 0002 00 01 0001 0001 02 
+					"modelExposer"
+					/{ class RoleText/ 
+						01 0071 1033c026 00000026 0000000c 00000193 0000004d 
+						{
+						}
+						""
+						0925 0001 00596ae8 /UOID/ 02 05b93025 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2a105027 0000023a 
+					{
+					}
+					02 0002 01 01 0001 0001 00 
+					"persistenceProvider"
+					/{ class RoleText/ 
+						01 0071 334df028 fffffe1b ffffffc9 00000006 0000000a 
+						{
+						}
+						""
+						0925 0001 65747369 /UOID/ 02 2a105027 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 1033c026 /UOID/ 02 334df028 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 354d8011 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0ab71044 /Location/ 00000d5c 00000ac8 00000f8c 00000b2c 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000006f 
+			"ExpojoContextFactory"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Superclass for all persistence exposer factories. These will provide an appropriate PersistenceProvider on request."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class Annotation/ 
+			01 0064 01385050 /Location/ 00001536 00000794 000016aa 0000080a 
+			{
+			}
+			"This class is designed to be shared among different threads."
+			0810 0002 98c398c3 
+		/} class Annotation/ 
+		/{ class AssociationChain/ 
+			01 0069 15512080 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2fe96081 00000ad2 
+					{
+					}
+					00 0002 00 01 0001 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 05f2e082 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000041 /UOID/ 02 2fe96081 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1eb1a083 00000ad2 
+					{
+					}
+					01 0002 01 01 0001 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 3afe7084 ffffffe6 ffffffc1 fffffffa ffffffc6 
+						{
+						}
+						""
+						0925 0001 00000016 /UOID/ 02 1eb1a083 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 05f2e082 /UOID/ 02 3afe7084 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0ab71044 /UOID/ 02 354d8011 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 1809e0be /Location/ 0000155e 0000038e 00001932 000006fe 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000079 
+			"ExpojoServletFilter"
+			"RENAME"
+			"com\\sas\\framework\\expojo\\servlet"
+			"A servlet filter that automatically implements dependency injection by calls to attachThread at the start of doFilter and detachThread after the filter chain/servlet has generated the response. Any servlet for which this filter is assigned can be guaranteed to have get:ModelExposer return a valid, session specific ModelExposer object.
+This filter accepts an ignorePaths parameter in the web.xml which can contain a comma separated list of paths (no spaces, no leading slash) which should NOT be wrapped by exPOJO.
+Typically ignorePaths is used for paths such as images/, resources/ etc., Such http requests are usually satisfied by the servlet container without any datastore access and so there is no need to wrap the request within an exPOJO dependency injection."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 13ef80e2 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 3a7000e3 /Location/ 000016ee 000001b8 000017a2 0000021c 
+						{
+						}
+						/UOID/ 02 394d7000 00 0000007c 
+						"Filter"
+						"RENAME"
+						"javax\\servlet"
+						"Servlet filter interface."
+						"h"
+						"java"
+						0002 
+						""
+						01 0001 0001 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 1809e0be 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 3ccca0cf 0001 01 01 
+					"String"
+					"ATTR_MODEL_EXPOSER"
+					"Name of the attribute used to store the ModelExposer in the session."
+					0000 01 00 7f 01 01 
+					"\"expojo.modex\""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 06cef0f7 0003 00 00 
+					"int"
+					"requestId"
+					"RequestId counter."
+					0000 01 00 7f 01 01 
+					"0"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 364b3115 0003 00 00 
+					"HashSet<String>"
+					"ignorePaths"
+					"Stores the paths to be ignored as specified in the ignorePaths parameter."
+					0000 01 00 7f 01 01 
+					"new HashSet<String>()"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 333d217b 0003 01 00 
+					"boolean"
+					"exposerPerRequest"
+					"true if a new exposer is created for every http request
+false if exposer/session affinity should be used so that the exposer is attached to the session and reused for all requests for the same session (legacy mode - new code should always use exposerPerRequest=true)"
+					0000 01 00 7f 01 01 
+					"false"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 1f00f0bf 0001 00 00 
+					"void"
+					"init"
+					"Does nothing."
+					0000 01 00000000 00 01 00 00 0003 
+					"FilterConfig filterConfig"
+					0000 
+					"ServletException"
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 07f411a7 0001 00 00 
+					"String"
+					"getExpojoFoundationClassName"
+					"Returns the name of the application specific class that extends ExpojoFoundation."
+					0000 01 00000000 00 01 00 00 0003 
+					"FilterConfig filterConfig"
+					0000 
+					"ServletException"
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0f8390c1 0001 00 00 
+					"void"
+					"doFilter"
+					"Call filter to performing filter operations and hand on request to the next filter in the chain."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServletRequest request, ServletResponse response, FilterChain chain"
+					0000 
+					"java.io.IOException, ServletException"
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1fb070c0 0001 00 00 
+					"void"
+					"destroy"
+					"Does nothing."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0efbd10e 0001 00 00 
+					"void"
+					"logError"
+					"Logs an error message via the ExpojoFoundation"
+					0000 01 00000000 00 01 00 00 0003 
+					"String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 38583116 0001 00 00 
+					"void"
+					"logInfo"
+					"Logs an info message via the ExpojoFoundation"
+					0000 01 00000000 00 01 00 00 0003 
+					"String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 39e1b16e 0001 00 00 
+					"void"
+					"logWarn"
+					"Logs a warning message via the ExpojoFoundation"
+					0000 01 00000000 00 01 00 00 0003 
+					"String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 17acd171 0001 00 00 
+					"void"
+					"logTrace"
+					"Logs a trace message via the ExpojoFoundation"
+					0000 01 00000000 00 01 00 00 0003 
+					"String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 308a917c 0001 01 00 
+					"boolean"
+					"isExposerPerRequestMode"
+					"Returns true if exposer per request mode is used."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+				/{ class LoggerCodeInjector/ 
+					01 371f 3f00a19e 
+				/} class LoggerCodeInjector/ 
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 2f61a0c2 /Location/ 00000c9e 00000276 00001162 0000096a 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000007a 
+			"ExpojoFoundation"
+			"RENAME"
+			"com\\sas\\framework\\expojo\\servlet"
+			"This is the foundation of any Expojo based application and is responsible for the establishment of the business layer components and their initialization and, in particular, the underlying persistence engine (typically an ORM) that is providing the transparent persistence services for the model objects in the business layer.
+It contains methods that are called for application initialization and shutdown.
+It is designed to be extended by an application specific class which needs to override the abstract methods..
+You may also like to optionally override establishGenesisObjects to establish the initial objects in the datastore when hasGenesisObjects returns true.
+@see com.sas.framework.expojo.ExpojoContextFactory#createPersistenceProvider
+@see com.sas.framework.expojo.ExpojoContextFactory#addComponents
+
+This class currently depends on classes in the Java Servlet API but this could be changed if the class was ever required to run in a non Servlet API environment (e.g. Java desktop application) but that need has not yet arisen."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 1e7330cc 0001 01 00 
+					"ExpojoFoundation"
+					"me"
+					"Returns this singleton."
+					0000 01 00 7f 01 00 
+					"null"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 14e960f4 0003 00 00 
+					"String"
+					"contextPath"
+					"Stores the applicaiton context."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 37630117 0002 01 00 
+					"boolean"
+					"initialized"
+					"Initially false but set to true at the completion of contextInitialized. The ExpojoServletFilter will halt processing of the servlet filter chain until initialized becomes true. "
+					0000 01 00 7f 01 01 
+					"false"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 06d960cd 0001 00 00 
+					"no type"
+					"Constructor"
+					"Sets 'me' to this."
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 05f4d0ce 0001 01 00 
+					"ExpojoFoundation"
+					"get"
+					"Returns this singleton object."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1fac50c3 0001 00 00 
+					"ExpojoContextFactory"
+					"createExpojoContextFactory"
+					"Overridden in a derived class to create the ExpojoContextFactory."
+					0000 01 00000000 00 01 01 00 0003 
+					"ServletContextEvent event"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 34a2d10a 0001 00 00 
+					"ExpojoContext"
+					"establishExpojoContext"
+					"This method is called by the ExpojoServletFilter.doFilter method when there is no ExpojoContext bound to the session yet i.e. it must be a new session.
+ This method returns an ExpojoContext which will then be bound to the new session (or new request if expojoContextPerRequest is true) by the ExpojoServletFilter. 
+The algorithm for establishing the ExpojoContext can be completely under the control if the application chooses to override this method in its extended ExpojoFoundation class or it can simply inherit the behaviour provided by this class which it to create a new ExpojoContext at each call - which can very innefficient when the HTTP clients are robots that do not accept session identification mechanisms like cookies and URL rewriting with session IDs.
+An overridden establishExpojoContext method should consider the following scenarios:
+Possible Secanrios:
+1. A normal user using a browser - the app should create a new a ModelExposer
+2. A crawler - crawlers don't support cookies and will ignore URL rewriting
+	attempts so it is not possible to have one session span more than one HTTP
+ request - each request will return false for getSession(false);
+In order to avoid creating a new ModelExposer and thus a PersistenceProvider and Level 1 cache for each new request from the crawler the application should 
+associate a ExpojoContext with the crawler and return that when required rather than return a new ModelExposer each time a request is made. The synchronized section below will ensure that only one thread can service a specific crawler's thread at a time ensuring that the crawler's PersistenceProvider is not accessed concurrently."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServletRequest servletRequest"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 36bb10d2 0001 00 00 
+					"void"
+					"establishGenesisObjects"
+					"Genesis objects are the essential, persistent, system objects that must be created right at the beginning of the life of a new system and from which all other objects will go forth and multiply. 
+If hasGenesisObjects() returns false then this method is called to create the genesis objcets.
+If you're a creationist then this method represents the time in which a supernatural entity called god, built the earth and everything around it. If you're an evolutionist then this method represents the big bang. Take your pick.
+This method is wrapped by code that has created a ModelExposer object and attached it to this thread.
+
+This method should ideally be located in a core ServiceComponent of the application."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServletContextEvent event"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 17155148 0001 00 00 
+					"void"
+					"initDataModel"
+					"Initializatoin of the model.
+Prerequisite: data model already exists.
+Use: this method can be used to perform data migration etc., if required."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3efdf0d5 0001 00 00 
+					"void"
+					"initApplication"
+					"Overridden in derived classes to perform any applicaiton specific initialization, if required, after the framework initialization has taken place."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 28b46129 0002 00 00 
+					"void"
+					"initContextPrePersistenceInit"
+					"Performs the parts of the app/context initialization that must occur before the persistence framework has been initialized.
+For example this method will typically be overridden to perform the reading of parameters configured in context.xml or some other config file.
+It can be assumed that the persistence framework has not yet been initialized by the time this method is called and therefore initialization of objects that can determine the persistence framework initialization behaviour can occur in this method."
+					0000 01 00000000 00 01 01 00 0003 
+					"final ServletContextEvent event"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0062217f 0003 00 00 
+					"void"
+					"initContextPostPersistenceInit"
+					"Performs the initialization of the app/context including calls to initialize the data model and calls overrideable initApplication method once everything else is initialized.
+It can be assumed that the persistence framework has been initialized by the time this method is called."
+					0000 01 00000000 00 00 00 00 0003 
+					"final ServletContextEvent event"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2d9fd0d1 0001 00 00 
+					"void"
+					"contextInitialized"
+					"Performs application initialisation and establishment of the PersistenceProviderFactory.
+It is not necessary to override this method but if it is then be sure to call this method first in the overridden method. Typically any application specific initialization is done by overriding initApplication which this method calls."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServletContextEvent event"
+					0001 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 34bf012b 0001 00 00 
+					"ExpojoContext"
+					"createExpojoContext"
+					"Creates an ExpojoContext. Application developers should rarely need to call this. This is called implicitly by the ExpojoServletFilter to establish an ExpojoContext object for each new session or request (depending on whether expojoContext per request is used)."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2e3f7147 0001 00 00 
+					"boolean"
+					"hasGenesisObjects"
+					"Returns true if the datastore already has the genesis objects (i.e. if it is not a new, blank system).
+If this method returns false then establishGenesisObjects will be called to establish genesis objects for a new blank system.
+NOTE: This method is called each time the servlet context starts up so it is important to check if a well known 'key' genesis object already exists (via a query method in an appropriate repository) and only return false if this key object can not be found."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0137b0d6 0001 00 00 
+					"void"
+					"destroyApplication"
+					"Called by the framework to allow application specific destruction behaviour. Override if  required."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0175e0d7 0001 00 00 
+					"void"
+					"contextDestroyed"
+					"Called when the application context is being destroyed. Typically an application will not override this method but override destroyApplication if application specific destruction is required."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServletContextEvent event"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 369470cb 0001 00 00 
+					"ExpojoContextFactory"
+					"getExpojoContextFactory"
+					"Returns expojoContextFactory. Called by ExpojoServletFilter when creating a ExpojoContext."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 342670f5 0001 00 00 
+					"String"
+					"getContextPath"
+					"Returns contextPath"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1f0d50f6 0001 00 00 
+					"void"
+					"setContextPath"
+					"Sets contextPath"
+					0000 01 00000000 00 01 00 00 0003 
+					"String contextPath"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3a8500fa 0001 00 00 
+					"String"
+					"getApplicationInfo"
+					"Returns details of the application such as Name, Copyright info etc.,"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 16910145 0001 00 00 
+					"String"
+					"getCopyrightInfo"
+					"Returns details of the application such as Name version etc"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 19c260fb 0001 00 00 
+					"void"
+					"log"
+					"Logs a message of the given type to System.out. This is not intended to be an exhaustive logging mechanism but one that is intended to be overridden in derived context classes to allow logging powerful logging frameworks like log4j. The implementation of this method is to avoid exPOJO having any dependency on log4j or any other specific logging framework."
+					0000 01 00000000 00 01 00 00 0003 
+					"int logType, String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 10d35197 0003 01 00 
+					"void"
+					"logToStdOut"
+					"Logs a message of the given type to System.out. This is not intended to be an exhaustive logging mechanism nor can it be called directly. The implementation of this method is to avoid exPOJO having any dependency on log4j or any other specific logging framework."
+					0000 01 00000000 00 01 00 00 0003 
+					"int logType, String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 22b0310d 0001 01 00 
+					"void"
+					"sLog"
+					"Static logger method. Logs a message of the given type to System.out. This is not intended to be an exhaustive logging mechanism but one that is intended to be overridden in derived context classes to allow logging powerful logging frameworks like log4j. The implementation of this method is to avoid exPOJO having any dependency on log4j or any other specific logging framework."
+					0000 01 00000000 00 01 00 00 0003 
+					"int logType, String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 11937183 0001 01 00 
+					"void"
+					"sLogError"
+					"Static logger method. Logs a message of the given type to System.out. This is not intended to be an exhaustive logging mechanism but one that is intended to be overridden in derived context classes to allow logging powerful logging frameworks like log4j. The implementation of this method is to avoid exPOJO having any dependency on log4j or any other specific logging framework."
+					0000 01 00000000 00 01 00 00 0003 
+					"String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1b9c8184 0001 01 00 
+					"void"
+					"sLogWarn"
+					"Static logger method. Logs a message of the given type to System.out. This is not intended to be an exhaustive logging mechanism but one that is intended to be overridden in derived context classes to allow logging powerful logging frameworks like log4j. The implementation of this method is to avoid exPOJO having any dependency on log4j or any other specific logging framework."
+					0000 01 00000000 00 01 00 00 0003 
+					"String msg"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 34bf9185 0001 01 00 
+					"void"
+					"sLogInfo"
+					"Static logger method. Logs a message of the given type to System.out. This is not intended to be an exhaustive logging mechanism but one that is intended to be overridden in derived context classes to allow logging powerful logging frameworks like log4j. The implementation of this method is to avoid exPOJO having any dependency on log4j or any other specific logging framework."
+					0000 01 00000000 00 01 00 00 0003 
+					"String msg"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+				/{ class LoggerCodeInjector/ 
+					01 371f 214fa19f 
+				/} class LoggerCodeInjector/ 
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 258df0c4 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 38fdf0c5 00000e42 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 35eff0c6 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 baadf00d /UOID/ 02 38fdf0c5 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2dab60c7 00000e42 
+					{
+					}
+					01 0000 01 01 0002 0001 00 
+					"expojoContextFactory"
+					/{ class RoleText/ 
+						01 0071 0f8740c8 00000012 ffffffb7 0000026e fffffff8 
+						{
+						}
+						""
+						0925 0001 006b6162 /UOID/ 02 2dab60c7 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 35eff0c6 /UOID/ 02 0f8740c8 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0ab71044 /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 035c40d8 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 00d5b0d9 0000038e 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 2cda10da ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 006d6376 /UOID/ 02 00d5b0d9 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2801a0db 0000038e 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 2b9ef0dc 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 006d6376 /UOID/ 02 2801a0db 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2cda10da /UOID/ 02 2b9ef0dc 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 28e0e003 /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 3f61f0dd 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1a92f0de 00000550 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 01abd0df ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 73697372 /UOID/ 02 1a92f0de 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 173130e0 00000550 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 2dcc50e1 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 173130e0 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 01abd0df /UOID/ 02 2dcc50e1 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 28e0e003 /UOID/ 02 1809e0be 
+		/} class AssociationChain/ 
+		/UOID/ 02 3a7000e3 /UOID/ 02 13ef80e2 
+		/{ class Annotation/ 
+			01 0064 0e8a110f /Location/ 00001220 00000226 000013db 00000350 
+			{
+			}
+			"Override the log method in your application's ExpojoFoundation class to redirect logging to log4j or some other logging framework. Without overriding the log method log messages will go to System.out."
+			0810 0002 706a6376 
+		/} class Annotation/ 
+		/{ class AssociationChain/ 
+			01 0069 29c30110 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 04ab5111 0000092e 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 24af4112 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 6a72706a /UOID/ 02 04ab5111 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 03f03113 0000092e 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 09676114 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 36203130 /UOID/ 02 03f03113 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 24af4112 /UOID/ 02 09676114 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 354d8011 /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 000b811f /Location/ 00000802 0000046a 000009f6 0000050a 
+			{
+			}
+			/UOID/ 02 394d7000 00 099d373e 
+			"IWrappedOperation"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"An operation that is wrapped inside the context of a ModelExposer that is attached to the thread and wrapped inside an open transaction."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 13e98120 0001 00 00 
+					"void"
+					"execute"
+					"Executes this operation wrapped with a thread attached ModelExposer and an open transaction. param1 and param2 are the same values as thosed passed to ModelExposer.executeWrapped(param1, param2). Obviously some casting will be required as appropriate if parameters will be used by the operation."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object param1, Object param2"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 34290122 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 28383123 00000474 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3b37b124 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00080008 /UOID/ 02 28383123 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 01d16125 00000474 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 28df7126 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000004 /UOID/ 02 01d16125 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 3b37b124 /UOID/ 02 28df7126 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 000b811f /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 28755138 /Location/ 00001202 0000092e 000014fb 00000b78 
+			{
+			}
+			"addComponents is deliberately implemented by a ExpojoContextFactory derivative in each application and not in ExpojoFoundation.
+This makes it easier for the developer to switch between Mock and ORM implementations of the ExpojoContextFactory and hence the ExpojoContext's it produces.
+As ExpojoContext components are specific to the persistence implementation (or Mock) then addComponent can not be a generic method residing within ExpojoFoundation.
+It does mean that the developer needs to create a new application specific ExpojoContextFactory derived class for each ExpojoContext implementation but the flexibility this brings makes that small effort very worthwhile."
+			0810 0002 70006a72 
+		/} class Annotation/ 
+		/{ class AssociationChain/ 
+			01 0069 3bf3e13d 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 3ecbd13e 0000032a 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 009cf13f 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 202e3031 /UOID/ 02 3ecbd13e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1441a140 0000032a 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 05d43141 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 706a6376 /UOID/ 02 1441a140 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 009cf13f /UOID/ 02 05d43141 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 2f61a0c2 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 2a848172 /Location/ 00000d8e 00000c8a 0000107a 00000e44 
+			{
+			}
+			"Todo:
+
+1. [Done via exposerPerRequest] doFilter should create a new ExpojoContext on entry and destroy it prior to exit.
+
+2. doFilter should assign ExpojoContext from a pool on entry and release it prior to exit 
+(depends on performance cost in creating new EC's from scratch each time)
+
+"
+			0810 0002 706a6376 
+		/} class Annotation/ 
+		/{ class AssociationChain/ 
+			01 0069 33223176 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 29bf1177 00000474 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 15222178 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 706a6376 /UOID/ 02 29bf1177 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1c919179 00000474 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3c6a717a 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 6a72706a /UOID/ 02 1c919179 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 15222178 /UOID/ 02 3c6a717a 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 000b811f /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 12c3d186 /Location/ 000014be 000001b8 0000164e 0000021c 
+			{
+			}
+			/UOID/ 02 394d7000 00 2c4d72b4 
+			"ServletContext"
+			"RENAME"
+			"javax\\servlet"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3f483187 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2175b188 000015a4 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 0ad5b189 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 2175b188 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3d93718a 000015a4 
+					{
+					}
+					01 0002 01 01 0002 0001 02 
+					"servletContext"
+					/{ class RoleText/ 
+						01 0071 23c8818b fffffe82 00000034 ffffffef 00000075 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 3d93718a 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0ad5b189 /UOID/ 02 23c8818b 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 12c3d186 /UOID/ 02 1809e0be 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 1d5a718c /Location/ 00001252 000003b6 0000146e 0000041a 
+			{
+			}
+			/UOID/ 02 394d7000 00 2c4f891f 
+			"ServletContextEvent"
+			"RENAME"
+			"javax\\servlet"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 1aab718d 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 3888e18e 000003f2 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 21b5218f ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 3888e18e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3c02d190 000003f2 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 389e7191 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 67006564 /UOID/ 02 3c02d190 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 21b5218f /UOID/ 02 389e7191 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1d5a718c /UOID/ 02 1809e0be 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 26b50192 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 138ef193 000004a6 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 0e620194 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 706a6376 /UOID/ 02 138ef193 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 14b40195 000004a6 
+					{
+					}
+					01 0000 01 01 0002 0001 01 
+					"expojoFoundation"
+					/{ class RoleText/ 
+						01 0071 1fdb2196 00000021 ffffffa9 00000220 ffffffea 
+						{
+						}
+						""
+						0925 0001 35006564 /UOID/ 02 14b40195 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0e620194 /UOID/ 02 1fdb2196 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 2f61a0c2 /UOID/ 02 1809e0be 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 138c3198 /Location/ 0000172a 00000938 000018e2 0000099c 
+			{
+			}
+			/UOID/ 02 394d7000 00 2c4c7cd6 
+			"ServletException"
+			"RENAME"
+			"javax\\servlet"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 37ed9199 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 34e4219a 00001798 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 0d7ca19b 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 6c090909 /UOID/ 02 34e4219a 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 228e319c 00001798 
+					{
+					}
+					01 0002 01 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 1bd4419d 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 09090909 /UOID/ 02 228e319c 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0d7ca19b /UOID/ 02 1bd4419d 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 138c3198 /UOID/ 02 1809e0be 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 080081a0 /Location/ 00000816 0000010e 000009a6 00000172 
+			{
+			}
+			/UOID/ 02 394d7000 00 37535c1f 
+			"ExpojoContext"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 0d8dd1a1 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 28e0e003 00 /UOID/ 02 080081a0 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 292a71a2 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 29b6c1a3 00000294 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 124a21a4 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 6f707845 /UOID/ 02 29b6c1a3 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3575b1a5 000008e8 
+					{
+					}
+					01 0002 01 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 372721a6 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 652e6b72 /UOID/ 02 3575b1a5 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 124a21a4 /UOID/ 02 372721a6 
+			}
+			0003 /Bend coords/ 000008f2 0000029e 
+			/NullObj/ 00 /UOID/ 02 080081a0 /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/UOID/ 02 0d8dd1a1 
+		/{ class Annotation/ 
+			01 0064 2818a1a8 /Location/ 00000b0e 000000c8 00000b22 000000d2 
+			{
+			}
+			""
+			0810 0002 6c696620 
+		/} class Annotation/ 
+		/{ class AssociationChain/ 
+			01 0069 05a391a9 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 162261aa 0000169e 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 105381ab 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 6e656e6f /UOID/ 02 162261aa 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2c0da1ac 00000136 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 13bbe1ad 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 2074206e /UOID/ 02 2c0da1ac 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 105381ab /UOID/ 02 13bbe1ad 
+			}
+			0003 /Bend coords/ 000016a8 00000140 
+			/NullObj/ 00 /UOID/ 02 080081a0 /UOID/ 02 1809e0be 
+		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 2c0c71ae /Location/ 00001202 000005e6 0000148b 0000080c 
+			{
+			}
+			"NOTE:
+
+Different servlet containers have different start up ordering.
+Some (eg., Jetty) initialize ServletFilters synchronously in the order in which they appear in the web.xml.
+Others (eg., Tomcat 7.x) initialise ServletFilters in random order which means that, say, doing any initialization in 
+the Wicket application object's init() method that assumes that the ExpojoServletFilter has properly initialized and
+established the ORM will fail on such servlet containers."
+			0810 0002 00000003 
+		/} class Annotation/ 
+	}
+	008a 
+	"com\\sas\\framework\\expojo\\servlet"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 325b4001 
+		""
+		0000 00000000 00000000 00 00 00 00 00 00 
+		"OpLckVersion"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

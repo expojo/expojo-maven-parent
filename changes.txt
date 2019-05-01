@@ -1,0 +1,48 @@
+exPOJO Change History
+---------------------
+
+See GitHub for change history after 2011
+
+2.0.1 2011/03/28
+- PersistenceProviderFactory has been renamed to ModelExposerFactory reflecting the fact that it is really creating generic ModelExposerS which just happen to contain their own persistence engine specific PersistenceProvider. exPOJO is all about persistence that is transparent to your domain model classes and ModelExposerS are the key enabler in achieving this goal.
+
+- The ExpojoServletContextListener no longer has the addComponents method. This method has migrated to ModelExposerFactory which is designed to be extended to have the addComponents method implemented for the specific persistence technology that you use. ExpojoServletContextListener is web app specific so moving addComponents to ModelExposerFactory means that web apps, non web apps and even non HTTP related threads within a web app can all have ModelExposer's constructed by a single, convenience factory. For a mock factory implementation simply extend MockModelExposerFactory and for real persistence extend one of the JdoModelExposerFactory variants or the HibernateModelExposer variant.
+
+- New 'attach' method added.
+- New 'forceCommitTx' method added.
+
+1.3.3 2008/06/26
+- Changed ExpojoServletFilter such that the HTTP request code now synchronizes access to the ModelExposer to prevent concurrent threading inside any single session's ModelExposer.
+
+1.3.2 2008/05/31
+
+-Added PersistenceProvider.flushChanges which can be called at anytime to perform a forced commit and then afterwards return the transaction depth back to its previous value to maintain the correct value for the current level of nesting.
+Calling flushChanges is sometimes required when you are creating an object graph with extremely complex cyclic relationships.
+These can sometimes cause ORMs to generate FK constraint violations if the database commit is performed in one step right at the end after the object graph is fully established in memory.
+Often the only workaround is to commit the object graph to the database in a piecemeal fashion - calling flushChanges at various places in the object graph creation code accomplishes this.
+
+-Guido's JDOQueryResultCollection has been improved to handle use within nested queries - ie. it can be produced from one query and then used as the extent for another query. This now works when the first query resulted in an empty JDOQueryResultCollection.
+
+1.3.1
+
+-Renamed ExpojoServletContext to ExpojoServletContextListener.
+-Updated documentation.
+-Added Javadoc pages.
+-ExpojoServletFilter now accesses correct root exception via getRootCause().
+
+1.3
+
+- Avoided the need to override ModelExposer. Now just override ExpojoServletContext and provided implementations for addComponents and createPersistenceProviderFactory.
+- Added ExpojoServletFilter
+- Added ExpojoServletContext
+
+1.2
+
+- Redistributed under changed licensing to allow free use in commercial applications.
+
+1.1
+
+- Added support for Hibernate persistence
+
+1.0
+- Released

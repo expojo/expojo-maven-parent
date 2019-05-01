@@ -1,0 +1,32 @@
+00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 00000022 01 
+/{ class ModelRepository/ 
+	01 2134 22102000 
+	{
+	}
+	"Chris Colman"
+	"Step Ahead Software"
+	"IAM Simple Implementation"
+	"(c) 2006, 2019 Step Ahead Software Pty Ltd. All rights reserved."
+	00 01 00 
+	"h"
+	"java"
+	0000012c 000000c8 
+	"com\\sas\\framework\\iam\\simple"
+	""
+	""
+	{
+		/{ class ClassDiagramRef/ 
+			01 2135 09feb021 
+			"DEFAULT"
+			"Simple User Repository Implementation"
+			/UOID/ 02 22102000 
+			"simpleUserImpl.vcm"
+		/} class ClassDiagramRef/ 
+	}
+	/{ class MakeRunOptions/ 
+		01 048e 3dd51007 0004 0000 0000 01 
+		"ant compile"
+		"ant run"
+		01 00 
+	/} class MakeRunOptions/ 
+/} class ModelRepository/ 

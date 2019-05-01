@@ -1,0 +1,1 @@
+expojo_jdo.vcm ClassId base: 0

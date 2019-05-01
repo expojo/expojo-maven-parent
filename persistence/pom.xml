@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.expojo</groupId>
+		<artifactId>expojo-parent</artifactId>
+		<version>3.2.1</version>	
+		<relativePath>../</relativePath>		
+	</parent>	
+
+	<groupId>com.expojo</groupId>
+	<artifactId>expojo-persistence-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Expojo - Persistence</name>
+
+	<description>
+		Parent pom file for Step Ahead Software's Expojo framework persistence implementations.
+	</description>
+  
+	<properties>
+	</properties>
+
+	<dependencies>
+	</dependencies>
+
+
+  	<profiles>
+		<profile>
+			<id>build</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+ 				<module>jdo</module>
+			</modules>
+		</profile>
+	</profiles>
+  
+</project>

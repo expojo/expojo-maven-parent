@@ -1,0 +1,32 @@
+00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 00000003 01 
+/{ class ModelRepository/ 
+	01 2134 2dd51000 
+	{
+	}
+	"Chris Colman"
+	"Step Ahead Software"
+	"Untitled Project"
+	""
+	01 01 00 
+	"h"
+	"java"
+	0000012c 000000c8 
+	""
+	""
+	""
+	{
+		/{ class ClassDiagramRef/ 
+			01 2135 010a9001 
+			"DEFAULT"
+			"exPOJO Hibernate specific classes"
+			/UOID/ 02 2dd51000 
+			"expojo_hibernate.vcm"
+		/} class ClassDiagramRef/ 
+	}
+	/{ class MakeRunOptions/ 
+		01 048e 3ec66002 0004 0000 0000 01 
+		"ant compile"
+		"ant run"
+		01 00 
+	/} class MakeRunOptions/ 
+/} class ModelRepository/ 

@@ -1,0 +1,434 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000b3 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 2003b000 
+	"Authentication Impl"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 2b6cd008 /Location/ 000001fe 00000168 000004e2 00000208 
+			{
+			}
+			/UOID/ 02 2003b000 00 372da29c 
+			"IAuthenticator"
+			"RENAME"
+			"com\\sas\\framework\\iam\\authentication"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0002 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 3f495009 0001 00 00 
+					"IUser"
+					"authenticateCredentials"
+					"Finds a user with the given credentials (username and password and optionally realm) and returns it. This is called to authenticate a user in the system.
+If authentication failed null will be retuned otherwise a User object will be returned."
+					0000 01 00000000 00 01 01 00 0003 
+					"String username, String password, boolean digested, IRealm realm"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 1d76900a /Location/ 000002f8 0000001e 000003d4 00000082 
+			{
+			}
+			/UOID/ 02 2003b000 00 372eebcd 
+			"IRealm"
+			"RENAME"
+			"com\\sas\\framework\\iam\\realm"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 1b28300b 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 35bb500c 00000366 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 313b400d 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 6176616a /UOID/ 02 35bb500c 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2be2500e 00000366 
+					{
+					}
+					01 0002 01 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 0e68c00f 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 76726553 /UOID/ 02 2be2500e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 313b400d /UOID/ 02 0e68c00f 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1d76900a /UOID/ 02 2b6cd008 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0e562010 /Location/ 000001ea 0000001e 0000029e 00000082 
+			{
+			}
+			/UOID/ 02 2003b000 00 372f65fe 
+			"IUser"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 22c02011 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 21842012 0000023a 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 05ef3013 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 616a5c6e /UOID/ 02 21842012 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2bc84014 0000023a 
+					{
+					}
+					01 0002 01 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 13642015 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 76726553 /UOID/ 02 2bc84014 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 05ef3013 /UOID/ 02 13642015 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0e562010 /UOID/ 02 2b6cd008 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 3d4e7090 /Location/ 0000041a 0000001e 000004ba 00000082 
+			{
+			}
+			/UOID/ 02 2003b000 00 37534a08 
+			"Ex"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 3f93a096 /Location/ 0000001e 000002c6 0000032a 0000041a 
+			{
+			}
+			/UOID/ 02 2003b000 00 375028fe 
+			"SimpleAuthenticator"
+			"RENAME"
+			"com\\sas\\framework\\iam\\authentication\\expojo"
+			"A very simple authenticator - not for production use."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 36dc2097 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 2b6cd008 00 /UOID/ 02 3f93a096 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 0a6f3098 0003 00 00 
+					"boolean"
+					"noPasswordCheck"
+					"Set to true if password should be ignored. This might be the case if operating in some kind of demonstration mode where we don't want to force users to enter a password."
+					0000 01 00 7f 01 01 
+					"false"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 39327099 0001 00 00 
+					"IUser"
+					"authenticateCredentials"
+					"Finds a user with the given credentials (username and password and optionally realm) and returns it. This is called to authenticate a user in the system.
+If authentication failed null will be retuned otherwise a User object will be returned.
+If realm is not null then the first matching attempt will occur on all OrgRoleUser that reference an OrgRoleInst for the give OrgUnit (IRealm)."
+					0000 01 00000000 00 01 00 00 0003 
+					"String username, String password, boolean digested, IRealm realm"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3f9d609a 0001 00 00 
+					"boolean"
+					"getNoPasswordCheck"
+					"Returns noPasswordCheck"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 079e809b 0001 00 00 
+					"void"
+					"setNoPasswordCheck"
+					"Sets noPasswordCheck"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean noPasswordCheck"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+				/{ class LoggerCodeInjector/ 
+					01 371f 26a630a0 
+				/} class LoggerCodeInjector/ 
+			}
+		/} class CClass/ 
+		/UOID/ 02 36dc2097 
+		/{ class CClass/ 
+			01 000b 2475809d /Location/ 000003e8 00000320 000006e0 000003c0 
+			{
+			}
+			/UOID/ 02 2003b000 00 375265dc 
+			"AnonymousAuthenticator"
+			"RENAME"
+			"com\\sas\\framework\\iam\\authentication\\expojo"
+			"A non production authenticator that always passes every authentication - it does not check username or password.
+
+Regardless of the username or password entered it always returns the \"anonymous\" user.
+
+This is for TESTING purposes only and should NEVER be used in a production environment."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 3d9f209e 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 2b6cd008 00 /UOID/ 02 2475809d 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 329ee09f 0001 00 00 
+					"IUser"
+					"authenticateCredentials"
+					"Finds a user with the given credentials (username and password and optionally realm) and returns it. This is called to authenticate a user in the system.
+If authentication failed null will be retuned otherwise a User object will be returned.
+If realm is not null then the first matching attempt will occur on all OrgRoleUser that reference an OrgRoleInst for the give OrgUnit (IRealm)."
+					0000 01 00000000 00 01 00 00 0003 
+					"String username, String password, boolean digested, IRealm realm"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+				/{ class LoggerCodeInjector/ 
+					01 371f 04bec0a1 
+				/} class LoggerCodeInjector/ 
+			}
+		/} class CClass/ 
+		/UOID/ 02 3d9f209e 
+		/{ class AssociationChain/ 
+			01 0069 0c2000a8 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 04fa90a9 0000046a 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 1c8750aa 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 04fa90a9 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3692e0ab 0000046a 
+					{
+					}
+					01 0002 01 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 013760ac 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 3692e0ab 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 1c8750aa /UOID/ 02 013760ac 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 3d4e7090 /UOID/ 02 2b6cd008 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0332a0ad /Location/ 00000640 0000017c 000007e4 000001e0 
+			{
+			}
+			/UOID/ 02 2003b000 00 3760d9e1 
+			"UserRepository"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3bfb60ae 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 0a3380af 000001a4 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 260ef0b0 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 006f6e20 /UOID/ 02 0a3380af 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 08d5d0b1 000001a4 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 01a6e0b2 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 08d5d0b1 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 260ef0b0 /UOID/ 02 01a6e0b2 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0332a0ad /UOID/ 02 2b6cd008 
+		/} class AssociationChain/ 
+	}
+	007b 
+	"com\\sas\\framework\\iam\\authentication\\expojo"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 2b3aa002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

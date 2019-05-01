@@ -1,0 +1,364 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000008b 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 2c6bc000 
+	"Website Repository"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 1ec2600f /Location/ 0000001e 000001c2 000003b6 000002da 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37194f97 
+			"IWebsiteRepository"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Basic repository of hosted websites."
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 066fc02b 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 36dad02a /Location/ 00000082 0000001e 000001c2 00000082 
+						{
+						}
+						/UOID/ 02 2c6bc000 00 371adca7 
+						"Serializable"
+						"RENAME"
+						"java\\io"
+						"Describe here"
+						"h"
+						"java"
+						0002 
+						""
+						01 0001 0001 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 1ec2600f 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 19741010 0001 00 00 
+					"void"
+					"addWebsite"
+					"Adds a website to the repo."
+					0000 01 00000000 00 01 01 00 0003 
+					"IWebsite website"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 01c1c015 0001 00 00 
+					"IWebsite"
+					"findWebsiteByHostName"
+					"Finds a website given its host name and returns it.
+If not found this will return null (no OptionalS in this code friends. People who need trainig wheels to handle nulls are in the wrong job)"
+					0000 01 00000000 00 01 01 00 0003 
+					"String hostName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 17f00087 0001 00 00 
+					"Collection<IWebsite>"
+					"findAllWebsites"
+					"Returns all IWebsites in the repository."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 2a388011 /Location/ 00000988 00000438 00000d34 00000604 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 371a928d 
+			"WebsiteInMemoryStore"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"This is a simple non persistent \"in memory\" store.
+
+It must be populated at start up time by the application."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 067a9080 0003 01 01 
+					"WebsiteInMemoryStore"
+					"self"
+					"Static reference to the singleton WebsiteInMemoryStore."
+					0000 01 00 7f 01 01 
+					"new WebsiteInMemoryStore()"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1deef02c 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 1475c078 0001 01 00 
+					"WebsiteInMemoryStore"
+					"get"
+					"Static convenience method to return the website store."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2627b013 0001 00 00 
+					"void"
+					"addWebsite"
+					"Adds a website to the repo."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWebsite website"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0e6ff014 0001 00 00 
+					"IWebsite"
+					"findWebsiteByHostName"
+					"Finds a website given its host name and returns it.
+If not found this will return null (no OptionalS in this code friends. People who need trainig wheels to handle nulls are in the wrong job)"
+					0000 01 00000000 00 01 00 00 0003 
+					"String hostName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 19730077 0001 00 00 
+					"Collection<IWebsite>"
+					"findAllWebsites"
+					"Returns all IWebsites in the repository."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 36dad02a /UOID/ 02 066fc02b 
+		/{ class CClass/ 
+			01 000b 26b57079 /Location/ 000001c2 0000042e 000005be 000005fa 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37be0a28 
+			"WebsiteRepository"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Provides access to the website store."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 3293b07f 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 1ec2600f 00 /UOID/ 02 26b57079 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+				/{ class BaseClassRef/ 
+					01 006b 185d3088 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0001 
+					/{ class CClass/ 
+						01 000b 3cd1a089 /Location/ 00000500 00000208 00000744 0000026c 
+						{
+						}
+						/UOID/ 02 2c6bc000 00 37becb0e 
+						"RepositoryComponent"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"Describe here"
+						"h"
+						"java"
+						0000 
+						""
+						00 0001 0000 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 26b57079 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1cb95081 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object, initializing the reference to the website store."
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 040d907b 0001 01 00 
+					"IWebsiteRepository"
+					"get"
+					"Static convenience method to return the repository"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0149308a 0002 00 00 
+					"WebsiteInMemoryStore"
+					"getWebsiteStore"
+					"Returns the Website store."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1989907c 0001 00 00 
+					"void"
+					"addWebsite"
+					"Adds a website to the repo."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWebsite website"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1b2d607d 0001 00 00 
+					"IWebsite"
+					"findWebsiteByHostName"
+					"Finds a website given its host name and returns it.
+If not found this will return null (no OptionalS in this code friends. People who need trainig wheels to handle nulls are in the wrong job)"
+					0000 01 00000000 00 01 00 00 0003 
+					"String hostName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 11bf307e 0001 00 00 
+					"Collection<IWebsite>"
+					"findAllWebsites"
+					"Returns all IWebsites in the repository."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 3293b07f 
+		/{ class AssociationChain/ 
+			01 0069 0e38d082 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 16cb6083 00000582 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 18e98084 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 2e393130 /UOID/ 02 16cb6083 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2411b085 00000582 
+					{
+					}
+					01 0002 01 01 0002 0001 03 
+					"websiteStore"
+					/{ class RoleText/ 
+						01 0071 36656086 fffffeb3 ffffffa9 ffffffff ffffffea 
+						{
+						}
+						""
+						0925 0001 2e393130 /UOID/ 02 2411b085 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 18e98084 /UOID/ 02 36656086 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 2a388011 /UOID/ 02 26b57079 
+		/} class AssociationChain/ 
+		/UOID/ 02 3cd1a089 /UOID/ 02 185d3088 
+	}
+	0073 
+	"com\\sas\\app\\wexpojo\\biz\\website"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 36050002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<!--
+	Library Building Ant Script
+-->
+
+<project default="dist" name="expojo">
+	<description>EXPOJO - A framework to make it simple to use the "exposed domain model" pattern of access to objects that are transparently or almost transparently persisted</description>
+	<property name="srcDir" location="src"/>
+	<property name="buildDir" location="build"/>
+	<property name="distDir" location="dist"/>
+	<property name="libDir" value="../core/dist"/>
+
+<!-- CHANGE THIS TO WHERE YOUR HIBERNATE .jar FILES ARE LOCATED -->
+	<property name="hibernateDir" value="D:/work/hiber/lib"/>
+
+	<!-- lib.classpath -->
+
+	<path id="lib.classpath">
+	      <fileset dir="${libDir}">
+		  <include name="**/*.jar"/>
+ 	      </fileset>
+	      <fileset dir="${hibernateDir}">
+		  <include name="**/*.jar"/>
+ 	      </fileset>
+	</path>
+
+	<!-- lib.classpath -->
+
+	<path id="compile.classpath">
+
+		<path refid="lib.classpath"/>
+
+		<pathelement location="${buildDir}"/>
+
+	</path>
+
+
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="${buildDir}"/>
+		<mkdir dir="${distDir}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac 
+			debug="true"
+			srcdir="${srcDir}"
+			destdir="${buildDir}"
+			source="1.5"
+			target="1.5" >
+
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar destfile="${distDir}/expojo_hibernate-2.0.1.jar" basedir="${buildDir}">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+			</manifest>
+		</jar>
+		<!-- uncomment to jar the source code also -->
+			<jar destfile="${distDir}/expojo_hibernate-2.0.1-src.jar" basedir="${srcDir}"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${buildDir}"/>
+		<delete dir="${distDir}"/>
+	</target>
+
+</project>

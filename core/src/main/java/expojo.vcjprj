@@ -1,0 +1,55 @@
+00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 00000007 01 
+/{ class ModelRepository/ 
+	01 2134 2ee06000 
+	{
+	}
+	"Chris Colman"
+	"Step Ahead Software"
+	"ExPOJO Core"
+	"(c) 2007, 2015. Step Ahead Software Pty Ltd.
+This software is released under the Apache 2 License, a copy of which can be found at:
+http://www.apache.org/licenses/LICENSE-2.0.html"
+	00 01 00 
+	"h"
+	"java"
+	0000012c 000000c8 
+	""
+	""
+	""
+	{
+		/{ class ClassDiagramRef/ 
+			01 2135 338da001 
+			"DEFAULT"
+			"Expojo Core"
+			/UOID/ 02 2ee06000 
+			"expojo_core.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 1e9d6004 
+			"DEFAULT"
+			"Expojo Foundation, ServletFilter"
+			/UOID/ 02 2ee06000 
+			"expojo_servlet.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 01ef1005 
+			"DEFAULT"
+			"Exopjo Module System"
+			/UOID/ 02 2ee06000 
+			"expojo_module.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 2d9a5006 
+			"DEFAULT"
+			"Expojo Context and Components"
+			/UOID/ 02 2ee06000 
+			"expojo_context_components.vcm"
+		/} class ClassDiagramRef/ 
+	}
+	/{ class MakeRunOptions/ 
+		01 048e 2ce1d002 0004 0000 0000 01 
+		"ant compile"
+		"ant run"
+		01 00 
+	/} class MakeRunOptions/ 
+/} class ModelRepository/ 

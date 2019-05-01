@@ -1,0 +1,2236 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001d4 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 394d7000 
+	"Expojo Context and Components"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 28e0e003 /Location/ 0000001e 0000001e 00000532 0000083e 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000065 
+			"ExpojoContext"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Central class for implementing the \"Exposed Model\" pattern.
+Supports the 'availability' of the ExpojoContext to all objects in a thread via attachment to the thread ie., TDP (Thread Dependency Provisioning) instead of the less performant, reflection heavy and/or annotation/scanning or XML based form of dependency provisioning known as Dependency Injection (DI).
+
+In most scenarios threads are pooled resources (eg., servlet environment) and so should not be permanently attached to a ModelExposer. attachThread and detachThread are provided and work with the ThreadLocal attribute to provide almost 'singleton' like (without the bad bits) access to the ExpojoContext from within a thread that has been attached.
+
+No automatic attachment/detachment takes place in the constructor, init or destroy methods because no assumptions are made that these methods are running in the thread that is the one that should be attached to the ExpojoContext.
+
+Typically in a web app environment the developer will configure the ExpojoServletFilter in web.xml and this will perform the dependency injection automatically. This is designed to work perfectly with the \"OpenPersistenceManagerInView\" and \"OpenSessionInView\" strategies.
+
+See web/web.xml for an example web.xml file that configures the ExpojoFoundation and ExpojoServletFilter for a typical web application.
+@see com.sas.framework.expojo.servlet.ExpojoFoundation
+@see com.sas.framework.expojo.servlet.ExpojoServletFilter
+
+ExpojoContext effeciently supports the provisioning of a set of \"components\" which are indexed via a Class based key. The developer is free to choose whatever class they like to key their components on so long as they use the same key for registration of the component as they do for retrieval of the component.
+Components are either RepositoryComponentS or ServiceComponentS and the key used will typically be the base class or interface that defines that repository or service's API. It is not mandatory that the key must be an interface but many will choose to do this as it is fairly common practice.
+
+For example a user repository that provides access to IUser objects will typically have an interface IUserRepository that defines the method signatures of the generic query methods of the user repository. It will then have an implementation class for a particular ORM. Queriy method implementations are notoriously ORM specific so the implementation will be specific to that developer's favourite ORM API e.g. JDO, JPA or ORM engine.
+
+The developer would typically use IUserRepository.class for the key of the user repostory. Regardless of the particular repository component implementation registered with the ExpojoContext the client code that requires that repository can expect to be provisioned with \"an\" implemenation of IUserRepository when they request a component using that key. Client code can therefore be written in a completely ORM agnostic manner. Any ORM specifics are hidden from most of the applications code so that the bulk of the code can be written as simple POJOs - assuming that the persistence and retrieval of model objects happens automatically and transparently - a truly \"zen\" way to write Java applications.
+
+IBound detachment feature option
+Some UI frameworks (eg., Wicket) provide built in detachment of model objects and so registering them via Expojo is not necessary as the UI framework will already be detaching them.
+Some UI frameworks do not provide a built in detachment mechanism. Expojo's IBound registration feature can provide that in this scenario.
+ExpojoContext can store references to individual IBoundS. When detachBounds is called (by ExpojoServletFilter after servicing HTTP request but before committing transaction) all IBoundS that have been registered with the ExpojoContext will have their detach method's called. When a UI element is used again later the getObject method of any IModelReference (extends IBound) implementation knows how to re-attach to a valid reference to the model object (implementation varies depending on persistence technology used (eg., Hibernate, JDO, JPA).
+IBoundS are registered using weak refrences and so will automatically be released soon after there are no strong references to a particular IBound object any more."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 1aea71b8 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 1f62519e /Location/ 000010ea 00000028 0000150e 000003d4 
+						{
+						}
+						/UOID/ 02 394d7000 00 37529ed7 
+						"ModelExposer"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"An ExpojoContext provides all the dependencies that any code may require including: repository components, service components and a persistence provider which supports the main operations of the underlying ORM e.g. persist, attach, delete, evict, getObject, getObjectId etc.,
+In Expojo an ExpojoContext is bound to the current thread via a number of mechanisms. This is known as TDP (Thread Dependency Provisioning).
+In TDP, unlikle DI, individual objects do not need to each be injected with the dependency when required, instead the dependencies are provisioned via the ExpojoContext object and are thus available to any code executing a bound thread without having to \"pre-litter\" that code with dependency injection importing annotated attribute declarations with all the dependencies one *thinks* they might need.
+In a web app the ExpojoFilter can be configured so that every thread servicing a http request has an ExpojoContext automatically bound to it at the start of the request processing and automatically unbound after the http request has been completed.
+Any code executing in the thread that is servicing the HTTP request thus has quick and simple, high performance access to the ExpojoContext via ExpojoContext.get().
+Expojo is both highly productive during development time and highly performant at runtime compared to less efficient traditional dependency injection mechanisms which involve a more invasive, physical injection of the dependency. "
+						"h"
+						"java"
+						0000 
+						""
+						01 0001 0001 00 00 0000 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+							/{ class Function/ 
+								01 0010 3ac391b9 0001 00 00 
+								"void"
+								"executeWrapped"
+								"Wraps an operation inside an open transaction with this ModelExposer attached to the current thread.
+After execution the transaction is committed (or rolled back on exception) and this ModelExposer is detached from the thread."
+								0000 01 00000000 00 01 00 00 0003 
+								"IWrappedOperation operation, Object param1, Object param2"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 23f7f1ba 0001 01 00 
+								"void"
+								"executeWrappedCreate"
+								"Wrapping operations within the context of an open transaction and managing the commit or rollback is a very common requirement in enterprise applications and the executeWrappedCreate method enables this pattern to be implemented without having to explicitly rewrite the entire transaction management construct each time.
+If no ModelExposer is associated with the current thread then it creates one and calls executeWrapped on it. If a ModelExposer was created then before returning it destroys it.
+This method does not take parameters that are to be passed to the IWrappedOperation because typical usage involves an anonymous class that can access attributes of the class it is instantiated in or final locals.
+
+ModelExposer.executeWrappedCreate assumes that no transaction context is present already and so creates a new ModelExposer, attaches it to the current thread and then executes the provided implementation of IWrappedOperation. This can be provided as an anonymous class or an explicit class. The call to the 'execute' method is wrapped within a 'begin transaction' and 'commit transaction' and all are within a try block whose catch will perform a rollback.  The finally block detaches the ModelExposer from the thread and then destroys it."
+								0000 01 00000000 00 01 00 00 0003 
+								"IWrappedOperation operation"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 0f2ed1bb 0001 01 00 
+								"void"
+								"executeWrappedCreate"
+								"Wrapping operations within the context of an open transaction and managing the commit or rollback is a very common requirement in enterprise applications and the executeWrappedCreate method enables this pattern to be implemented without having to explicitly rewrite the entire transaction management construct each time.
+If no ModelExposer is associated with the current thread then it creates one and calls executeWrapped on it. If a ModelExposer was created then before returning it destroys it.
+This method does not take parameters that are to be passed to the IWrappedOperation because typical usage involves an anonymous class that can access attributes of the class it is instantiated in or final locals.
+
+ModelExposer.executeWrappedCreate assumes that no transaction context is present already and so creates a new ModelExposer, attaches it to the current thread and then executes the provided implementation of IWrappedOperation. This can be provided as an anonymous class or an explicit class. The call to the 'execute' method is wrapped within a 'begin transaction' and 'commit transaction' and all are within a try block whose catch will perform a rollback.  The finally block detaches the ModelExposer from the thread and then destroys it."
+								0000 01 00000000 00 01 00 00 0003 
+								"IWrappedOperation operation, Object param1, Object param2"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 1c8aa1c4 0001 01 00 
+								"PersistenceProvider"
+								"pp"
+								"Static convenience method to return a persistence provider."
+								0000 01 00000000 00 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 32bf21bc 0001 01 00 
+								"ExpojoContext"
+								"get"
+								"Returns the ExpojoContext for the current thread. Each thread will be transiently bound to its an ExpojoContext instance - thus avoiding issues with the Singleton pattern and more traditional, obsfuscated and lower performance, reflection/AOP based dependency injection frameworks (eg., Spring, Guava)."
+								0000 01 00000000 00 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 0a8841c7 0001 01 00 
+								"ExpojoComponent"
+								"get_legacy"
+								"Returns the ExpojoComponent with the given Id.
+This method should not be called prior to a ModelExposer being completely initialized. This means that when ExpojoComponent's are being initialized themselves they must use getComponent on the ModelInstance provided to their init method instead of using the static get method. "
+								0000 01 00000000 00 01 00 00 0003 
+								"Object id"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 036b01cc 0001 00 00 
+								"void"
+								"destroy"
+								"Destroys this model exposer instance, closing it's PersistenceProvider."
+								0000 01 00000000 00 01 01 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 22ada1c2 0001 00 00 
+								"void"
+								"attachThread"
+								"Implements Dependency Injection:
+Attaches this ModelExposer to the current thread. This is called automatically by the ExpojoServletFilter prior to servicing a HTTP request so that model objects can call ModelExposer.get() and get this model exposer during the servicing of that HTTP request.
+This eliminates the need to manually inject a ModelExposer dependency into various objects that might need one because the ModelExposer is available to all objects in the current thread via ModelExposer.get()."
+								0000 01 00000000 00 01 01 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 0f2671c3 0001 00 00 
+								"void"
+								"detachThread"
+								"Detaches a ModelExposer from the current thread - enabling it to be garbage collected if necessary (assuming ThreadLocal had the last remaining reference to the ModelExposer).
+This is called automatically by the ExpojoServletFilter after the current HTTP request has been serviced."
+								0000 01 00000000 00 01 01 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 095211c5 0001 00 00 
+								"void"
+								"addService"
+								"Adds a service component to the model exposer."
+								0000 01 00000000 00 01 01 00 0003 
+								"Class key, ServiceComponent serviceComponent"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 225f01c6 0001 00 00 
+								"void"
+								"addRepository"
+								"Adds a repository to the model exposer."
+								0000 01 00000000 00 01 01 00 0003 
+								"Class key, RepositoryComponent repositoryComponent"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 1e7191ca 0001 00 00 
+								"ServiceComponent"
+								"getService"
+								"Returns the service associated with the given key."
+								0000 01 00000000 00 01 01 00 0003 
+								"Class key"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 3e0711cb 0001 00 00 
+								"RepositoryComponent"
+								"getRepository"
+								"Returns a repository associated with the given key."
+								0000 01 00000000 00 01 01 00 0003 
+								"Class key"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 202011cd 0001 00 00 
+								"PersistenceProvider"
+								"getPersistenceProvider"
+								"Returns a ThreadLocal version of the appropriate PersistenceProvider. Each thread that calls this will then end up with a unique connection to the persistence service with which to access the data store."
+								0000 01 00000000 00 01 01 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 28e0e003 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 1cf0a0ab 0002 01 00 
+					"ThreadLocal"
+					"threadLocalExpojoContext"
+					"A thread local used to store the persistence provider per thread. This has an initialization construct so we can always assume that the threadLocalExpojoContext is not null."
+					0000 01 00 7f 01 00 
+					"new ThreadLocal()"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 1e7300af 0002 00 00 
+					"boolean"
+					"traceTxDepth"
+					"If true dumps information about the transaction depth each time begin, commit or rollback are called."
+					0000 01 00 7f 01 01 
+					"false"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 15c840f0 0003 00 00 
+					"int"
+					"activeThreads"
+					"Number of active threads currently associated with this ModelExposer. There can be no more than one."
+					0000 01 00 7f 01 01 
+					"0"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0a87b159 0003 00 00 
+					"WeakHashMap<IBound, Integer>"
+					"boundRegistrations"
+					"Stores references to registered IBoundS."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1d7a800d 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"PersistenceProvider iPersistenceProvider"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 316d4060 0001 00 00 
+					"void"
+					"init"
+					"This should be called after construction to allow initialization of the exposer components that have been added. Calls init on each ModelExposerComponent that has been added.
+They may override ModelExposerComponent.init to set up references to other services or repositories as required - in this case the super class init() must be called at the end of the overwritten init() method."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 03a30022 0001 00 00 
+					"void"
+					"destroy"
+					"Destroys this model exposer instance, closing it's PersistenceProvider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3d33c09a 0002 00 00 
+					"void"
+					"finalize"
+					"Called to destroy the ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0381a0b0 0001 00 00 
+					"boolean"
+					"getTraceTxDepth"
+					"Returns traceTxDepth"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2688c0b1 0001 00 00 
+					"void"
+					"setTraceTxDepth"
+					"Sets traceTxDepth"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean traceTxDepth"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 32253109 0001 00 00 
+					"void"
+					"setThreadBindListener"
+					"Sets a listener on the binding of this ModelExposer to a thread via attachThread/detachThread."
+					0000 01 00000000 00 01 00 00 0003 
+					"ThreadBindListener iThreadBindListener"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 314bc0ac 0001 00 00 
+					"void"
+					"attachThread"
+					"Implements Dependency Injection:
+Attaches this ModelExposer to the current thread. This is called automatically by the ExpojoServletFilter prior to servicing a HTTP request so that model objects can call ModelExposer.get() and get this model exposer during the servicing of that HTTP request.
+This eliminates the need to manually inject a ModelExposer dependency into various objects that might need one because the ModelExposer is available to all objects in the current thread via ModelExposer.get()."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1dc880ad 0001 00 00 
+					"void"
+					"detachThread"
+					"Detaches a ModelExposer from the current thread - enabling it to be garbage collected if necessary (assuming ThreadLocal had the last remaining reference to the ModelExposer).
+This is called automatically by the ExpojoServletFilter after the current HTTP request has been serviced."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0faac0f1 0001 00 00 
+					"int"
+					"getActiveThreads"
+					"Returns activeThreads"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1647b0f2 0001 00 00 
+					"void"
+					"setActiveThreads"
+					"Sets activeThreads"
+					0000 01 00000000 00 01 00 00 0003 
+					"int activeThreads"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 046bd03e 0001 01 00 
+					"ExpojoContext"
+					"get"
+					"Returns the ExpojoContext for the current thread. Each thread will be transiently bound to its an ExpojoContext instance - thus avoiding issues with the Singleton pattern and more traditional, obsfuscated and lower performance, reflection/AOP based dependency injection frameworks (eg., Spring, Guava)."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 151c80fe 0001 01 00 
+					"ExpojoComponent"
+					"get_legacy"
+					"Returns the ExpojoComponent with the given Id.
+This method should not be called prior to a ModelExposer being completely initialized. This means that when ExpojoComponent's are being initialized themselves they must use getComponent on the ModelInstance provided to their init method instead of using the static get method. "
+					0000 01 00000000 00 01 00 00 0003 
+					"Object id"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 236bc10c 0001 01 00 
+					"PersistenceProvider"
+					"pp"
+					"Static convenience method to return a persistence provider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 23563059 0001 00 00 
+					"PersistenceProvider"
+					"getPersistenceProvider"
+					"Returns a ThreadLocal version of the appropriate PersistenceProvider. Each thread that calls this will then end up with a unique connection to the persistence service with which to access the data store."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0ab8f01f 0001 00 00 
+					"void"
+					"addService"
+					"Adds a service component to the ExpojoContext and stores it in the components map by the given key."
+					0000 01 00000000 00 01 00 00 0003 
+					"Class key, ServiceComponent serviceComponent"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c0cc020 0001 00 00 
+					"void"
+					"addRepository"
+					"Adds a repository to the ExpojoContext and stores it in the component map via the given key."
+					0000 01 00000000 00 01 00 00 0003 
+					"Class key, RepositoryComponent repositoryComponent"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 044db0ff 0002 00 00 
+					"void"
+					"addComponent"
+					"Adds a component to the components map, keyed via the given key.
+
+The developer needs to decide what class/interface will be used as the key for the component's storage in the map
+
+It doesn't matter so long as the key used for storage is the same as is used for retrieval.
+
+
+Some may have an interface that contains all required methods with a base abstract implementation which is ORM agnostic and then an ORM specific derived class which implements the methods.
+
+Some may not have such an interface and simply use the base abstract class as the key for storage and retrieval
+.
+
+Whatever the case the user now needs to specify the class that will be used as the key in the components map"
+					0000 01 00000000 00 01 00 00 0003 
+					"Class key, ExpojoComponent component"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 06fe2100 0001 00 00 
+					"ExpojoComponent"
+					"getComponent"
+					"Returns the ExpojoComponent with the given key."
+					0000 01 00000000 00 01 00 00 0003 
+					"Class key"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 26fad1ce 0001 00 00 
+					"ServiceComponent"
+					"getService"
+					"Returns the service associated with the given key."
+					0000 01 00000000 00 01 00 00 0003 
+					"Class key"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 320d8058 0001 00 00 
+					"RepositoryComponent"
+					"getRepository"
+					"Returns a repository associated with the given key."
+					0000 01 00000000 00 01 00 00 0003 
+					"Class key"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b67b121 0001 00 00 
+					"void"
+					"executeWrapped"
+					"Wraps an operation inside an open transaction with this ModelExposer attached to the current thread.
+After execution the transaction is committed (or rolled back on exception) and this ModelExposer is detached from the thread."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWrappedOperation operation, Object param1, Object param2"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2c775170 0001 01 00 
+					"void"
+					"executeWrappedCreate"
+					"Wrapping operations within the context of an open transaction and managing the commit or rollback is a very common requirement in enterprise applications and the executeWrappedCreate method enables this pattern to be implemented without having to explicitly rewrite the entire transaction management construct each time.
+If no ModelExposer is associated with the current thread then it creates one and calls executeWrapped on it. If a ModelExposer was created then before returning it destroys it.
+This method does not take parameters that are to be passed to the IWrappedOperation because typical usage involves an anonymous class that can access attributes of the class it is instantiated in or final locals.
+
+ModelExposer.executeWrappedCreate assumes that no transaction context is present already and so creates a new ModelExposer, attaches it to the current thread and then executes the provided implementation of IWrappedOperation. This can be provided as an anonymous class or an explicit class. The call to the 'execute' method is wrapped within a 'begin transaction' and 'commit transaction' and all are within a try block whose catch will perform a rollback.  The finally block detaches the ModelExposer from the thread and then destroys it."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWrappedOperation operation"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 39769175 0001 01 00 
+					"void"
+					"executeWrappedCreate"
+					"Wrapping operations within the context of an open transaction and managing the commit or rollback is a very common requirement in enterprise applications and the executeWrappedCreate method enables this pattern to be implemented without having to explicitly rewrite the entire transaction management construct each time.
+If no ModelExposer is associated with the current thread then it creates one and calls executeWrapped on it. If a ModelExposer was created then before returning it destroys it.
+This method does not take parameters that are to be passed to the IWrappedOperation because typical usage involves an anonymous class that can access attributes of the class it is instantiated in or final locals.
+
+ModelExposer.executeWrappedCreate assumes that no transaction context is present already and so creates a new ModelExposer, attaches it to the current thread and then executes the provided implementation of IWrappedOperation. This can be provided as an anonymous class or an explicit class. The call to the 'execute' method is wrapped within a 'begin transaction' and 'commit transaction' and all are within a try block whose catch will perform a rollback.  The finally block detaches the ModelExposer from the thread and then destroys it."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWrappedOperation operation, Object param1, Object param2"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 36ccd13c 0001 00 00 
+					"String"
+					"toString"
+					"Returns a summary of the ModelExposer including statistics from the PersistenceProvider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2981415a 0001 00 00 
+					"void"
+					"registerBound"
+					"Registers an IBound. All registered IBoundS will have their detach method called when detachThread is called on this ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"IBound bound"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 11b80160 0001 00 00 
+					"void"
+					"detachBounds"
+					"Calls detach on all registerd IBoundS"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2cfa6195 0001 00 00 
+					"void"
+					"logComponents"
+					"Dumps a list of the components to the info log."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 08e151b7 0001 01 00 
+					"<C> C"
+					"component"
+					"Typesafe method to return a component of the type specified by the argument.
+
+e.g.
+
+IMyRepo repo = ExpojoContext.component(IMyRepo.class);
+
+Should make a shorthand form available:
+
+IMyRepo repo = Ex.get(IMyRepo.class);"
+					0000 01 00000000 00 01 00 00 0003 
+					"Class<C> cls"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 109e7006 /Location/ 00001c3e 000007e4 00001e32 00000848 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000067 
+			"ServiceComponent"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Superclass for exposer components exposing services - ie., that which can make changes to the objects in the datastore.
+Extend this class to make your application specific services. Typically methods will be written in a persistence engine independent way allowing them to be easily reused with any persistence provider."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 35d69007 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 2442d008 /Location/ 00001a0e 0000050a 00001e32 000006d6 
+						{
+						}
+						/UOID/ 02 394d7000 00 00000069 
+						"ExpojoComponent"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"Superclass for all service and repository components in ExPojo. These will be easily accessible via any ExPojoContext.
+Pooling of ExPojoContextS may offer a performance benefit in the future as this will void the need to instantiate the individual components each time a ExPojoContext is required."
+						"h"
+						"java"
+						0000 
+						""
+						00 0001 0001 00 00 0000 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+							/{ class Function/ 
+								01 0010 299a3040 0001 00 00 
+								"void"
+								"setExpojoContext"
+								"Sets the ExpojoContext of which this component forms a part. There should be no need to ever call this explicitly. This is called automatically by the addService and addRepository methods when an ExpojoComponent is added to the ExpojoContext."
+								0000 01 00000000 00 01 00 00 0003 
+								"ExpojoContext expojoContext"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 03b0e041 0001 00 00 
+								"PersistenceProvider"
+								"getPersistenceProvider"
+								"Returns a ThreadLocal version of the appropriate PersistenceProvider. Each thread that calls this will then end up with a unique connection to the persistence service with which to access the data store."
+								0000 01 00000000 00 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 3cb2e180 0001 00 00 
+								"ExpojoContext"
+								"getExpojoContext"
+								"Returns the ExpojoContext"
+								0000 01 00000000 00 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 1e9850fd 0001 00 00 
+								"Object"
+								"getId"
+								"Returns an object used to identify the ModelExposerComponent. In the base class this returns getName() but it can be overridden in derived classes to return unique integers or Class objects or whatever is required.
+Returning getName() in this base class is mainly for backwards compatibility."
+								0000 01 00000000 00 00 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 28e22042 0001 00 00 
+								"String"
+								"getName"
+								"Overridden in derived classes to return the name of the model exposer component - only used for backwards compatibility."
+								0000 01 00000000 00 00 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 2babc061 0001 00 00 
+								"void"
+								"init"
+								"Overridden in derived classes to allow initialization."
+								0000 01 00000000 00 01 00 00 0003 
+								"ExpojoContext expojoContext"
+								0000 
+								""
+							/} class Function/ 
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 109e7006 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 3ea30009 /Location/ 000019aa 000007e4 00001bda 00000848 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000068 
+			"RepositoryComponent"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Superclass for repository components - ie., those that provide facilities for finding and locating domain objects in the datastore.
+Extend this class to make your application specific repositories. Typically these will include query methods written to an persistence engine specific query API and query language. Ideally you should provide an abstract superclass for each type of repository you require and then provide a concrete implementation for your specific persistence engine and name them appropriately (eg., HibernateRoleManagerRepository or JdoRoleManagerRepository, IBatisRoleManagerRepository).
+Structuring your repositories in this way makes your application code (GUI and model) completely independent of any particular persistence engine."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 3af6700a 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 2442d008 00 /UOID/ 02 3ea30009 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 2442d008 /UOID/ 02 3af6700a /UOID/ 02 35d69007 
+		/{ class CClass/ 
+			01 000b 354d8011 /Location/ 000000aa 0000091a 0000042e 00001086 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000006b 
+			"PersistenceProvider"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Superclass for all persistence providers. This class is extended to provide persistence engine specific implementations. eg., HibernatePersistenceProvider and JdoPersistenceProvider. These objects are typically kept 'open' throughout multiple HTTP requests, for each request a transaction is begun at the start and commited (or rolled back) at the end. This implements the 'OpenSessionInView' (hibernate) or 'OpenPersistenceManagerInView' pattern.
+A future possible enhancement is to add an optional \"free persistence provider' mechanism at the end of each HTTP request."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 31a79097 0002 00 00 
+					"int"
+					"depth"
+					"Depth of the deepest transaction. 0 = no active transaction.
+beginTx increments and commitTx and rollbackTx decrement depth.
+See rollbackTx for more information."
+					0000 01 00 7f 01 01 
+					"0"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 18a400b2 0001 00 00 
+					"void"
+					"setExpojoContext"
+					"Sets the owning ExpojoContext."
+					0000 01 00000000 00 01 00 00 0003 
+					"ExpojoContext iExpojoContext"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 12d8210b 0001 01 00 
+					"PersistenceProvider"
+					"get"
+					"Static method that returns the PersistenceManager of the ModelExposer attached to the current thread."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1f5ce0ea 0001 00 00 
+					"int"
+					"getTxDepth"
+					"Returns the transaction depth. This does not infer support for nested transactions (they would have to be supported by the underlying ORM) but it does allow for more than one call to beginTx without a corresponding commitTx or rollbackTx so long as the beginTx calls eventually matches the sum of the commitTx and rollbackTx calls."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ee060ef 0001 00 00 
+					"void"
+					"flushChanges"
+					"Not normally required. Causes all of the uncommitted changes to be committed to the database. Occassionally it is desirable or sometimes even necessary to get all changes to your model up to a certain point commited to the database prior to proceeding further  - regardless of the current transaction depth. This method will do a forced commit and return with the transaction depth at the same level it was at when called."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c2d607d 0001 00 00 
+					"void"
+					"open"
+					"Opens a persistence provider."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 08701015 0001 00 00 
+					"void"
+					"beginTx"
+					"Begins a transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3e1a2016 0001 00 00 
+					"void"
+					"commitTx"
+					"Commits a transaction if the transaction depth is 1, otherwise merely decreases the transaction depth. To force a real commit regardless of the current transaction depth use forceCommitTx."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0f785137 0001 00 00 
+					"void"
+					"forceCommitTx"
+					"Forces a real commit, regardless of the current transaction depth. Afterwards the transaction is reopened and the txDepth is restored to its previous value less 1."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2458f144 0001 00 00 
+					"void"
+					"forceRollbackTx"
+					"Forces a real rollback, regardless of the current transaction depth. Afterwards the transaction is reopened and the txDepth is restored to its previous value less 1."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0efc4017 0001 00 00 
+					"void"
+					"rollbackTx"
+					"Rolls back a transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0ef4a0f8 0001 00 00 
+					"void"
+					"flush"
+					"Flushes all object modifications to SQL (as yet uncommitted) that makes newly created objects and changes available to DB queries within the current transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 38b520f3 0001 00 00 
+					"void"
+					"clearTx"
+					"Rollsback any active transaction and sets the tx depth back to 0."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 398c70bc 0001 00 00 
+					"boolean"
+					"hasActiveTx"
+					"Returns true if the PersistenceProvider has an active transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 10a0305a 0001 00 00 
+					"Object"
+					"persist"
+					"Makes the given object persistent."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 10916136 0001 00 00 
+					"Object"
+					"attach"
+					"Reattaches the given unattached object to the PersistenceProvider"
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c04c139 0001 00 00 
+					"Object"
+					"detachCopy"
+					"Returns a detached copy of the given persistent object."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 013e405b 0001 00 00 
+					"void"
+					"delete"
+					"Deletes the persistent object from the datastore."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 32cee143 0001 00 00 
+					"void"
+					"deleteAll"
+					"Deletes the persistent objects contained in the collection.
+Maybe be overridden by some derived classes to perform a native ORM Collection delete."
+					0000 01 00000000 00 01 00 00 0003 
+					"Collection toDelete"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b595073 0001 00 00 
+					"void"
+					"close"
+					"Closes the persistence provider. It can no longer be used after being closed."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 37ce40ed 0001 00 00 
+					"void"
+					"refresh"
+					"Refreshes a single object instance."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 173890ee 0001 00 00 
+					"void"
+					"refreshAll"
+					"Refresh all transactional instances - only has effect if within the context of an open transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 00b380e6 0001 00 00 
+					"void"
+					"evict"
+					"Evicts a persistent object from the PersistenceProvider's cache."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3a4890e7 0001 00 00 
+					"void"
+					"evictAll"
+					"Evicts all objects from the PersistenceManager's cache."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ff2907a 0001 00 00 
+					"RuntimeException"
+					"processException"
+					"Processes an exception thrown while in a transaction. The exception could be relevent to the persistence technology or a generic RuntimeException. If it's an optimistic verification exception (optimistic locking check failed) then no exception is thrown and the persistence technology may or may not need clean. In the case of JDO a rollback as already been performed."
+					0000 01 00000000 00 01 01 00 0003 
+					"RuntimeException e"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3515313b 0001 00 00 
+					"String"
+					"getStatistics"
+					"Returns a summary of the statistics regarding the PersistenceProvider. Typically this will be a count of the number of objects it is currently managing in it's L1 cache."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2312c162 0001 00 00 
+					"long"
+					"getObjectId"
+					"Returns the numeric portion of the OID for the given object."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 20970163 0001 00 00 
+					"Object"
+					"getObject"
+					"Returns the object of the given class and oid."
+					0000 01 00000000 00 01 01 00 0003 
+					"Class cls, long oid"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0de68181 0001 00 00 
+					"void"
+					"detectAttachedRelationships"
+					"Detects if the given object related directly or indirectly to any attached objects. Typically used when re-detaching an supposedly already detached object graph to ensure that there are no references to attached objects."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 168d9187 0001 00 00 
+					"boolean"
+					"isPersistenceCapable"
+					"Returns true if the given object is of a class that has been configured to be 'able to be persisted' by whatever the current ORM implementation requires."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3c318024 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 05b93025 0000023a 
+					{
+					}
+					01 0002 00 01 0001 0001 02 
+					"expojoContext"
+					/{ class RoleText/ 
+						01 0071 1033c026 00000026 0000000c 00000192 0000004d 
+						{
+						}
+						""
+						0925 0001 00596ae8 /UOID/ 02 05b93025 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2a105027 0000023a 
+					{
+					}
+					02 0002 01 01 0001 0001 00 
+					"persistenceProvider"
+					/{ class RoleText/ 
+						01 0071 334df028 fffffe1b ffffffc9 00000006 0000000a 
+						{
+						}
+						""
+						0925 0001 65747369 /UOID/ 02 2a105027 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 1033c026 /UOID/ 02 334df028 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 354d8011 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 3491f045 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2ec36046 00000514 
+					{
+					}
+					02 0001 00 01 0002 0005 03 
+					"components"
+					/{ class RoleText/ 
+						01 0071 3aac1047 fffffe89 00000017 00000010 00000058 
+						{
+						}
+						""
+						0925 0001 00e800a8 /UOID/ 02 2ec36046 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 039a0048 00000514 
+					{
+					}
+					01 0002 01 00 0002 0001 01 
+					"expojoContext"
+					/{ class RoleText/ 
+						01 0071 31b7b049 00000007 ffffffb5 00000173 fffffff6 
+						{
+						}
+						""
+						0925 0001 00000020 /UOID/ 02 039a0048 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 3aac1047 /UOID/ 02 31b7b049 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 28e0e003 /UOID/ 02 2442d008 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0ab71044 /Location/ 0000105e 00000884 000014d2 00000c30 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000006f 
+			"ExpojoContextFactory"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Superclass for all persistence ExpojoContext factories.
+createExpojoContext will create an ExpojoContext with a new, appropriate instance of a PersistenceProvider.
+The PersistenceProvider will be returned by the abstract method createPersistenceProvider."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 3e9cd062 0002 00 00 
+					"boolean"
+					"testDb"
+					"True if dealing with a test database. By convention make sure any test database has the word 'test' in its URL. When initializing the persistence technology in the derived class be sure to call setTestDb according to whether the URL contains 'test' in it.
+This is not used by the model exposer itself but can be used by other classes to know whether they are dealing with a test database or not. The  PersistenceTestCase uses this valid to assert that it is only operating on test databases. Adding and removing objects from a live production system could have detrimental affects on the data store especially when the destroyTestObjects method removes all objects from the database!"
+					0000 01 00 7f 01 00 
+					"true"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0ffb011a 0003 01 00 
+					"ExpojoContextFactory"
+					"self"
+					"Reference to this singleton."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 227b311b 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 279b01a2 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object taking an IModuleProvider."
+					0000 01 00000000 00 00 00 00 0000 
+					"IModulesProvider iModulesProvider"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 3786b16f 0001 00 00 
+					"void"
+					"init"
+					"Initializes the model exposer"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1212511c 0001 01 00 
+					"ExpojoContextFactory"
+					"get"
+					"Returns this singleton or null if no factory is available."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 27324118 0001 00 00 
+					"ExpojoContext"
+					"createExpojoContext"
+					"Creates an ExpojoContext.
+Application developers should rarely need to call this. This is called implicitly by the ExpojoServletFilter to establish an ExpojoContext object for each new session or request that is started (depending on whether expojoContext per request is true or not).."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3b77c18f 0001 00 00 
+					"Collection<IModule>"
+					"getModules"
+					"Returns a collection of modules from the IModuleProvider."
+					0000 01 00000000 00 00 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0a1e21b0 0001 00 00 
+					"IModulesProvider"
+					"getModulesProvider"
+					"Returns the IModulesProvider that is providing the modules for the application."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 37ccd04f 0001 00 00 
+					"PersistenceProvider"
+					"createPersistenceProvider"
+					"Overridden in derived classes to provide PersistenceProvider appropriate to the persistence technology used."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b876119 0001 00 00 
+					"void"
+					"addComponents"
+					"Adds service and repository components to the ModelExposer. This method is called whenever the ExpojoSerletFilter is establishing a new session, and thus a new ModelExposer. This method adds the services and repositories to the ModelExposer. Within the scope of an individual HTTP request the ModelExposer, and hence its services and repositories, are made available to the application via dependency injection.
+
+This implementation of the method will add all components belonging to the IModules returned by the overwritten getModules method. For apps that use the IModule infrastructure this should be sufficient. For apps that don't use IModuleS or have specific requirements this method can be overwritten to perform specialized behaviour."
+					0000 01 00000000 00 01 00 00 0003 
+					"ModelExposer modelExposer"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 26028077 0001 00 00 
+					"void"
+					"close"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1dcea063 0001 00 00 
+					"boolean"
+					"isTestDb"
+					"Returns testDb"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0b2ca064 0001 00 00 
+					"void"
+					"setTestDb"
+					"Sets testDb"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean testDb"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 15512080 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2fe96081 000009b0 
+					{
+					}
+					00 0002 00 01 0001 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 05f2e082 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000041 /UOID/ 02 2fe96081 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1eb1a083 000009b0 
+					{
+					}
+					01 0002 01 01 0001 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 3afe7084 ffffffe6 ffffffc1 fffffffa ffffffc6 
+						{
+						}
+						""
+						0925 0001 00000016 /UOID/ 02 1eb1a083 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 05f2e082 /UOID/ 02 3afe7084 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0ab71044 /UOID/ 02 354d8011 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 3452c089 /Location/ 000006b8 00000afa 00000a50 000011b2 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000073 
+			"MockPersistenceProvider"
+			"RENAME"
+			"com\\sas\\framework\\expojo\\mock"
+			"Provides a 'drop in' mock persistence provider that does not persist objects to a database. It's purpose is to allow expojo applications to be run/tested in a memory only environment to exercise unit tests, business rules etc., without the overhead of database persistence. It is only intended to be used as a testing mechanism. Applications running in a production environment would typically use a true persistence provider like JDO or Hibernate."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2668408a 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 354d8011 00 /UOID/ 02 3452c089 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 39e7e094 0002 01 00 
+					"Object"
+					"firstPersistedObject"
+					"Stores a reference to the first persisted object - which should be the system object. This can then be used by the Mock repository in getSystemEntity to return the top level system entity object.
+This is a static because it's shared by all threads - heh it's only the mock system ok - we're not going to have a private cache for each PersistenceProvider."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 398d70e4 0002 01 00 
+					"Vector"
+					"objects"
+					"Implements a simple storage system for objects. persist just adds the object to the Vector and delete removes it."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 11d1b08b 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object giving it a PersistenceManager."
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 12bd508c 0001 00 00 
+					"void"
+					"open"
+					"Opens a persistence provider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1533908d 0001 00 00 
+					"void"
+					"beginTx"
+					"Begins a transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 173cb08e 0001 00 00 
+					"void"
+					"commitTx"
+					"Commits a transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3e36f134 0001 00 00 
+					"void"
+					"forceCommitTx"
+					"Forces a real commit, regardless of the current transaction depth. Afterwards the transaction is reopened and the txDepth is restored to its previous value less 1."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 16a8208f 0001 00 00 
+					"void"
+					"rollbackTx"
+					"Rolls back a transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 08f5d0bd 0001 00 00 
+					"boolean"
+					"hasActiveTx"
+					"Returns true if the PersistenceProvider has an active transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1ba03090 0001 00 00 
+					"Object"
+					"persist"
+					"Makes the given object persistent."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0d6de135 0001 00 00 
+					"Object"
+					"attach"
+					"Reattaches the given unattached object to the PersistenceProvider"
+					0000 01 00000000 00 01 00 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 228eb13a 0001 00 00 
+					"Object"
+					"detachCopy"
+					"Returns a detached copy of the given persistent object."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 13da7095 0001 00 00 
+					"Object"
+					"getFirstPersistedObject"
+					"Returns firstPersistedObject"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 08b26096 0001 00 00 
+					"void"
+					"setFirstPersistedObject"
+					"Sets firstPersistedObject"
+					0000 01 00000000 00 01 00 00 0003 
+					"Object firstPersistedObject"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3a458091 0001 00 00 
+					"void"
+					"delete"
+					"Deletes the persistent object from the datastore."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 17c10092 0001 00 00 
+					"RuntimeException"
+					"processException"
+					"Processes an exception thrown while in a transaction. The exception could be relevent to the persistence technology or a generic RuntimeException. If it's an optimistic verification exception (optimistic locking check failed) then no exception is thrown and the persistence technology may or may not need clean. In the case of JDO a rollback as already been performed."
+					0000 01 00000000 00 01 00 00 0003 
+					"RuntimeException e"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0243d093 0001 00 00 
+					"void"
+					"close"
+					"Closes the persistence provider. It can no longer be used after being closed."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 20cf90f9 0001 00 00 
+					"void"
+					"flush"
+					"Flushes all object modifications to SQL (as yet uncommitted) that makes newly created objects and changes available to DB queries within the current transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 282a70eb 0001 00 00 
+					"void"
+					"refresh"
+					"Refreshes a single object instance."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ef4d0ec 0001 00 00 
+					"void"
+					"refreshAll"
+					"Refresh all transactional instances - only has effect if within the context of an open transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 11b7b0e8 0001 00 00 
+					"void"
+					"evict"
+					"Evicts a persistent object from the PersistenceProvider's cache."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3198c0e9 0001 00 00 
+					"void"
+					"evictAll"
+					"Evicts all objects from the PersistenceManager's cache."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3be7f0e5 0001 00 00 
+					"Collection"
+					"getExtent"
+					"Gets all objects of the given type."
+					0000 01 00000000 00 01 00 00 0003 
+					"Class cls"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2127e164 0001 00 00 
+					"long"
+					"getObjectId"
+					"Returns the numeric portion of the OID for the given object."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 24631165 0001 00 00 
+					"Object"
+					"getObject"
+					"Returns the object of the given class and oid."
+					0000 01 00000000 00 01 00 00 0003 
+					"Class cls, long oid"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1a6b8182 0001 00 00 
+					"void"
+					"detectAttachedRelationships"
+					"Detects if the given object related directly or indirectly to any attached objects. Typically used when re-detaching an supposedly already detached object graph to ensure that there are no references to attached objects."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1ace8188 0001 00 00 
+					"boolean"
+					"isPersistenceCapable"
+					"Returns true if the given object is of a class that has been configured to be 'able to be persisted' by whatever the current ORM implementation requires."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 2668408a 
+		/{ class CClass/ 
+			01 000b 2f61a0c2 /Location/ 0000132e 000005be 000014fa 00000622 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000007a 
+			"ExpojoFoundation"
+			"RENAME"
+			"com\\sas\\framework\\expojo\\servlet"
+			"Implements the ServletContextListener interface to initialize the exPOJO framework. It is designed to be extended by an application specific class. Only two methods in the application specific class require overriding: createPersistenceProviderFactory and addComponents.
+You may also like to optionally override establishGenesisObjects.
+@see com.sas.framework.expojo.servlet.ExpojoServletContextListener#createPersistenceProviderFactory
+@see com.sas.framework.expojo.servlet.ExpojoServletContextListener#addComponents
+@see com.sas.framework.expojo.servlet.ExpojoServletContextListener#establishGenesisObjects"
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 258df0c4 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 38fdf0c5 00001478 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 35eff0c6 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 baadf00d /UOID/ 02 38fdf0c5 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2dab60c7 00001478 
+					{
+					}
+					01 0000 01 01 0002 0001 00 
+					"expojoContextFactory"
+					/{ class RoleText/ 
+						01 0071 0f8740c8 00000026 ffffffad 00000282 ffffffee 
+						{
+						}
+						""
+						0925 0001 006b6162 /UOID/ 02 2dab60c7 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 35eff0c6 /UOID/ 02 0f8740c8 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0ab71044 /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 298050d0 /Location/ 00000d02 00000e10 0000128b 0000110e 
+			{
+			}
+			"USAGE:
+
+To use exPOJO simply follow these steps:
+
+1. Create a class in your app that extends ExpojoServletContext.
+1a.Create a class in your app that extends a platform specific ModelExposerFactory (eg., JdoModelExposerFactory,
+HibernateModelExposerFactory, MockExposerFactory)
+3. Overwrite the addComponents method to add any services and repository objects to your ModelExposer
+2. Implement addComponentsOverwrite the createModelExposerFactory method to instantiate a PersistenceProviderFactory 
+specific to your persistence library (eg., JPOX or Hibernate)
+4. Configure your web.xml file to set up your derived ExpojoServletContext class as a listener so that 
+exPOJO will be notified whenever your web application starts up and shuts down.
+5. Configure your web.xml file to set up the ExpojoServletFilter and associate it with any of your servlets
+so that it can automatically inject the ModelExposer into each thread that services a HTTP request on your
+servlets so that the ModelExposer is available to any of your code via ModelExposer.get()."
+			0810 0002 6a6f7078 
+		/} class Annotation/ 
+		/{ class AssociationChain/ 
+			01 0069 035c40d8 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 00d5b0d9 000005c8 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 2cda10da ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 006d6376 /UOID/ 02 00d5b0d9 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2801a0db 000005c8 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 2b9ef0dc 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 006d6376 /UOID/ 02 2801a0db 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2cda10da /UOID/ 02 2b9ef0dc 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 28e0e003 /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 13a2f101 /Location/ 00000924 00000758 00000b18 00000834 
+			{
+			}
+			/UOID/ 02 394d7000 00 01e6308c 
+			"ThreadBindListener"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"A listener interface for optional notification of thread attach/detach calls.
+Any application that needs to perform work during attachment or detachment of the ModelExposer can provide an implementation of the ThreadBindListener and perform that work in there.
+Attach is called after attachement occurs and detach is called before detachment occurs although changes to persistent objects should be avoided if possible.
+"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 16c08102 0001 00 00 
+					"void"
+					"postAttach"
+					"Called just after the ExpojoContext has been attached to the current thread."
+					0000 01 00000000 00 01 01 00 0003 
+					"ExpojoContext expojoContext"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3b82e103 0001 00 00 
+					"void"
+					"preDetach"
+					"Called just before the ExpojoContext is detached from the current thread."
+					0000 01 00000000 00 01 01 00 0003 
+					"ExpojoContext expojoContext"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3eec6104 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1733b105 00000762 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 16355106 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000004 /UOID/ 02 1733b105 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 25e09107 00000762 
+					{
+					}
+					01 0000 01 01 0002 0001 03 
+					"threadBindListener"
+					/{ class RoleText/ 
+						01 0071 22af6108 fffffdd5 ffffffbd ffffffeb fffffffe 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 25e09107 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 16355106 /UOID/ 02 22af6108 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 13a2f101 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 29c30110 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 04ab5111 0000136a 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 24af4112 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 6a72706a /UOID/ 02 04ab5111 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 03f03113 0000092e 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 09676114 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 36203130 /UOID/ 02 03f03113 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 24af4112 /UOID/ 02 09676114 
+			}
+			0005 /Bend coords/ 00001374 000007d0 00000f3c 000007da 00000f3c 00000938 
+			/NullObj/ 00 /UOID/ 02 354d8011 /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 000b811f /Location/ 0000091a 000005fa 00000b0e 0000069a 
+			{
+			}
+			/UOID/ 02 394d7000 00 099d373e 
+			"IWrappedOperation"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"An operation that is wrapped inside the context of a ModelExposer that is attached to the thread and wrapped inside an open transaction."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 13e98120 0001 00 00 
+					"void"
+					"execute"
+					"Executes this operation wrapped with a thread attached ModelExposer and an open transaction. param1 and param2 are the same values as thosed passed to ModelExposer.executeWrapped(param1, param2). Obviously some casting will be required as appropriate if parameters will be used by the operation."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object param1, Object param2"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 34290122 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 28383123 0000062c 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3b37b124 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00080008 /UOID/ 02 28383123 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 01d16125 0000062c 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 28df7126 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000004 /UOID/ 02 01d16125 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 3b37b124 /UOID/ 02 28df7126 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 000b811f /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 3bf3e13d 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 3ecbd13e 000005c8 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 009cf13f 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 202e3031 /UOID/ 02 3ecbd13e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1441a140 000005c8 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 05d43141 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 706a6376 /UOID/ 02 1441a140 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 009cf13f /UOID/ 02 05d43141 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 2f61a0c2 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 2d66d174 /Location/ 000017d4 00000028 00001914 0000008c 
+			{
+			}
+			/UOID/ 02 394d7000 00 18f88e50 
+			"Serializable"
+			"RENAME"
+			"java\\io"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 33223176 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 29bf1177 00000604 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 15222178 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 706a6376 /UOID/ 02 29bf1177 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1c919179 00000604 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3c6a717a 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 6a72706a /UOID/ 02 1c919179 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 15222178 /UOID/ 02 3c6a717a 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 000b811f /UOID/ 02 2f61a0c2 
+		/} class AssociationChain/ 
+		/UOID/ 02 1f62519e 
+		/{ class Annotation/ 
+			01 0064 1b12f1a1 /Location/ 00001a0e 000002bc 00001d5f 000004e2 
+			{
+			}
+			"Planning to change the map's key to
+Class<? extends ExpojoComponent>
+rather than it's current key \"name\".
+Using name requires each coponent to define a 'name' attribute and give it a unique value.
+We should not need to do that. The unique base class for any particular service or repository will be an appropriate key value.
+The key will need to be specified by the developer - it could be an interface or it could be an abstract base class - the choice is up to the developer - the important thing is that whatever Class<? extends ExpojoComponent> they use for adding the component should be the same as what they use to retrieve it!
+"
+			0810 0002 35313032 
+		/} class Annotation/ 
+		/UOID/ 02 1aea71b8 
+		/{ class AssociationChain/ 
+			01 0069 03b311bd 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1b7ec1be 000013b0 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 0bd5c1bf 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 35313032 /UOID/ 02 1b7ec1be 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 15b7e1c0 000013b0 
+					{
+					}
+					01 0002 01 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 016a71c1 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 35313032 /UOID/ 02 15b7e1c0 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0bd5c1bf /UOID/ 02 016a71c1 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 2f61a0c2 /UOID/ 02 1f62519e 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 362951cf /Location/ 000007bc 000000c8 00000a14 000001e0 
+			{
+			}
+			/UOID/ 02 394d7000 00 375b9227 
+			"Ex"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"A convenience class to provide shorthand access to key ExpojoContext aspects such its components and the persistence provider.
+
+No one should ever create an Ex instance so the constructor is private.
+
+It is only ever used for its convenience static methods."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 20dd51d1 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 28e0e003 00 /UOID/ 02 362951cf 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 088521d2 0003 00 00 
+					"no type"
+					"Constructor"
+					"No one should ever create an Ex instance so the constructor is private.
+
+It is only ever used for its convenience static methods."
+					0000 01 00000000 00 00 00 00 0000 
+					"PersistenceProvider iPersistenceProvider"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 083c21d0 0001 01 00 
+					"<C> C"
+					"c"
+					"Shorthand, convenience method to return a component keyed by the cls argument and also \"typed\" by it.
+
+e.g.
+
+IMyRepo repo = Ex.c(IMyRepo.class);"
+					0000 01 00000000 00 01 00 00 0003 
+					"Class<C> cls"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0d99b1d3 0001 01 00 
+					"PersistenceProvider"
+					"pp"
+					"Static convenience method to return a persistence provider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 20dd51d1 
+	}
+	008c 
+	"com\\sas\\framework\\expojo"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 325b4001 
+		""
+		0000 00000000 00000000 00 00 00 00 00 00 
+		"OpLckVersion"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

@@ -1,0 +1,903 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000008a 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 2c6bc000 
+	"Website Domain Model Impl"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 10323004 /Location/ 00000ab4 0000021c 00000e10 00000424 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 3718b8a3 
+			"IWebsite"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"WexPOJO supports multiple website within the one app.
+
+IWebsite is an interface that represents a website.
+"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 02f93029 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 36dad02a /Location/ 000007ee 0000001e 0000092e 00000082 
+						{
+						}
+						/UOID/ 02 2c6bc000 00 371adca7 
+						"Serializable"
+						"RENAME"
+						"java\\io"
+						"Describe here"
+						"h"
+						"java"
+						0002 
+						""
+						01 0001 0001 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 10323004 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 08b38034 0001 00 00 
+					"int"
+					"getSiteId"
+					"Returns unique ID for this website.
+Can be used a path component in the filename of various site specific files. This allows each website to have its own separate subdirectory for site specific files.
+"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2e6fc008 0001 00 00 
+					"String"
+					"getName"
+					"Gets name of website."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3a26d009 0001 00 00 
+					"String"
+					"getHostName"
+					"Returns the host name of the webserver(s) hosting this website."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0aefc02d 0001 00 00 
+					"int"
+					"getTemplateId"
+					"Each website can specify which web template (collection of HTML files with appropriate suffixes) should be used to display its pages.
+
+Templates are identified by an integer ID and are a set of HTML files. Each template can provide customized variations of the standard HTML file. 
+
+For example:
+
+HomePage.html may provide a vanilla home page.
+
+HomePage_23.html may provide a home page styled according to the style of template with ID - 23.
+
+As well as providing HTML markup file variations for pages the web developer can also provide markup files styled for a particular template for panels.
+
+If a particular markup file does not have a variant appropriate for the template of a particular website then Wicket will default to using the default markup - i.e. the one with no variant suffix."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3540903b 0001 00 00 
+					"String"
+					"getThemeId"
+					"Returns the ID of the theme within the template that this website is using.
+The head section of the HTML will be generated to include the following CSS file:
+
+//pagebloom/css/t/${templateId}/${themeId}.css"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b31e03f 0001 00 00 
+					"IWebsiteBehaviour"
+					"getBehaviour"
+					"Returns the website behaviour for this website. It is valid to return null for this in which case default behaviour will be used."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3c0b805d 0001 00 00 
+					"ICredentialSpec"
+					"getCredentialSpec"
+					"Returns an ICredentialSpec appropriate for this website."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 06a5600a /Location/ 00000aa0 00000500 00000e24 00000a50 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 371ae6d5 
+			"Website"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Stores details about a website."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 22eaa00b 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 10323004 00 /UOID/ 02 06a5600a 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+				/{ class BaseClassRef/ 
+					01 006b 16a1e06c 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0001 
+					/{ class CClass/ 
+						01 000b 3e58106b /Location/ 000008a2 000005a0 0000097e 00000604 
+						{
+						}
+						/UOID/ 02 2c6bc000 00 378ff8d6 
+						"IRealm"
+						"RENAME"
+						"com\\sas\\framework\\iam\\realm"
+						"Describe here"
+						"h"
+						"java"
+						0002 
+						""
+						01 0001 0001 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 06a5600a 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 2893f068 0003 00 00 
+					"int"
+					"siteId"
+					"Returns unique ID for this website.
+Can be used a path component in the filename of various site specific files. This allows each website to have its own separate subdirectory for site specific files.
+."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 09154016 0003 00 00 
+					"String"
+					"name"
+					"Name of the website."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 1b492065 0003 00 00 
+					"String"
+					"hostName"
+					"The host name of the webserver(s) hosting this website."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0b666038 0003 00 00 
+					"int"
+					"templateId"
+					"The unique ID (integer) of a particular template.
+
+By mandatory convention these are ID numbers (integer) not names. This allows abstraction of the internal identity of a template away from its name so that name changes to the template will not affect the operation or require renaming of markup or CSS files or directories.
+
+"
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0b67103c 0003 00 00 
+					"String"
+					"themeId"
+					"The ID of the theme within the template that this website is using.
+The head section of the HTML will be generated to include the following CSS file:
+
+//pagebloom/css/t/${templateId}/${themeId}.css"
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1df8c00c 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"int iId, String iName, String iHostName, IWebsiteBehaviour iBehaviour"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 049fb04f 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"int iId, String iName, String iHostName"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 2d222069 0001 00 00 
+					"int"
+					"getSiteId"
+					"Returns siteId"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0d3ad06a 0001 00 00 
+					"void"
+					"setSiteId"
+					"Sets siteId"
+					0000 01 00000000 00 01 00 00 0003 
+					"int siteId"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 11170018 0001 00 00 
+					"String"
+					"getName"
+					"Returns name"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3cce4019 0001 00 00 
+					"void"
+					"setName"
+					"Sets name"
+					0000 01 00000000 00 01 00 00 0003 
+					"String name"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 245ff066 0001 00 00 
+					"String"
+					"getHostName"
+					"Returns hostName"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0db07067 0001 00 00 
+					"void"
+					"setHostName"
+					"Sets hostName"
+					0000 01 00000000 00 01 00 00 0003 
+					"String hostName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 30eca039 0001 00 00 
+					"int"
+					"getTemplateId"
+					"Returns templateId"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2c2ba03a 0001 00 00 
+					"void"
+					"setTemplateId"
+					"Sets templateId"
+					0000 01 00000000 00 01 00 00 0003 
+					"int templateId"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0ff2503d 0001 00 00 
+					"String"
+					"getThemeId"
+					"Returns themeId or, if null, will return \"default\"."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 26b9803e 0001 00 00 
+					"void"
+					"setThemeId"
+					"Sets themeId"
+					0000 01 00000000 00 01 00 00 0003 
+					"String themeId"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 05f9404e 0001 00 00 
+					"IWebsiteBehaviour"
+					"getBehaviour"
+					"Return IWebsiteBehaviour."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1a14c05e 0001 00 00 
+					"ICredentialSpec"
+					"getCredentialSpec"
+					"Returns an ICredentialSpec appropriate for this website."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 16e1d06d 0001 00 00 
+					"boolean"
+					"supportsAuxiliaryChallenge"
+					"Returns true if this realm supports auxiliary authentication challenges.
+Supporting an auxiliary authentication challenge does not mean that an authentication challenge will occur every time a user logs on because the decision of when to challenge may be based on other factors eg., user has not logged in for more than 3 months etc.,"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0e3c106e 0001 00 00 
+					"IRealm"
+					"getRealm"
+					"Return the realm associated with this website."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 22eaa00b 
+		/{ class CClass/ 
+			01 000b 2a388011 /Location/ 00000ea6 00000500 00001252 000006cc 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 371a928d 
+			"WebsiteInMemoryStore"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"This is a simple non persistent \"in memory\" store.
+
+It must be populated at start up time by the application."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 067a9080 0003 01 01 
+					"WebsiteInMemoryStore"
+					"self"
+					"Static reference to the singleton WebsiteInMemoryStore."
+					0000 01 00 7f 01 01 
+					"new WebsiteInMemoryStore()"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1deef02c 0003 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 1475c078 0001 01 00 
+					"WebsiteInMemoryStore"
+					"get"
+					"Static convenience method to return the website store."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2627b013 0001 00 00 
+					"void"
+					"addWebsite"
+					"Adds a website to the repo."
+					0000 01 00000000 00 01 00 00 0003 
+					"IWebsite website"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0e6ff014 0001 00 00 
+					"IWebsite"
+					"findWebsiteByHostName"
+					"Finds a website given its host name and returns it.
+If not found this will return null (no OptionalS in this code friends. People who need trainig wheels to handle nulls are in the wrong job)"
+					0000 01 00000000 00 01 00 00 0003 
+					"String hostName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 19730077 0001 00 00 
+					"Collection<IWebsite>"
+					"findAllWebsites"
+					"Returns all IWebsites in the repository."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 0fcd3024 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 3a5f4025 00001086 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 09746026 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 2e393130 /UOID/ 02 3a5f4025 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3d01d027 0000033e 
+					{
+					}
+					01 0001 01 01 0002 0005 01 
+					"websites"
+					/{ class RoleText/ 
+						01 0071 1594a028 0000000a ffffffb3 00000141 fffffff4 
+						{
+						}
+						""
+						0925 0001 0079726f /UOID/ 02 3d01d027 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 09746026 /UOID/ 02 1594a028 
+			}
+			0003 /Bend coords/ 00001090 00000348 
+			/NullObj/ 00 /UOID/ 02 10323004 /UOID/ 02 2a388011 
+		/} class AssociationChain/ 
+		/UOID/ 02 36dad02a /UOID/ 02 02f93029 
+		/{ class CClass/ 
+			01 000b 1425a040 /Location/ 00000226 000002d0 000005e6 000003ac 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 372933f1 
+			"IWebsiteBehaviour"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Specifies how a particular website should behave.
+For example:
+Should the home page allow unauthenticated access?"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2858a041 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 36dad02a 00 /UOID/ 02 1425a040 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 359d104b 0001 00 00 
+					"boolean"
+					"allPagesRequireAuth"
+					"Returns true if all pages require an authenticated user - except for the Authenticate pages."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0260605b 0001 00 00 
+					"boolean"
+					"getSecondFactorAuthAvailable"
+					"Returns true if the website has second factor authentication available.
+It does not mean that every log in will require a second factor authentication - that is left to the application to decide based on business rules.
+e.g. second factor authentication may only be required if the user logs in via a device that they have not previously logged in from."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3751f042 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1cf38043 00000366 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 16f19044 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 76616a5c /UOID/ 02 1cf38043 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1dc56045 00000366 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 34712046 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 1dc56045 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 16f19044 /UOID/ 02 34712046 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1425a040 /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 02e54047 /Location/ 0000001e 00000622 000003a2 000006fe 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37294095 
+			"UnrestrictedWebsiteBehaviour"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Standard behaviour for a public website - most pages (including home page) allow access to non authenticated users."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 33f33048 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 1425a040 00 /UOID/ 02 02e54047 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 2014404c 0001 00 00 
+					"boolean"
+					"allPagesRequireAuth"
+					"Returns true if all pages require an authenticated user - except for the Authenticate pages."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 229ab074 0001 00 00 
+					"boolean"
+					"supportsAuxiliaryChallenge"
+					"Returns true if the website has auxiliary challenge authentication available.
+It does not mean that every log in will invoke an auxiliary authentication challenge - that is left to the application to decide based on business rules.
+e.g. auxiliary challenge may only be required if the user logs in via a device that they have not previously logged in from."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 33f33048 /UOID/ 02 2858a041 
+		/{ class CClass/ 
+			01 000b 37691049 /Location/ 00000424 00000618 000007a8 0000076c 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37288507 
+			"PortalWebsiteBehaviour"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"The website is actually a web application or \"portal\" for which the home page and most other pages are available to authenticated users only."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2d87104a 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 1425a040 00 /UOID/ 02 37691049 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 1b8c9075 0003 00 00 
+					"boolean"
+					"auxiliaryChallenge"
+					"true if auxiliary challenge is supported."
+					0000 01 00 7f 01 01 
+					"true"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 29bbf04d 0001 00 00 
+					"boolean"
+					"allPagesRequireAuth"
+					"Returns true if all pages require an authenticated user - except for the Authenticate pages."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1b61f073 0001 00 00 
+					"boolean"
+					"supportsAuxiliaryChallenge"
+					"Returns true if the website has auxiliary challenge authentication available.
+It does not mean that every log in will invoke an auxiliary authentication challenge - that is left to the application to decide based on business rules.
+e.g. auxiliary challenge may only be required if the user logs in via a device that they have not previously logged in from."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2edb9076 0001 00 00 
+					"void"
+					"setAuxiliaryChallenge"
+					"Sets auxiliaryChallenge"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean auxiliaryChallenge"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 2d87104a 
+		/{ class AssociationChain/ 
+			01 0069 0f243050 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1dfa9051 00000546 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 1b5fa052 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 1dfa9051 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 32f55053 000005b4 
+					{
+					}
+					01 0002 01 01 0002 0001 02 
+					"behaviour"
+					/{ class RoleText/ 
+						01 0071 28aef054 00000014 00000020 00000118 00000061 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 32f55053 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 1b5fa052 /UOID/ 02 28aef054 
+			}
+			0003 /Bend coords/ 000005be 00000550 
+			/NullObj/ 00 /UOID/ 02 1425a040 /UOID/ 02 06a5600a 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0cb5b05f /Location/ 000007bc 0000026c 00000960 000002d0 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 372f9c52 
+			"ICredentialSpec"
+			"RENAME"
+			"com\\sas\\framework\\iam\\authentication"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 147ed060 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 06183061 00000294 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 077c7062 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00797469 /UOID/ 02 06183061 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 043ab063 00000294 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 18329064 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 005c6176 /UOID/ 02 043ab063 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 077c7062 /UOID/ 02 18329064 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0cb5b05f /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/UOID/ 02 3e58106b /UOID/ 02 16a1e06c 
+	}
+	0073 
+	"com\\sas\\app\\wexpojo\\biz\\website"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 36050002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

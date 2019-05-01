@@ -1,0 +1,610 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000013f 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 1d179000 
+	"Exopjo Module System"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 3aeb20d5 /Location/ 0000001e 0000001e 00000316 00000226 
+			{
+			}
+			/UOID/ 02 1d179000 00 1c12269e 
+			"IModule"
+			"RENAME"
+			"com\\sas\\framework\\system"
+			"Base class for all Modules that make up the system - like a very cut down version of OSGi that should be eventually migrated to OSGi with more time.
+
+The lifecycle of a module during application execution is:
+
+init - called before persistence management has commenced
+establishGenesisObjects - called after persistence management has commenced and only if hasGenesisObjects returned false in Expojo listener.
+start - called after persistence managerment has commenced and after establishGenesisObjects was called (only called if genesis objects did not already exist)
+
+... application executes
+
+stop - called when application is shutting down
+destroy - called after application has stopped running
+"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 15b2a0eb 0001 00 00 
+					"void"
+					"init"
+					"init is called before any vital systems and/or start up operations (eg., workflow, data migrations, persistence framework) have been initialized.
+If you need some code to be executed at start up of a module that requires these vital systems and operations then place that code in the start method.
+If a module requires new objects to be created during the 'genesis' phase of a new system then override establishGenesisObjects and create such new objects in that method."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1d923112 0001 00 00 
+					"void"
+					"addComponents"
+					"Adds the repository and services components for a module to the ModelExposer."
+					0000 01 00000000 00 01 01 00 0003 
+					"ModelExposer modelExposer"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ed90110 0001 00 00 
+					"void"
+					"establishGenesisObjects"
+					"Establishes genesis objects for this module if the system as has determined that they are not yet established in the datastore."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2879a0d6 0001 00 00 
+					"void"
+					"start"
+					"Starts the module"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3b3fb0d7 0001 00 00 
+					"void"
+					"stop"
+					"Stops the module."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3392710e 0001 00 00 
+					"void"
+					"destroy"
+					"Releases any references or resources used by the module."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0da1c0ef 0001 00 00 
+					"String[]"
+					"getMetaDataPackages"
+					"Returns an array of packages that contain metadata files for this module. This method can return null or empty array if this module does not contain persistent classes.
+This method is typically used by an application to ensure that all meta data is included and available to the persistence framework during startup."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 0429910c /Location/ 00000852 0000047e 00000b9a 0000051e 
+			{
+			}
+			/UOID/ 02 1d179000 00 2d2e9954 
+			"Util"
+			"RENAME"
+			"com\\sas\\framework\\util"
+			"Helps avoid dependencies on third party libraries to keep it extremely lightweight"
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 3a01010d 0001 01 00 
+					"String"
+					"collectionToDelimitedString"
+					"Converts a collection of Strings to a single delimited String."
+					0000 01 00000000 00 01 00 00 0003 
+					"Collection<String> strings, String delimiter"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 1f18e114 /Location/ 000004ce 00000014 0000065e 00000078 
+			{
+			}
+			/UOID/ 02 1d179000 00 32a7cab8 
+			"ModelExposer"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 2cccb115 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 291b1116 0000003c 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 02e4b117 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 291b1116 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 02632118 0000003c 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 36cc9119 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 6d206120 /UOID/ 02 02632118 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 02e4b117 /UOID/ 02 36cc9119 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1f18e114 /UOID/ 02 3aeb20d5 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 2abf911a /Location/ 00000014 000002f8 00000320 00000500 
+			{
+			}
+			/UOID/ 02 1d179000 00 36bd4a1e 
+			"DefaultModule"
+			"RENAME"
+			"com\\sas\\framework\\system"
+			"Implementation of IModule that has \"no op\" implementations of each method. Used for convenience as the base class for many modules who do not need to provide custom implementations of every method."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 0128611b 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 3aeb20d5 00 /UOID/ 02 2abf911a 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 064fe11c 0001 00 00 
+					"void"
+					"init"
+					"Initializes the module"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3341211d 0001 00 00 
+					"void"
+					"addComponents"
+					"Adds the repository and services components for a module to the ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"ModelExposer modelExposer"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1c06b11e 0001 00 00 
+					"void"
+					"establishGenesisObjects"
+					"Establishes genesis objects for this module if the system as has determined that they are not yet established in the datastore."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ca3d11f 0001 00 00 
+					"void"
+					"start"
+					"Starts the module after initialization of the main system components has completed."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 367ea120 0001 00 00 
+					"void"
+					"stop"
+					"Stops the module."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1588e121 0001 00 00 
+					"void"
+					"destroy"
+					"Releases any references or resources used by the module."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0f12d122 0001 00 00 
+					"String[]"
+					"getMetaDataPackages"
+					"Returns an array of packages that contain metadata files for this module. This method can return null or empty array if this module does not contain persistent classes.
+This method is typically used by an application to ensure that all meta data is included and available to the persistence framework during startup."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 0128611b 
+		/{ class CClass/ 
+			01 000b 0f492123 /Location/ 0000085c 00000000 00000b90 000000dc 
+			{
+			}
+			/UOID/ 02 1d179000 00 37511407 
+			"IModulesProvider"
+			"RENAME"
+			"com\\sas\\framework\\system"
+			"Provides a collection of IModuleS."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 12c2d124 0001 00 00 
+					"Collection<IModule>"
+					"getModules"
+					"Returns a collection of modules."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 29116134 0001 00 00 
+					"void"
+					"addModule"
+					"Adds an IModule."
+					0000 01 00000000 00 01 01 00 0003 
+					"IModule module"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 33f0a125 /Location/ 0000085c 00000154 00000b90 0000026c 
+			{
+			}
+			/UOID/ 02 1d179000 00 375270c8 
+			"DefaultModulesProvider"
+			"RENAME"
+			"com\\sas\\framework\\system"
+			"Default implementation of IModuleProvider that stores a List of IModuleS."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 0e9f5126 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 0f492123 00 /UOID/ 02 33f0a125 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 20afb127 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 097d9132 0001 00 00 
+					"void"
+					"addModule"
+					"Adds an IModule."
+					0000 01 00000000 00 01 00 00 0003 
+					"IModule module"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 12cf5133 0001 00 00 
+					"Collection<IModule>"
+					"getModules"
+					"Returns the colleciton of IModuleS."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 1fd80128 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1ec39129 0000008c 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 3ec8c12a ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 6e656d65 /UOID/ 02 1ec39129 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3fd1812b 0000008c 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 240b912c 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00270002 /UOID/ 02 3fd1812b 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 3ec8c12a /UOID/ 02 240b912c 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 3aeb20d5 /UOID/ 02 0f492123 
+		/} class AssociationChain/ 
+		/UOID/ 02 0e9f5126 
+		/{ class AssociationChain/ 
+			01 0069 2990912d 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 0de1112e 0000015e 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 0d9d412f ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 35313032 /UOID/ 02 0de1112e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 06951130 0000015e 
+					{
+					}
+					01 0001 01 01 0002 0006 01 
+					"modules"
+					/{ class RoleText/ 
+						01 0071 32e8b131 00000023 ffffffbd 00000155 fffffffe 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 06951130 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0d9d412f /UOID/ 02 32e8b131 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 3aeb20d5 /UOID/ 02 33f0a125 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 232b4135 /Location/ 000004ce 000002f8 00000636 00000398 
+			{
+			}
+			/UOID/ 02 1d179000 00 37833915 
+			"ProxyModule"
+			"RENAME"
+			"com\\sas\\framework\\system"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2f9c9136 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 3aeb20d5 00 /UOID/ 02 232b4135 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 007ba13d 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"IModule iModule"
+					0000 
+					""
+				/} class FConstructor/ 
+			}
+			/NullObj/ 00 
+			{
+				/{ class CustomProxyCodeInjector/ 
+					01 3718 04d19137 0000 
+					""
+					""
+					""
+					""
+				/} class CustomProxyCodeInjector/ 
+			}
+		/} class CClass/ 
+		/UOID/ 02 2f9c9136 
+		/{ class AssociationChain/ 
+			01 0069 1cea1138 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 351ea139 00000578 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 0759f13a 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 20746168 /UOID/ 02 351ea139 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 170ed13b 000001ae 
+					{
+					}
+					01 0002 01 01 0002 0001 01 
+					"impl"
+					/{ class RoleText/ 
+						01 0071 1f57913c 00000018 ffffffc7 00000097 00000008 
+						{
+						}
+						""
+						0925 0001 61206f74 /UOID/ 02 170ed13b 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0759f13a /UOID/ 02 1f57913c 
+			}
+			0003 /Bend coords/ 00000582 000001b8 
+			/NullObj/ 00 /UOID/ 02 3aeb20d5 /UOID/ 02 232b4135 
+		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 1c1f713e /Location/ 00000668 000002f8 000007f0 000003fe 
+			{
+			}
+			"This class is a 'Custom Proxy' so methods of the interface it implements are auto generated at design time by Javelin rather than inefficiently synthesized via reflection at runtime."
+			0810 0002 20202020 
+		/} class Annotation/ 
+	}
+	0084 
+	"com\\sas\\framework\\system"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 30678002 
+		""
+		0000 00000000 00000000 00 00 00 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

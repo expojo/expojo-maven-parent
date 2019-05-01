@@ -1,0 +1,462 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000074 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 2c6bc000 
+	"Website API"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 10323004 /Location/ 000008ac 000001a4 00000c08 000003e8 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 3718b8a3 
+			"IWebsite"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"WexPOJO supports multiple website within the one app.
+
+IWebsite is an interface that represents a website.
+"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 02f93029 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 36dad02a /Location/ 000009ba 0000001e 00000afa 00000082 
+						{
+						}
+						/UOID/ 02 2c6bc000 00 371adca7 
+						"Serializable"
+						"RENAME"
+						"java\\io"
+						"Describe here"
+						"h"
+						"java"
+						0002 
+						""
+						01 0001 0001 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 10323004 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 08b38034 0001 00 00 
+					"int"
+					"getSiteId"
+					"Returns unique ID for this website.
+Can be used a path component in the filename of various site specific files. This allows each website to have its own separate subdirectory for site specific files.
+"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2e6fc008 0001 00 00 
+					"String"
+					"getName"
+					"Gets name of website."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3a26d009 0001 00 00 
+					"String"
+					"getHostName"
+					"Returns the host name of the webserver(s) hosting this website."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0aefc02d 0001 00 00 
+					"int"
+					"getTemplateId"
+					"Each website can specify which web template (collection of HTML files with appropriate suffixes) should be used to display its pages.
+
+Templates are identified by an integer ID and are a set of HTML files. Each template can provide customized variations of the standard HTML file. 
+
+For example:
+
+HomePage.html may provide a vanilla home page.
+
+HomePage_23.html may provide a home page styled according to the style of template with ID - 23.
+
+As well as providing HTML markup file variations for pages the web developer can also provide markup files styled for a particular template for panels.
+
+If a particular markup file does not have a variant appropriate for the template of a particular website then Wicket will default to using the default markup - i.e. the one with no variant suffix."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3540903b 0001 00 00 
+					"String"
+					"getThemeId"
+					"Returns the ID of the theme within the template that this website is using.
+The head section of the HTML will be generated to include the following CSS file:
+
+//pagebloom/css/t/${templateId}/${themeId}.css"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b31e03f 0001 00 00 
+					"IWebsiteBehaviour"
+					"getBehaviour"
+					"Returns the website behaviour for this website. It is valid to return null for this in which case default behaviour will be used."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0e06306b 0001 00 00 
+					"IRealm"
+					"getRealm"
+					"Return the realm associated with this website."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3c0b805d 0001 00 00 
+					"ICredentialSpec"
+					"getCredentialSpec"
+					"Returns an ICredentialSpec appropriate for this website."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 1ec2600f /Location/ 00000d7a 000001a4 00001112 000002bc 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37194f97 
+			"IWebsiteRepository"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Basic repository of hosted websites."
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 066fc02b 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 36dad02a 00 /UOID/ 02 1ec2600f 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 19741010 0001 00 00 
+					"void"
+					"addWebsite"
+					"Adds a website to the repo."
+					0000 01 00000000 00 01 01 00 0003 
+					"IWebsite website"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 01c1c015 0001 00 00 
+					"IWebsite"
+					"findWebsiteByHostName"
+					"Finds a website given its host name and returns it.
+If not found this will return null (no OptionalS in this code friends. People who need trainig wheels to handle nulls are in the wrong job)"
+					0000 01 00000000 00 01 01 00 0003 
+					"String hostName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 19197073 0001 00 00 
+					"Collection<IWebsite>"
+					"findAllWebsites"
+					"Returns all IWebsites in the repository."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 36dad02a /UOID/ 02 02f93029 /UOID/ 02 066fc02b 
+		/{ class CClass/ 
+			01 000b 1425a040 /Location/ 0000001e 000002da 0000038e 000003b6 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 372933f1 
+			"IWebsiteBehaviour"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\biz\\website"
+			"Specifies how a particular website should behave.
+For example:
+Should the home page allow unauthenticated access?"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2858a041 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 36dad02a 00 /UOID/ 02 1425a040 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 359d104b 0001 00 00 
+					"boolean"
+					"allPagesRequireAuth"
+					"Returns true if all pages require an authenticated user - except for the Authenticate pages."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2aca1072 0001 00 00 
+					"boolean"
+					"supportsAuxiliaryChallenge"
+					"Returns true if this realm supports auxiliary authentication challenges.
+Supporting an auxiliary authentication challenge does not mean that an authentication challenge will occur every time a user logs on because the decision of when to challenge may be based on other factors eg., user has not logged in for more than 3 months etc.,"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3751f042 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1cf38043 00000348 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 16f19044 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 76616a5c /UOID/ 02 1cf38043 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1dc56045 00000348 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 34712046 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 1dc56045 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 16f19044 /UOID/ 02 34712046 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1425a040 /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/UOID/ 02 2858a041 
+		/{ class CClass/ 
+			01 000b 0cb5b05f /Location/ 00000de8 00000334 00000f8c 00000398 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 372f9c52 
+			"ICredentialSpec"
+			"RENAME"
+			"com\\sas\\framework\\iam\\authentication"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 147ed060 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 06183061 0000035c 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 077c7062 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00797469 /UOID/ 02 06183061 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 043ab063 0000035c 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 18329064 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 005c6176 /UOID/ 02 043ab063 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 077c7062 /UOID/ 02 18329064 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0cb5b05f /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 20a7e06c /Location/ 00000686 00000262 00000762 000002c6 
+			{
+			}
+			/UOID/ 02 2c6bc000 00 37906474 
+			"IRealm"
+			"RENAME"
+			"com\\sas\\framework\\iam\\realm"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 0b52f06d 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1a45b06e 0000028a 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 2aa7606f ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 1a45b06e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 33c95070 0000028a 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 30a9d071 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 33c95070 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2aa7606f /UOID/ 02 30a9d071 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 20a7e06c /UOID/ 02 10323004 
+		/} class AssociationChain/ 
+	}
+	0071 
+	"com\\sas\\app\\wexpojo\\biz\\website"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 36050002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

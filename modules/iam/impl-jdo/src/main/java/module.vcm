@@ -1,0 +1,274 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000c9 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 2003b000 
+	"Expojo Module"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 0ded008b /Location/ 00000046 0000001e 00000276 00000082 
+			{
+			}
+			/UOID/ 02 2003b000 00 375254a6 
+			"IdentityAccessModule"
+			"RENAME"
+			"com\\sas\\framework\\iam\\module"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 3cb5b08c /Location/ 0000001e 00000172 0000029e 00000212 
+			{
+			}
+			/UOID/ 02 2003b000 00 375227a6 
+			"IdentityAccessModuleJdo"
+			"RENAME"
+			"com\\sas\\framework\\iam\\module\\jdo"
+			"The IModule implementation for this identity and access management module."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 3d15a08d 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 0ded008b 00 /UOID/ 02 3cb5b08c 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 0e5a808e 0001 00 00 
+					"void"
+					"addComponents"
+					"Adds the repository and services components for a module to the ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"ModelExposer modelExposer"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 3d15a08d 
+		/{ class CClass/ 
+			01 000b 391680a2 /Location/ 00000442 000002ee 000005d2 00000352 
+			{
+			}
+			/UOID/ 02 2003b000 00 3760cc4c 
+			"ModelExposer"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3fcaa0a3 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2b9ce0a4 0000012c 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 04c090a5 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 656e202c /UOID/ 02 2b9ce0a4 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 290640a6 00000316 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 28cd90a7 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 290640a6 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 04c090a5 /UOID/ 02 28cd90a7 
+			}
+			0003 /Bend coords/ 00000136 00000320 
+			/NullObj/ 00 /UOID/ 02 391680a2 /UOID/ 02 3cb5b08c 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 308ae0bd /Location/ 00000456 000001d6 000005fa 0000023a 
+			{
+			}
+			/UOID/ 02 2003b000 00 37609907 
+			"UserRepository"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 0b0f50be 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 263c30bf 000001e0 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 2999c0c0 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 263c30bf 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3d2b20c1 000001e0 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 3f1df0c2 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 656e202c /UOID/ 02 3d2b20c1 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2999c0c0 /UOID/ 02 3f1df0c2 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 308ae0bd /UOID/ 02 3cb5b08c 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0e4f60c3 /Location/ 00000456 0000015e 000005fa 000001c2 
+			{
+			}
+			/UOID/ 02 2003b000 00 37630e59 
+			"IUserRepository"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3e3810c4 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 118dd0c5 0000017c 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 312170c6 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 003b6563 /UOID/ 02 118dd0c5 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 19b900c7 0000017c 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 370fa0c8 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 19b900c7 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 312170c6 /UOID/ 02 370fa0c8 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0e4f60c3 /UOID/ 02 3cb5b08c 
+		/} class AssociationChain/ 
+	}
+	007d 
+	"com\\sas\\framework\\iam\\authentication\\expojo"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 2b3aa002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

@@ -1,0 +1,1181 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000a9 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 26d1e000 
+	"Expojo Components"
+	"Implementations of user related interface classes with repository and service classes being expojo components."
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 28ea6003 /Location/ 0000001e 0000001e 000002b2 000002da 
+			{
+			}
+			/UOID/ 02 26d1e000 00 00000065 
+			"IUser"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"Interface for all users in a system."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 2755a004 0001 00 00 
+					"String"
+					"getUsername"
+					"Returns username"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3000e006 0001 00 00 
+					"String"
+					"getPassword"
+					"Returns (ideally a digested) password."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0f85d023 0001 00 00 
+					"long"
+					"getMemberId"
+					"Describe here"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 30c2e024 0001 00 00 
+					"IEntity"
+					"getEntity"
+					"Describe here"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 32973009 0001 00 00 
+					"Date"
+					"getPreviousLogon"
+					"Returns previousLogon"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0a0bd00b 0001 00 00 
+					"Date"
+					"getCurrentLogon"
+					"Returns currentLogon"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 251a700c 0001 00 00 
+					"void"
+					"registerAuthentication"
+					"Registers a successful authentication. Typically would update previous and current logon times."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1dab3021 0001 00 00 
+					"String"
+					"getActivationCode"
+					"Returns the activation code."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3140d022 0001 00 00 
+					"void"
+					"setActivationCode"
+					"Sets the activationCode."
+					0000 01 00000000 00 01 01 00 0003 
+					"String iActivationCode"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b29e00d 0001 00 00 
+					"String"
+					"toString"
+					"Describe here"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 16d8300e /Location/ 000006b8 000002b2 00000974 0000038e 
+			{
+			}
+			/UOID/ 02 26d1e000 00 00000067 
+			"IUserRepository"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"An interface that supplies user services such as checking if a username, password combination is for a valid user etc.,"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 2c562010 0001 00 00 
+					"IUser"
+					"findUserByUsername"
+					"Finds the user with the given username."
+					0000 01 00000000 00 01 01 00 0003 
+					"String username"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 29961011 0001 00 00 
+					"Collection"
+					"findAllUsers"
+					"Returns all users in the system."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 12f55013 /Location/ 00000ca8 00000244 00000e4c 000002e4 
+			{
+			}
+			/UOID/ 02 26d1e000 00 0f33d4d0 
+			"IRealm"
+			"RENAME"
+			"com\\sas\\framework\\iam\\realm"
+			"Interface representing a realm. IUserS can be associated with an IRealm. This can be used to support multi tenanted systems.
+A Realm is typically some type of an organization which is really just a group of people gathered together in some type of group to \"do stuff\"."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0002 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 290a502c 0001 00 00 
+					"String"
+					"getName"
+					"Returns the name of this realm."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 3a776019 /Location/ 00000cbc 000003fc 00000e24 00000460 
+			{
+			}
+			/UOID/ 02 26d1e000 00 0f300f4b 
+			"IUserService"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"User related Services."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 10ca201a 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 3152e01b 00000cc6 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 2804e01c 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 53203930 /UOID/ 02 3152e01b 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1c7ac01d 00000cc6 
+					{
+					}
+					01 0002 01 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 1fd1601e 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 53203930 /UOID/ 02 1c7ac01d 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2804e01c /UOID/ 02 1fd1601e 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 12f55013 /UOID/ 02 3a776019 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 1a352025 /Location/ 000003b6 0000017c 000005fa 00000258 
+			{
+			}
+			/UOID/ 02 26d1e000 00 327bdce6 
+			"IEntity"
+			"RENAME"
+			"com\\sas\\framework\\entity"
+			"Interface representing an entity.
+An entity could be any of these:
+person
+organization
+software agent - i.e. a software agent that has access to use a particular system
+vehicle
+real estate asset
++ many more
+or a myriad of others"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0002 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 2557902b 0001 00 00 
+					"String"
+					"getDisplayName"
+					"Returns the name to display for this entity.
+The display name is unique across the system so that it is possibly to uniquely identify an entity by it's display name. The display name does not have to have any resemblance to the name returned by getName but it may.
+e.g. getName may return Bill Smith for many entities but for each entity the getDisplayName for each must be different so you could end up with display names being billsmith1, billsmith57, bill smith A, Bill Smith 27 etc.,"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ce2c03c 0001 00 00 
+					"String"
+					"getName"
+					"The name of this entity - not necessarily unique across the system."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 02d6902d 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1604602e 000001e0 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 24c9702f 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 69746e45 /UOID/ 02 1604602e 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 366c0030 000001e0 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 2ae25031 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 7469746e /UOID/ 02 366c0030 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 24c9702f /UOID/ 02 2ae25031 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1a352025 /UOID/ 02 28ea6003 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 389f6049 /Location/ 00000118 000003fc 000003c0 0000094c 
+			{
+			}
+			/UOID/ 02 26d1e000 00 3759fd2d 
+			"User"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user\\impl"
+			"Simple implementation of User"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 21bb704a 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 28ea6003 00 /UOID/ 02 389f6049 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+				/{ class BaseClassRef/ 
+					01 006b 0510b05b 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0001 /UOID/ 02 1a352025 00 /UOID/ 02 389f6049 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 3994c059 0002 00 00 
+					"String"
+					"username"
+					"NoDesc"
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0628205a 0002 00 00 
+					"String"
+					"password"
+					"NoDesc"
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 3bc6b05e 0003 00 00 
+					"Date"
+					"currentLogon"
+					"Time of the current log on. At the next logon this will be assigned to previousLogOn."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 28a5f05f 0003 00 00 
+					"Date"
+					"previousLogon"
+					"Time of the previous log on."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 1ab05065 0003 00 00 
+					"String"
+					"activationCode"
+					"String used to activate a user account - could be sent via an email link."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 380a004e 0001 00 00 
+					"String"
+					"getUsername"
+					"Returns username"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2a9d104f 0001 00 00 
+					"void"
+					"setUsername"
+					"Sets username"
+					0000 01 00000000 00 01 00 00 0003 
+					"String username"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2d540050 0001 00 00 
+					"String"
+					"getPassword"
+					"Returns password"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0fd4a051 0001 00 00 
+					"void"
+					"setPassword"
+					"Sets password"
+					0000 01 00000000 00 01 00 00 0003 
+					"String password"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 23d71053 0001 00 00 
+					"Date"
+					"getPreviousLogon"
+					"Returns previousLogon"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3ea3d064 0003 00 00 
+					"void"
+					"setPreviousLogon"
+					"Sets previousLogon"
+					0000 01 00000000 00 01 00 00 0003 
+					"Date previousLogon"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 14060054 0001 00 00 
+					"Date"
+					"getCurrentLogon"
+					"Returns currentLogon"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 172bd060 0003 00 00 
+					"void"
+					"setCurrentLogon"
+					"Sets currentLogon"
+					0000 01 00000000 00 01 00 00 0003 
+					"Date currentLogon"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0a135055 0001 00 00 
+					"void"
+					"registerAuthentication"
+					"Called when a successful authentication has taken place."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2c913066 0001 00 00 
+					"String"
+					"getActivationCode"
+					"Returns activationCode"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 24aa8067 0001 00 00 
+					"void"
+					"setActivationCode"
+					"Sets activationCode"
+					0000 01 00000000 00 01 00 00 0003 
+					"String activationCode"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 04593056 0001 00 00 
+					"String"
+					"toString"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 11790057 0001 00 00 
+					"long"
+					"getMemberId"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0dd6a058 0001 00 00 
+					"IEntity"
+					"getEntity"
+					"Returns the IEntity associated with this SimpleUser - may actually be the SimpleUser itself."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1003e05c 0001 00 00 
+					"String"
+					"getDisplayName"
+					"Returns the name to display for this entity.
+The display name is unique across the system so that it is possibly to uniquely identify an entity by it's display name. The display name does not have to have any resemblance to the name returned by getName but it may.
+e.g. getName may return Bill Smith for many entities but for each entity the getDisplayName for each must be different so you could end up with display names being billsmith1, billsmith57, bill smith A, Bill Smith 27 etc.,"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 10d8305d 0001 00 00 
+					"String"
+					"getName"
+					"The name of this entity - not necessarily unique across the system."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/{ class PersistenceDirectives/ 
+				01 0493 3e8b6063 
+				""
+				""
+				""
+			/} class PersistenceDirectives/ 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 21bb704a /UOID/ 02 0510b05b 
+		/{ class CClass/ 
+			01 000b 32d79070 /Location/ 00000712 0000056e 0000091a 0000060e 
+			{
+			}
+			/UOID/ 02 26d1e000 00 375ee019 
+			"UserRepository"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2cb9f071 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 16d8300e 00 /UOID/ 02 32d79070 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+				/{ class BaseClassRef/ 
+					01 006b 016ce08b 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0001 
+					/{ class CClass/ 
+						01 000b 211a208c /Location/ 000008fc 00000406 00000b40 0000046a 
+						{
+						}
+						/UOID/ 02 26d1e000 00 37613fa6 
+						"RepositoryComponent"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"Describe here"
+						"h"
+						"java"
+						0000 
+						""
+						01 0001 0000 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 32d79070 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 05862073 0001 01 00 
+					"UserRepository"
+					"get"
+					"Static convenience method to return the repository."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/{ class PersistenceDirectives/ 
+				01 0493 35707072 
+				""
+				""
+				""
+			/} class PersistenceDirectives/ 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 2cb9f071 
+		/{ class CClass/ 
+			01 000b 39bee074 /Location/ 00000ba4 000006ea 00000dd4 0000083e 
+			{
+			}
+			/UOID/ 02 26d1e000 00 375c2efe 
+			"UserService"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 1ffe2075 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 3a776019 00 /UOID/ 02 39bee074 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+				/{ class BaseClassRef/ 
+					01 006b 00d68089 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0001 
+					/{ class CClass/ 
+						01 000b 26a0708a /Location/ 00000eec 000003fc 000010e0 00000460 
+						{
+						}
+						/UOID/ 02 26d1e000 00 376222ba 
+						"ServiceComponent"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"Describe here"
+						"h"
+						"java"
+						0000 
+						""
+						01 0001 0000 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 39bee074 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 15e4f077 0001 01 00 
+					"UserService"
+					"get"
+					"Static convenience method to return the service."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 16b6108f 0001 00 00 
+					"boolean"
+					"registerUser"
+					"Registers a new User in the context of a sign up process, typically initiated from the UI.
+The OrgUnit provides the context for the application in which the user is operating when registering even though the User created can log in to different applications in the system.
+If the system does not require auto registration then the AbstractUserSession object will be set to this current User and it's Entity effectively making the User logged on in the system.
+Returns true if the new user was logged on i.e. OrgUnit does not require activation via the link in an activation email."
+					0000 01 00000000 00 01 00 00 0003 
+					"IRealm realm, String siteVisitorId, AbstractUserSession session, String username, String password, String firstName, String lastName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1999d090 0001 00 00 
+					"User"
+					"registerUser"
+					"Registers a new User directly, typically not within the context of a sign up process initiated via the UI. It sends no activation or welcome emails. It will activate the User if initialState indicates that the User should be active.
+
+This method is typically used when registering a User in the process of establishing standard objects within a system at initialization time.
+
+Creates a new User with the specified initialState. Associated processing will occur for some states.
+
+Will check for uniqueness of username if checkUsernameIsUnique is true but won't if false. This allows use to avoid double checking in the case that this method is called within a context where the check has already been performed.
+
+Sets up an initial SiteMember role on the website the user signed up on."
+					0000 01 00000000 00 01 00 00 0003 
+					"String username, String password, int initialState, boolean checkUsernameIsUnique"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 20cd00a8 0003 00 00 
+					"void"
+					"persistNewUser"
+					"This will establish a new persistent user in the system. The user contains all of the details of the new user."
+					0000 01 00000000 00 01 00 00 0003 
+					"User user"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/{ class PersistenceDirectives/ 
+				01 0493 3eb5a076 
+				""
+				""
+				""
+			/} class PersistenceDirectives/ 
+			{
+				/{ class LoggerCodeInjector/ 
+					01 371f 206980a1 
+				/} class LoggerCodeInjector/ 
+			}
+		/} class CClass/ 
+		/UOID/ 02 1ffe2075 
+		/{ class AssociationChain/ 
+			01 0069 0aad2078 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 06f9d079 00000578 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 0f6ec07a ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 75727422 /UOID/ 02 06f9d079 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 0fd4107b 00000578 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 0810507c 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 0fd4107b 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0f6ec07a /UOID/ 02 0810507c 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 389f6049 /UOID/ 02 32d79070 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 20bfe07e /Location/ 000009f6 00000582 00000a96 000005e6 
+			{
+			}
+			/UOID/ 02 26d1e000 00 376023be 
+			"Ex"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 09f4907f 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 31156080 000005aa 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 22fa5081 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 41287265 /UOID/ 02 31156080 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 19012082 000005aa 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 1b487083 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 19012082 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 22fa5081 /UOID/ 02 1b487083 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 20bfe07e /UOID/ 02 32d79070 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 2537d084 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 22fa7085 00000bf4 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 33062086 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 75727422 /UOID/ 02 22fa7085 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 109c8087 000005aa 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 12a6f088 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 109c8087 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 33062086 /UOID/ 02 12a6f088 
+			}
+			0003 /Bend coords/ 00000bfe 000005b4 
+			/NullObj/ 00 /UOID/ 02 20bfe07e /UOID/ 02 39bee074 
+		/} class AssociationChain/ 
+		/UOID/ 02 26a0708a /UOID/ 02 00d68089 /UOID/ 02 211a208c /UOID/ 02 016ce08b 
+		/{ class AssociationChain/ 
+			01 0069 1f027091 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 09b6d092 00000708 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 2297b093 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 72702070 /UOID/ 02 09b6d092 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 21a8d094 00000708 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 05dcc095 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 34313032 /UOID/ 02 21a8d094 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2297b093 /UOID/ 02 05dcc095 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 389f6049 /UOID/ 02 39bee074 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 1f9bd096 /Location/ 000007da 00000744 000009f6 000007a8 
+			{
+			}
+			/UOID/ 02 26d1e000 00 37920e5d 
+			"AbstractUserSession"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 1976d097 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 0848d098 00000758 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 1d15a099 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 0848d098 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1d49f09a 00000758 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3847109b 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 1d49f09a 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 1d15a099 /UOID/ 02 3847109b 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 1f9bd096 /UOID/ 02 39bee074 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 1bf6209c 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 142c509d 00000c26 
+					{
+					}
+					00 0002 00 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 0001e09e 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 142c509d 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 202a609f 0000006e 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3a98b0a0 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 202a609f 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0001e09e /UOID/ 02 3a98b0a0 
+			}
+			0003 /Bend coords/ 00000c30 00000078 
+			/NullObj/ 00 /UOID/ 02 28ea6003 /UOID/ 02 39bee074 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 05b910a2 /Location/ 00000b90 0000099c 00000de8 00000a00 
+			{
+			}
+			/UOID/ 02 26d1e000 00 37905324 
+			"AuthenticationException"
+			"RENAME"
+			"com\\sas\\framework\\iam\\authentication"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 32a2e0a3 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1b0a00a4 00000cc6 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 3cafa0a5 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 1b0a00a4 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 13e120a6 00000cc6 
+					{
+					}
+					01 0002 01 01 0002 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 243370a7 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 3b6e6f69 /UOID/ 02 13e120a6 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 3cafa0a5 /UOID/ 02 243370a7 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 05b910a2 /UOID/ 02 39bee074 
+		/} class AssociationChain/ 
+	}
+	0078 
+	"com\\sas\\framework\\iam\\user\\expojo"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 19a8d08d 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

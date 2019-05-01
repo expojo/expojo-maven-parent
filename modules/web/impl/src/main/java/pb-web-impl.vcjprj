@@ -1,0 +1,47 @@
+00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 00000007 01 
+/{ class ModelRepository/ 
+	01 2134 2c6bc000 
+	{
+	}
+	"Chris Colman"
+	"Step Ahead Software"
+	"WexPOJO - Wicket + exPOJO application core"
+	"(c) 2008,2019. Step Ahead Software Pty Ltd. All rights reserved.
+Usage is governed by the terms of the Apache 2 License."
+	00 01 00 
+	"h"
+	"java"
+	0000012c 000000c8 
+	"com\\sas\\app\\wexpojo"
+	""
+	""
+	{
+		/{ class ClassDiagramRef/ 
+			01 2135 2c7dd004 
+			"DEFAULT"
+			"Website Module"
+			/UOID/ 02 2c6bc000 
+			"Website module.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 21c8d005 
+			"DEFAULT"
+			"Website Repository"
+			/UOID/ 02 2c6bc000 
+			"Website Repository.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 22933006 
+			"DEFAULT"
+			"Website Domain Model Impl"
+			/UOID/ 02 2c6bc000 
+			"Website Domain Model Impl.vcm"
+		/} class ClassDiagramRef/ 
+	}
+	/{ class MakeRunOptions/ 
+		01 048e 086b8001 0004 0000 0000 01 
+		"ant compile"
+		"ant run"
+		01 00 
+	/} class MakeRunOptions/ 
+/} class ModelRepository/ 

@@ -1,0 +1,345 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000026 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 2fbfe000 
+	"Session"
+	"Classes and interfaces related to session."
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 09a45009 /Location/ 0000001e 0000001e 000004a6 0000029e 
+			{
+			}
+			/UOID/ 02 2fbfe000 00 372ecf40 
+			"IWexpojoSession"
+			"RENAME"
+			"com\\expojo\\app\\wexpojo\\ui\\session"
+			"Interface implemented by all WexPojoSession classes.
+
+This has methods for extracting the authenticated IUser from the session. Implementation of this is left up to the application.
+
+Authenticated user implies a fully authenticated user. In multi factor authentication with 1, 2, 3, n factors of authentication the getUser method should return null unless all required factors of authentication have been sucessfully processed."
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 3852700a 0001 00 00 
+					"IUser"
+					"getUser"
+					"Returns the authenticated user associated with this session.
+
+This will return null unless all required authentication factors have been processed and succeeded.
+
+NOTE: it is possible that an implementation may have a reference to the IUser but should NOT return it due to not all authentication factor processes being completed successfully."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 253d3012 0001 00 00 
+					"String"
+					"getSiteVisitorId"
+					"Returns a unique identifier for the visitor visiting this website.
+This value is typically stored as a cookie in the user's browser.
+A single user may access the website from multiple browsers across a range of different PCs, Laptops and handheld devices. There will be a separate, unique site visitor Id for each of these browsers."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2897e013 0001 00 00 
+					"boolean"
+					"hasUnsatisfiedAuxiliaryChallenge"
+					"Returns true if an auxiliary authentication challenge was required AND has not been satisfied."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 224c2014 0001 00 00 
+					"void"
+					"setUnsatisfiedAuxiliaryChallenge"
+					"Marks the session as having an unsatisfied auxiliary authentication challenge."
+					0000 01 00000000 00 01 01 00 0003 
+					"boolean iUnsatisfiedAuxiliaryChallenge"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3e816015 0001 00 00 
+					"void"
+					"processGenericPageParameters"
+					"Allows a general app wide processing of certain generic page parameters if required. Any page specific parameters will likely not be handled by this method."
+					0000 01 00000000 00 01 01 00 0003 
+					"WebPage webPage, PageParameters pageParameters"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1e537011 0001 00 00 
+					"IUser"
+					"authenticate"
+					"Attempts to authenticate with the given username and password.
+Returns an implementation of IUser if successful or null if not.
+realm is an optional parameter that may be null. If not null then the authentication process is widened to consider a match for username and password in any org specific roles within the realm.
+Note: the realm parameter is not used for pagebloom standard. It is currently a pagebloom enterprise feature only."
+					0000 01 00000000 00 01 01 00 0003 
+					"String username, String password, boolean enableAutoSignIn, IRealm realm"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 39a9c01c 0001 00 00 
+					"void"
+					"setWorkflowOrchestrator"
+					"Sets the workflow orchestrator."
+					0000 01 00000000 00 01 01 00 0003 
+					"IWorkflowOrchestrator iWorkflowOrchestrator"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1756701d 0001 00 00 
+					"IWorkflowOrchestrator"
+					"getWorkflowOrchestrator"
+					"Returns the workflow orchestrator if there is one."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 23b05025 0001 00 00 
+					"void"
+					"detach"
+					"Detaches the session. This needs to be overridden to detach any associated IWorkflowOrchestrator"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 3917d00b /Location/ 00000654 0000001e 00000708 00000082 
+			{
+			}
+			/UOID/ 02 2fbfe000 00 372d4172 
+			"IUser"
+			"RENAME"
+			"com\\sas\\framework\\iam\\user"
+			"Describe here"
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 0bcb300c 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 0d97000d 00000046 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3754800e 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 53203900 /UOID/ 02 0d97000d 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2b4bc00f 00000046 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 26037010 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 2b4bc00f 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 3754800e /UOID/ 02 26037010 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 3917d00b /UOID/ 02 09a45009 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 3589b016 /Location/ 00000654 00000168 0000076c 000001cc 
+			{
+			}
+			/UOID/ 02 2fbfe000 00 37937538 
+			"WebPage"
+			"RENAME"
+			"org\\apache\\wicket\\markup\\html"
+			"Describe here"
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 01 00 0004 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 07ac4017 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2b435018 00000190 
+					{
+					}
+					00 0002 00 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 234c1019 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 28656d61 /UOID/ 02 2b435018 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2756601a 00000190 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 3d60401b ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 61506567 /UOID/ 02 2756601a 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 234c1019 /UOID/ 02 3d60401b 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 3589b016 /UOID/ 02 09a45009 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 3e8d801e /Location/ 000005d2 00000334 00000802 000003d4 
+			{
+			}
+			/UOID/ 02 2fbfe000 00 37b5d49d 
+			"IWorkflowOrchestrator"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\ui\\session"
+			"Interface for objects whose lifecylce is beyond that of a single request cycle and that are attached to the session.
+
+These objects are often used to store data that is collected from a user as they traverse a workflow that involves multiple screens."
+			"h"
+			"java"
+			0002 
+			""
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 2ee5d024 0001 00 00 
+					"void"
+					"detach"
+					"Detaches the workflow orchestrator."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 0d2b101f 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1dead020 0000037a 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 2fbd0021 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 32313032 /UOID/ 02 1dead020 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 0a4d7022 00000352 
+					{
+					}
+					01 0002 01 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 1d0fa023 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000003 /UOID/ 02 0a4d7022 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2fbd0021 /UOID/ 02 1d0fa023 
+			}
+			0003 /Bend coords/ 00000384 0000035c 
+			/NullObj/ 00 /UOID/ 02 3e8d801e /UOID/ 02 09a45009 
+		/} class AssociationChain/ 
+	}
+	006b 
+	"com\\sas\\app\\wexpojo\\ui\\session"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 0a0d4002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

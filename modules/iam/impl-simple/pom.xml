@@ -1,0 +1,28 @@
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.expojo.iam</groupId>
+		<artifactId>expojo-iam-parent-pom</artifactId>
+		<version>3.2.1</version>	
+		<relativePath>../</relativePath>		
+	</parent>	
+
+	<groupId>com.expojo.iam</groupId>
+	<artifactId>expojo-iam-impl-simple</artifactId>
+
+	<name>Expojo - IAM Simple Impl</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.expojo.iam</groupId>
+			<artifactId>expojo-iam-api</artifactId>
+			<version>${iam.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

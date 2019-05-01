@@ -1,0 +1,315 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.expojo</groupId>
+	<artifactId>expojo-parent</artifactId>
+	<version>3.2.1</version>
+	<packaging>pom</packaging>
+
+	<name>Expojo - Productive development of fast Java apps</name>
+
+	<description>Parent pom file for Step Ahead Software's Expojo framework</description>
+ 
+	<properties>
+
+		<!-- SAS Opensource module versions -->
+		<expojo.core.version>3.2.1</expojo.core.version>
+		<expojo.jdo.version>3.2.1</expojo.jdo.version>
+		
+		<sasthreadutils.version>1.1</sasthreadutils.version>
+
+		<!-- Third Party Module Versions -->
+		<!-- Specify versions of third party modules once and only once here in this top level pom -->
+
+		<!-- Java native -->		
+		<javax.mail.version>1.4.7</javax.mail.version>
+		<javax.servlet.version>3.1.0</javax.servlet.version>
+
+
+		<!-- ORM API Versions -->
+		<jdo.api.version>3.2.0-m10</jdo.api.version>
+
+		<!-- ORM Implementation versions -->
+
+		<!-- DataNucleus versions -->
+
+		<datanucleus.api.jdo.version>5.2.0-m3</datanucleus.api.jdo.version>
+		<datanucleus.cache.version>5.1.1</datanucleus.cache.version>
+		<datanucleus.core.version>5.2.0-m3</datanucleus.core.version>
+		<datanucleus.guava.version>5.0.1</datanucleus.guava.version>
+		<datanucleus.jdo-query.version>5.0.9</datanucleus.jdo-query.version>
+		<datanucleus.jodatime.version>5.1.0-release</datanucleus.jodatime.version>
+		<datanucleus.rdbms.version>5.2.0-m3</datanucleus.rdbms.version>
+		<datanucleus.maven.plugin.version>5.0.2</datanucleus.maven.plugin.version>
+
+		
+		<!-- Miscellaneous -->		
+		<log4j.version>2.11.0</log4j.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		
+		<junit.version>4.11</junit.version>
+
+		
+		<poi.version>3.11</poi.version>
+
+		<apache.derby.version>10.14.1.0</apache.derby.version>
+
+		<maven.sure-fire.version>2.21.0</maven.sure-fire.version>
+			
+	</properties>
+
+	<modules>
+		<module>core</module>
+		<module>persistence</module>
+		<module>modules</module>
+		<module>ui/wicket</module>
+	</modules>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.sas.framework.expojo</groupId>
+				<artifactId>expojo-core</artifactId>
+				<version>${expojo.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sas.framework.expojo</groupId>
+				<artifactId>expojo-jdo</artifactId>
+				<version>${expojo.jdo.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+
+		<!-- Logging -->
+
+		<!-- Just include the log4j API, not the impl -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+
+		<!-- 
+			We need to remove these two implementation specific dependencies from this project which should 
+			remain SLF4J implementation agnostic
+		-->
+
+	</dependencies>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>Step Ahead Software Pty Ltd</name>
+		<url>http://www.stepaheadsoftware.com</url>
+	</organization>
+	
+	<url>http://www.expojo.com</url>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- Give the tests a extra memory -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.sure-fire.version}</version>
+				<configuration>
+					<argLine>-Xmx1024m</argLine>
+				</configuration>
+			</plugin>
+
+			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+		
+
+		<!--
+		pluginManagement 'defines and configures' the plugins in a single place high up in the
+		pom.xml hierarchy but by itself inclusion of a plugin within pluginManagement does not 
+		apply it to any particular project. Usage requires a plugin reference inside the plugins section
+		of a child project eg.,
+
+    	<plugins>
+			<plugin>
+				<groupId>org.mygroup</groupId>
+				<artifactId>my-plugin</artifactId>
+			</plugin>
+	    </plugins>
+		-->
+		
+		<pluginManagement>
+			<plugins>
+						
+				<plugin>
+					<!--
+					Special config of maven-resources-plugin to pull in .jdo and .properties files used by
+					DN for testing. The app would need to override this pluging in its own pom.xml to pull
+					in the properties files into the actual jar/war - but definitely don't want that for
+					libs as this would create multiple copies of those properties files on the class path
+					when the app is running.
+					-->
+				
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${basedir}/target/classes</outputDirectory>
+									<resources>          
+										<resource>
+											<directory>${basedir}/src/main/java</directory>
+											<filtering>true</filtering>
+											<includes>
+												<include>**/*.jdo</include>
+											</includes>
+										</resource>
+										<resource>
+											<directory>${basedir}/src/main/java</directory>
+											<filtering>true</filtering>
+											<includes>
+												<include>**/*.properties</include>
+											</includes>
+										</resource>
+									</resources>              
+							</configuration>
+						</execution>
+					
+						<execution>
+							<id>copy-test-resources</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							
+							<configuration>
+								  <outputDirectory>${basedir}/target/test-classes</outputDirectory>
+								  <resources>          
+									<resource>
+										<directory>${basedir}/src/test/java</directory>
+										<filtering>true</filtering>
+										<includes>
+											<include>**/*.jdo</include>
+										</includes>
+									</resource>
+									<resource>
+										<directory>${basedir}/src/test/resources</directory>
+										<filtering>true</filtering>
+										<includes>
+											<include>**/*.properties</include>
+										</includes>
+									</resource>
+								  </resources>              
+							</configuration>            
+						</execution>
+					</executions>
+				</plugin>			
+				
+				
+				<plugin>
+					<groupId>org.datanucleus</groupId>
+					<artifactId>datanucleus-maven-plugin</artifactId>
+					<version>${datanucleus.maven.plugin.version}</version>
+					
+					<configuration>
+						<fork>false</fork>
+						<api>JDO</api>
+						<props>${basedir}/src/test/resources/datanucleus.properties</props>
+						<log4jConfiguration>${basedir}/src/test/resources/log4j2-test.yaml</log4jConfiguration>
+						<verbose>true</verbose>
+					</configuration>
+
+					<executions>
+						<execution>
+							<id>main</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>enhance</goal>
+							</goals>
+						</execution>
+		<!-- 				<execution>
+							<id>test</id>
+							<phase>process-test-classes</phase>
+							<goals>
+								<goal>enhance</goal>
+							</goals>
+						</execution> -->
+					</executions>
+
+					<dependencies>
+
+						<!-- DataNucleus JDO implementation -->
+						<dependency>
+							<groupId>org.datanucleus</groupId>
+							<artifactId>datanucleus-api-jdo</artifactId>
+							<version>${datanucleus.api.jdo.version}</version>
+						</dependency>
+
+						<dependency>
+						  <groupId>org.datanucleus</groupId>
+						  <artifactId>datanucleus-core</artifactId>
+						  <version>${datanucleus.core.version}</version>
+						</dependency>
+					</dependencies>
+					
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

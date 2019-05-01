@@ -1,0 +1,123 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000000c 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 34c1f000 
+	"Wicket Model References"
+	"Wicket model references are a typesafe, convenient way of providing references to domain model objects that are implementations of Wicket's IModel interface."
+	""
+	""
+	{
+		/{ class CClass/ 
+			01 000b 358c5003 /Location/ 00000104 0000019a 000002f8 0000023a 
+			{
+			}
+			/UOID/ 02 34c1f000 00 37bb04a9 
+			"WicketExModelRef"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\modelref"
+			"Provides a convenient Wicket IModel implementation which references any persistent domain model object."
+			"h"
+			"java"
+			0001 
+			"T"
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 35dd8004 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 1087a005 /Location/ 0000001e 0000001e 00000172 00000082 
+						{
+						}
+						/UOID/ 02 34c1f000 00 37b86cb3 
+						"ExModelRef"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"Describe here"
+						"h"
+						"java"
+						0001 
+						"T"
+						01 0001 0000 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 358c5003 
+					"T"
+					00 7f 
+				/} class BaseClassRef/ 
+				/{ class BaseClassRef/ 
+					01 006b 3cfc700a 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0001 
+					/{ class CClass/ 
+						01 000b 0aa2d00b /Location/ 000002c6 0000001e 000003a2 00000082 
+						{
+						}
+						/UOID/ 02 34c1f000 00 37b9d12c 
+						"IModel"
+						"RENAME"
+						"org\\apache\\wicket\\model"
+						"Describe here"
+						"h"
+						"java"
+						0003 
+						"T"
+						00 0001 0001 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 358c5003 
+					"T"
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 35e78006 0001 00 00 
+					"no type"
+					"Constructor"
+					"WARNING: This constructor should only be used for the default model for a Wicket component. For all other cases, use another constructor."
+					0000 01 00000000 01 00 00 00 0000 
+					"T o"
+					0000 
+					""
+				/} class FConstructor/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 1087a005 /UOID/ 02 35dd8004 /UOID/ 02 0aa2d00b /UOID/ 02 3cfc700a 
+	}
+	0067 
+	"com\\sas\\app\\wexpojo\\modelref"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 04475002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

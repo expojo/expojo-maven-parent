@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.expojo</groupId>
+		<artifactId>expojo-parent</artifactId>
+		<version>3.2.1</version>
+		<relativePath>../</relativePath>		
+	</parent>	
+
+	<groupId>com.expojo</groupId>
+	<artifactId>expojo-core</artifactId>
+	<packaging>jar</packaging>
+	
+	
+	<name>Expojo - Core</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- What was this doing in Expojo?
+		<dependency>
+			<groupId>org.lesscss</groupId>
+			<artifactId>lesscss</artifactId>
+			<version>1.7.0.1.1</version>
+		</dependency>
+		-->
+	</dependencies>
+
+</project>

@@ -1,0 +1,4 @@
+com\sas\framework\role\simple\SimpleUserRepository.class
+com\sas\framework\role\simple\SimpleUserService.class
+com\sas\framework\iam\authentication\simple\StandardCredentialSpec.class
+com\sas\framework\role\simple\SimpleUser.class

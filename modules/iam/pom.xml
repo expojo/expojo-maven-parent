@@ -1,0 +1,78 @@
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.expojo</groupId>
+		<artifactId>expojo-modules-parent</artifactId>
+		<version>3.2.1</version>	
+		<relativePath>../</relativePath>		
+	</parent>	
+	
+	<properties>  
+		<iam.version>${project.version}</iam.version>
+	</properties>
+
+	<groupId>com.expojo.iam</groupId>
+	<artifactId>expojo-iam-parent-pom</artifactId>
+	<packaging>pom</packaging>
+
+
+	<name>Expojo - IAM</name>
+
+	<dependencies>
+
+	</dependencies>
+
+   	<profiles>
+		<profile>
+			<id>build</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>api</module>
+				<module>impl</module>
+				<module>impl-jdo</module>
+			</modules>
+		</profile>
+	</profiles>
+
+	<organization>
+		<name>Step Ahead Software Pty Ltd</name>
+		<url>http://www.stepaheadsoftware.com</url>
+	</organization>
+
+	<url>http://www.stepaheadsoftware.com</url>
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- Give the tests a extra memory -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.sure-fire.version}</version>
+				<configuration>
+					<argLine>-Xmx1024m</argLine>
+				</configuration>
+			</plugin>
+
+		</plugins>
+		
+	</build>
+
+</project>

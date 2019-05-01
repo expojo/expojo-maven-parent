@@ -1,0 +1,226 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000004a 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 26d1e000 
+	"Entity"
+	"Interfaces related to entities"
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 12f55013 /Location/ 0000041a 00000032 0000078a 0000010e 
+			{
+			}
+			/UOID/ 02 26d1e000 00 0f33d4d0 
+			"IRealm"
+			"RENAME"
+			"com\\sas\\framework\\iam\\realm"
+			"Interface representing a realm. IUserS can be associated with an IRealm. This can be used to support multi tenanted systems.
+A Realm is typically some type of an organization which is really just a group of people gathered together in some type of group to \"do stuff\"."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0002 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 290a502c 0001 00 00 
+					"String"
+					"getName"
+					"Returns the name of this realm."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1807a049 0001 00 00 
+					"boolean"
+					"supportsAuxiliaryChallenge"
+					"Returns true if this realm supports auxiliary authentication challenges.
+Supporting an auxiliary authentication challenge does not mean that an authentication challenge will occur every time a user logs on because the decision of when to challenge may be based on other factors eg., user has not logged in for more than 3 months etc.,"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 1a352025 /Location/ 0000001e 0000001e 00000262 000000fa 
+			{
+			}
+			/UOID/ 02 26d1e000 00 327bdce6 
+			"IEntity"
+			"RENAME"
+			"com\\sas\\framework\\entity"
+			"Interface representing an entity.
+An entity could be any of these:
+person
+organization
+software agent - i.e. a software agent that has access to use a particular system
+vehicle
+real estate asset
++ many more
+or a myriad of others"
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0002 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 2557902b 0001 00 00 
+					"String"
+					"getDisplayName"
+					"Returns the name to display for this entity.
+The display name is unique across the system so that it is possibly to uniquely identify an entity by it's display name. The display name does not have to have any resemblance to the name returned by getName but it may.
+e.g. getName may return Bill Smith for many entities but for each entity the getDisplayName for each must be different so you could end up with display names being billsmith1, billsmith57, bill smith A, Bill Smith 27 etc.,"
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ce2c03c 0001 00 00 
+					"String"
+					"getName"
+					"The name of this entity - not necessarily unique across the system."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 2424c032 /Location/ 000000c8 00000262 000001b8 000002c6 
+			{
+			}
+			/UOID/ 02 26d1e000 00 370a3d51 
+			"IPerson"
+			"RENAME"
+			"com\\sas\\framework\\entity"
+			"Interface for a person."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 0edbe033 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 1a352025 00 /UOID/ 02 2424c032 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 0edbe033 
+		/{ class CClass/ 
+			01 000b 0a29e034 /Location/ 00000348 00000244 000006a4 000002e4 
+			{
+			}
+			/UOID/ 02 26d1e000 00 370b96e2 
+			"IPersonRepository"
+			"RENAME"
+			"com\\sas\\framework\\entity"
+			"Respository to retrieve IPerson objects."
+			"h"
+			"java"
+			0002 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+			}
+			{
+				/{ class Function/ 
+					01 0010 23e46036 0001 00 00 
+					"IPerson"
+					"findPersonByDisplayName"
+					"Finds an IPerson by its display name."
+					0000 01 00000000 00 01 01 00 0003 
+					"String displayName"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 11db7037 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 3e9b0038 0000028a 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 0dc91039 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 76726553 /UOID/ 02 3e9b0038 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 0671803a 0000028a 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 0718a03b 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 75727422 /UOID/ 02 0671803a 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 0dc91039 /UOID/ 02 0718a03b 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 2424c032 /UOID/ 02 0a29e034 
+		/} class AssociationChain/ 
+	}
+	006e 
+	"com\\sas\\framework\\user"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 3de27001 
+		""
+		0000 00000000 00000000 00 00 00 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

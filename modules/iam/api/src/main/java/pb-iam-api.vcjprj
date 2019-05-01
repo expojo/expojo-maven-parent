@@ -1,0 +1,60 @@
+00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 00000024 01 
+/{ class ModelRepository/ 
+	01 2134 22102000 
+	{
+	}
+	"Chris Colman"
+	"Step Ahead Software"
+	"Entity Model Framework"
+	"(c) 2006, 2014 Step Ahead Software Pty Ltd. All rights reserved."
+	00 01 00 
+	"h"
+	"java"
+	0000012c 000000c8 
+	"com\\sas\\framework\\user"
+	""
+	""
+	{
+		/{ class ClassDiagramRef/ 
+			01 2135 36107006 
+			"DEFAULT"
+			"Interfaces for user model classes"
+			/UOID/ 02 22102000 
+			"userAccessIf.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 08e7e020 
+			"DEFAULT"
+			"Authentication"
+			/UOID/ 02 22102000 
+			"authentication.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 075fc021 
+			"DEFAULT"
+			"Entity"
+			/UOID/ 02 22102000 
+			"entity.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 0adbb022 
+			"DEFAULT"
+			"Interfaces for user service and repository components"
+			/UOID/ 02 22102000 
+			"user repo and service components.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 18970023 
+			"DEFAULT"
+			"Association of user with a session"
+			/UOID/ 02 22102000 
+			"Association of user with a session.vcm"
+		/} class ClassDiagramRef/ 
+	}
+	/{ class MakeRunOptions/ 
+		01 048e 3dd51007 0004 0000 0000 01 
+		"ant compile"
+		"ant run"
+		01 00 
+	/} class MakeRunOptions/ 
+/} class ModelRepository/ 

@@ -1,0 +1,1272 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000d8 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 394d7000 
+	"exPOJO Hibernate specific classes"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 28e0e003 /Location/ 0000001e 0000001e 0000041a 0000047e 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000065 
+			"ModelExposer"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Base class for classes implementing the \"Exposed Model\" pattern.
+Supports the 'availability' of the ModelExposer to all objects in a thread via attachment to the thread. In most scenarios threads are shared resources (eg., servlet environment) and so should not be permanently attached to a ModelExposer. attachThread and detachThread are provided and work with the ThreadLocal attribute to provide almost 'singleton' like (without the bad bits) access to the model exposer from within a thread that has been attached.
+No automatic attachment/detachment takes place in the constructor, init or destroy methods because no assumptions are made that these methods are running in the thread that is the one that should be attached to the ModelExposer.
+Typically in an Echo2/servlet environment the service method is overwritten in a manner similar to the following:
+
+EServerApp active = (EServerApp)ApplicationInstance.getActive();
+
+if ( active != null )
+{
+	active.modelExposer.attachThread();
+}
+
+// do per request opening of the persistence provider
+try
+{
+	if ( active != null )
+		active.modelExposer.persistenceProvider.open();
+	super.service(req, res);
+}
+
+finally
+{
+	// do per request closing of the persistence provider
+	if ( active != null )
+		active.modelExposer.persistenceProvider.close();
+
+	if ( active == null )
+	{
+
+		// app was not initialised at start of this method - is it active now?
+		active = (EServerApp)ApplicationInstance.getActive();
+	}
+
+	if ( active != null )
+
+	{
+
+		// detach from this thread
+
+		active.modelExposer.detachThread();
+
+	}
+}
+"
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 1cf0a0ab 0003 01 00 
+					"ThreadLocal"
+					"threadLocalModelExposer"
+					"A thread local used to store the persistence provider per thread. This has an initialization construct so we can always assume that the threadLocalModelExposer is not null."
+					0000 01 00 7f 01 00 
+					"new ThreadLocal()"
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 1e7300af 0002 00 00 
+					"boolean"
+					"traceTxDepth"
+					"If true dumps information about the transaction depth each time begin, commit or rollback are called."
+					0000 01 00 7f 01 01 
+					"false"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1d7a800d 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object, passing in the persistence provider factory shared by all model exposers accessing a particular datastore."
+					0000 01 00000000 00 00 00 00 0000 
+					"PersistenceProviderFactory iPersistenceProviderFactory"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 316d4060 0001 00 00 
+					"void"
+					"init"
+					"This should be called after construction to allow initialization of the exposer components that have been added. Calls init on each ModelExposerComponent that has been added.
+They may override ModelExposerComponent.init to set up references to other services or repositories as required - in this case the super class init() must be called at the end of the overwritten init() method."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 03a30022 0001 00 00 
+					"void"
+					"destroy"
+					"Destroys this thread's model exposer instance by setting it's ThreadLocal value instance to null."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3d33c09a 0002 00 00 
+					"void"
+					"finalize"
+					"Calls to destroy the ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 14402076 0001 00 00 
+					"boolean"
+					"isTestDb"
+					"Returns testDb"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0381a0b0 0001 00 00 
+					"boolean"
+					"getTraceTxDepth"
+					"Returns traceTxDepth"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2688c0b1 0001 00 00 
+					"void"
+					"setTraceTxDepth"
+					"Sets traceTxDepth"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean traceTxDepth"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 314bc0ac 0001 00 00 
+					"void"
+					"attachThread"
+					"Attaches this ModelExposer to the current thread. Typically called at the start of the service method in a Servlet so that model objects can call ModelExposer.get() and get this model exposer during the servicing of the current HTTP request.
+This eliminates the need to inject a ModelExposer dependency into various objects that might need one because the ModelExposer is available to all objects in the current thread via ModelExposer.get()."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1dc880ad 0001 00 00 
+					"void"
+					"detachThread"
+					"Detaches a ModelExposer from the current thread - enabling it to be garbage collected if necessary (assuming ThreadLocal had the last remaining reference to the ModelExposer).
+This is typically called at the end of the Servlet's service method - after super.service() has been called."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 046bd03e 0001 01 00 
+					"ModelExposer"
+					"get"
+					"Returns the ModelExposer for the current thread. Each thread has its own seperate set of instances of the ModelExposer and its components - thus avoiding issues with the Singleton pattern."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 23563059 0001 00 00 
+					"PersistenceProvider"
+					"getPersistenceProvider"
+					"Returns a ThreadLocal version of the appropriate PersistenceProvider. Each thread that calls this will then end up with a unique connection to the persistence service with which to access the data store."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0ab8f01f 0001 00 00 
+					"void"
+					"addService"
+					"Adds a service component to the model exposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServiceComponent serviceComponent"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c0cc020 0001 00 00 
+					"void"
+					"addRepository"
+					"Adds a repository to the model exposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"RepositoryComponent repositoryComponent"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 02742057 0001 00 00 
+					"ServiceComponent"
+					"getService"
+					"Returns the service of the given name or null if not found."
+					0000 01 00000000 00 01 00 00 0003 
+					"String serviceName"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 320d8058 0001 00 00 
+					"RepositoryComponent"
+					"getRepository"
+					"Returns a repository of the given name or null if not found."
+					0000 01 00000000 00 01 00 00 0003 
+					"String repositoryName"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 109e7006 /Location/ 000007f8 000002b2 000009ec 00000316 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000067 
+			"ServiceComponent"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Base class for exposer components exposing services - ie., that which can make changes to the objects in the datastore."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 35d69007 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 2442d008 /Location/ 000005c8 00000028 00000a00 000001b8 
+						{
+						}
+						/UOID/ 02 394d7000 00 00000069 
+						"ModelExposerComponent"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"Base class for all components that expose the model."
+						"h"
+						"java"
+						0000 
+						""
+						00 0001 0001 01 00 0000 0000 0000 00 
+						{
+						}
+						{
+							/{ class Data/ 
+								01 000d 27c2603f 0002 00 00 
+								"String"
+								"name"
+								"Name of the component."
+								0000 01 00 7f 01 00 
+								""
+								/NullObj/ 00 
+							/} class Data/ 
+						}
+						{
+							/{ class Function/ 
+								01 0010 299a3040 0001 00 00 
+								"void"
+								"setModelExposer"
+								"Sets the model exposer of which this component forms a part. There should be no need to ever call this explicitly. This is called automatically by the addService and addRepository methods when a model exposer component is added to the model exposer."
+								0000 01 00000000 00 01 00 00 0003 
+								"ModelExposer iModelExposer"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 03b0e041 0001 00 00 
+								"PersistenceProvider"
+								"getPersistenceProvider"
+								"Returns a ThreadLocal version of the appropriate PersistenceProvider. Each thread that calls this will then end up with a unique connection to the persistence service with which to access the data store."
+								0000 01 00000000 00 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 28e22042 0001 00 00 
+								"String"
+								"getName"
+								"Overridden in derived classes to return the name of the model exposer component."
+								0000 01 00000000 00 01 01 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 2babc061 0001 00 00 
+								"void"
+								"init"
+								"Overridden in derived classes to allow initialization."
+								0000 01 00000000 00 01 00 00 0003 
+								"ModelExposer modelExposer"
+								0000 
+								""
+							/} class Function/ 
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 109e7006 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class CClass/ 
+			01 000b 3ea30009 /Location/ 00000596 0000023a 000007c6 0000029e 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000068 
+			"RepositoryComponent"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Base class for repository components - those that provide facilities for finding and locating domain objects in the datastore."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 3af6700a 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 2442d008 00 /UOID/ 02 3ea30009 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 2442d008 /UOID/ 02 3af6700a /UOID/ 02 35d69007 
+		/{ class CClass/ 
+			01 000b 354d8011 /Location/ 00000118 00000532 000004b0 000007ee 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000006b 
+			"PersistenceProvider"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Base class for all persistence providers.
+At this stage the acquired JDO persistence manager or the Hibernate session is kept active after rollback or commit. An future possible enhancement is to add an optional \"free persistence manager when transaction becomes innactive\"."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 31a79097 0002 00 00 
+					"int"
+					"depth"
+					"Depth of the deepest transaction. 0 = no active transaction.
+beginTx increments and commitTx and rollbackTx decrement depth.
+See rollbackTx for more information."
+					0000 01 00 7f 01 01 
+					"0"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 18a400b2 0001 00 00 
+					"void"
+					"setModelExposer"
+					"Sets the owning ModelExposer."
+					0000 01 00000000 00 01 00 00 0003 
+					"ModelExposer iModelExposer"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0c2d607d 0001 00 00 
+					"void"
+					"open"
+					"Opens a persistence provider."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 08701015 0001 00 00 
+					"void"
+					"beginTx"
+					"Begins a transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3e1a2016 0001 00 00 
+					"void"
+					"commitTx"
+					"Commits a transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0efc4017 0001 00 00 
+					"void"
+					"rollbackTx"
+					"Rolls back a transaction."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 10a0305a 0001 00 00 
+					"void"
+					"persist"
+					"Makes the given object persistent."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 013e405b 0001 00 00 
+					"void"
+					"delete"
+					"Deletes the persistent object from the datastore."
+					0000 01 00000000 00 01 01 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b595073 0001 00 00 
+					"void"
+					"close"
+					"Closes the persistence provider. It can no longer be used after being closed."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2ff2907a 0001 00 00 
+					"RuntimeException"
+					"processException"
+					"Processes an exception thrown while in a transaction. The exception could be relevent to the persistence technology or a generic RuntimeException. If it's an optimistic verification exception (optimistic locking check failed) then no exception is thrown and the persistence technology may or may not need clean. In the case of JDO a rollback as already been performed."
+					0000 01 00000000 00 01 01 00 0003 
+					"RuntimeException e"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 3c318024 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 05b93025 0000023a 
+					{
+					}
+					01 0002 00 01 0001 0001 02 
+					"modelExposer"
+					/{ class RoleText/ 
+						01 0071 1033c026 ffffffe0 0000000c 0000014d 0000004d 
+						{
+						}
+						""
+						0925 0001 00596ae8 /UOID/ 02 05b93025 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 2a105027 0000023a 
+					{
+					}
+					02 0002 01 01 0001 0001 00 
+					"persistenceProvider"
+					/{ class RoleText/ 
+						01 0071 334df028 fffffe61 ffffffdd 0000004c 0000001e 
+						{
+						}
+						""
+						0925 0001 65747369 /UOID/ 02 2a105027 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 1033c026 /UOID/ 02 334df028 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 354d8011 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 367b3029 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1fc4602a 000002e4 
+					{
+					}
+					00 0002 00 01 0001 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 2127c02b 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 000000ee /UOID/ 02 1fc4602a 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1e10802c 000002e4 
+					{
+					}
+					02 0001 01 00 0001 0003 03 
+					"services"
+					/{ class RoleText/ 
+						01 0071 0ab0402d ffffff04 ffffffd3 00000032 00000014 
+						{
+						}
+						""
+						0925 0001 65502063 /UOID/ 02 1e10802c 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2127c02b /UOID/ 02 0ab0402d 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 109e7006 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 0c96d02e 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2220f02f 00000280 
+					{
+					}
+					00 0002 00 01 0001 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 2d7c3030 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 000000f9 /UOID/ 02 2220f02f 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3e1d5031 00000280 
+					{
+					}
+					02 0001 01 00 0001 0003 03 
+					"repositories"
+					/{ class RoleText/ 
+						01 0071 209d7032 fffffec6 ffffffd3 0000003f 00000014 
+						{
+						}
+						""
+						0925 0001 0000005b /UOID/ 02 3e1d5031 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 2d7c3030 /UOID/ 02 209d7032 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 3ea30009 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 3491f045 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2ec36046 00000172 
+					{
+					}
+					00 0002 00 01 0001 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 3aac1047 ffffffec 00000003 00000000 00000008 
+						{
+						}
+						""
+						0925 0001 00e800a8 /UOID/ 02 2ec36046 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 039a0048 00000172 
+					{
+					}
+					01 0002 01 00 0001 0001 01 
+					"modelExposer"
+					/{ class RoleText/ 
+						01 0071 31b7b049 ffffffd5 ffffffd3 00000142 00000014 
+						{
+						}
+						""
+						0925 0001 00000020 /UOID/ 02 039a0048 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 3aac1047 /UOID/ 02 31b7b049 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 28e0e003 /UOID/ 02 2442d008 
+		/} class AssociationChain/ 
+		/{ class CClass/ 
+			01 000b 0ab71044 /Location/ 00000afa 0000030c 00000f6e 0000049c 
+			{
+			}
+			/UOID/ 02 394d7000 00 0000006f 
+			"ModelExposerFactory"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"Base class for all ModelExposerFactoryS. These will provide an appropriate PersistenceProvider on request and they also provide an implementation of addComponents."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 01 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 3e9cd062 0002 00 00 
+					"boolean"
+					"testDb"
+					"True if dealing with a test database. By convention make sure any test database has the word 'test' in its URL. When initializing the persistence technology in the derived class be sure to call setTestDb according to whether the URL contains 'test' in it.
+This is not used by the model exposer itself but can be used by other classes to know whether they are dealing with a test database or not. The  PersistenceTestCase uses this valid to assert that it is only operating on test databases. Adding and removing objects from a live production system could have detrimental affects on the data store especially when the destroyTestObjects method removes all objects from the database!"
+					0000 01 00 7f 01 00 
+					"true"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 37ccd04f 0001 00 00 
+					"PersistenceProvider"
+					"createPersistenceProvider"
+					"Overridden in derived classes to provide PersistenceProvider appropriate to the persistence technology used."
+					0000 01 00000000 00 01 01 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 26028077 0001 00 00 
+					"void"
+					"close"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1dcea063 0001 00 00 
+					"boolean"
+					"isTestDb"
+					"Returns testDb"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0b2ca064 0001 00 00 
+					"void"
+					"setTestDb"
+					"Sets testDb"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean testDb"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/{ class AssociationChain/ 
+			01 0069 0491304a 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 3008504b 0000037a 
+					{
+					}
+					00 0002 00 01 0001 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 23b5004c 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 00000009 /UOID/ 02 3008504b 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 08d0104d 0000037a 
+					{
+					}
+					01 0002 01 00 0001 0001 03 
+					"modelExposerFactory"
+					/{ class RoleText/ 
+						01 0071 25dfe04e fffffdb9 ffffffb5 ffffffd2 fffffff6 
+						{
+						}
+						""
+						0925 0001 0000005b /UOID/ 02 08d0104d 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 23b5004c /UOID/ 02 25dfe04e 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 0ab71044 /UOID/ 02 28e0e003 
+		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 01385050 /Location/ 00000cc6 00000280 00000ecb 000002e2 
+			{
+			}
+			"This class is designed to be shared among different threads."
+			0810 0002 98c398c3 
+		/} class Annotation/ 
+		/{ class CClass/ 
+			01 000b 1da32051 /Location/ 000005aa 000006d6 00000942 00000d52 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000070 
+			"HibernatePersistenceProvider"
+			"RENAME"
+			"com\\sas\\framework\\expojo\\hibernate"
+			"Provides persistence using Hibernate."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 02a90052 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 354d8011 00 /UOID/ 02 1da32051 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 2d9aa0c8 0002 00 00 
+					"Session"
+					"session"
+					"Hibernate session."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 2c3530c5 0002 00 00 
+					"SessionFactory"
+					"sessionFactory"
+					"Hibernate session factory."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 352e70cb 0002 00 00 
+					"Transaction"
+					"transaction"
+					"The current transaction for the session, null if no transaction is currently associated with the session."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 22800053 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object giving it a SessionFactory so that it can make it's own Session(s)."
+					0000 01 00000000 00 00 00 00 0000 
+					"SessionFactory iSessionFactory"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 324ce0c9 0001 00 00 
+					"Session"
+					"getSession"
+					"Returns session"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 239b90ca 0001 00 00 
+					"void"
+					"setSession"
+					"Sets session"
+					0000 01 00000000 00 01 00 00 0003 
+					"Session session"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 192e70c6 0001 00 00 
+					"SessionFactory"
+					"getSessionFactory"
+					"Returns sessionFactory"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 27b5f0c7 0001 00 00 
+					"void"
+					"setSessionFactory"
+					"Sets sessionFactory"
+					0000 01 00000000 00 01 00 00 0003 
+					"SessionFactory sessionFactory"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1cc290cc 0001 00 00 
+					"Transaction"
+					"getTransaction"
+					"Returns transaction"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 20a540cd 0001 00 00 
+					"void"
+					"setTransaction"
+					"Sets transaction"
+					0000 01 00000000 00 01 00 00 0003 
+					"Transaction transaction"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2c80807f 0001 00 00 
+					"void"
+					"open"
+					"Opens a persistence provider."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1f6b2055 0001 00 00 
+					"void"
+					"beginTx"
+					"Begins a transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1a8b6054 0001 00 00 
+					"void"
+					"commitTx"
+					"Commits a transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1a5b1056 0001 00 00 
+					"void"
+					"rollbackTx"
+					"Rolls back a transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 114a30d4 0001 00 00 
+					"void"
+					"flush"
+					"Flushes all object modifications to SQL (as yet uncommitted) that makes newly created objects and changes available to DB queries within the current transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3cb150cf 0001 00 00 
+					"boolean"
+					"hasActiveTx"
+					"Returns true if the PersistenceProvider has an active transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 293df05e 0001 00 00 
+					"Object"
+					"persist"
+					"Makes the given object persistent."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0eb0d0d6 0001 00 00 
+					"Object"
+					"attach"
+					"Reattaches the given unattached object to the PersistenceProvider"
+					0000 01 00000000 00 01 00 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0d2c70d7 0001 00 00 
+					"Object"
+					"detachCopy"
+					"Returns a detached copy of the given persistent object."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3f95a05f 0001 00 00 
+					"void"
+					"delete"
+					"Deletes the persistent object from the datastore."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object object"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2bff80d2 0001 00 00 
+					"void"
+					"refresh"
+					"Refresh the given object - only has effect if within the context of an open transaction."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object o"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 186c00d3 0001 00 00 
+					"void"
+					"refreshAll"
+					"Refresh all transactional instances - only has effect if within the context of an open transaction.
+WARNING: Could not find a method that performs a refresh on all objects in Hibernate so this method currently does nothing. If there is one please let us know."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 017b00d0 0001 00 00 
+					"void"
+					"evict"
+					"Evicts all objects from the PersistenceProvider's (Session) cache."
+					0000 01 00000000 00 01 00 00 0003 
+					"Object po"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1afb50d1 0001 00 00 
+					"void"
+					"evictAll"
+					"Evicts all objects from the PersistenceManager's cache."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 04bbc075 0001 00 00 
+					"void"
+					"close"
+					"Closes the persistence provider. It can no longer be used after being closed."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 282ab07c 0001 00 00 
+					"RuntimeException"
+					"processException"
+					"Processes an exception thrown while in a transaction. The exception could be relevent to the persistence technology or a generic RuntimeException. If it's an optimistic verification exception (optimistic locking check failed) then no exception is thrown and the persistence technology may or may not need clean. In the case of JDO a rollback as already been performed."
+					0000 01 00000000 00 01 00 00 0003 
+					"RuntimeException e"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 02a90052 
+		/{ class AssociationChain/ 
+			01 0069 15512080 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 2fe96081 0000042e 
+					{
+					}
+					00 0002 00 01 0001 0000 00 
+					""
+					/{ class RoleText/ 
+						01 0071 05f2e082 00000000 fffffff9 00000014 fffffffe 
+						{
+						}
+						""
+						0925 0001 00000041 /UOID/ 02 2fe96081 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 1eb1a083 0000042e 
+					{
+					}
+					01 0002 01 01 0001 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 3afe7084 ffffffe6 ffffffc1 fffffffa ffffffc6 
+						{
+						}
+						""
+						0925 0001 00000016 /UOID/ 02 1eb1a083 
+					/} class RoleText/ 
+					00 7f 00 00 00 00 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 05f2e082 /UOID/ 02 3afe7084 
+			}
+			0003 /Bend coords/ 00000438 00000438 
+			/NullObj/ 00 /UOID/ 02 0ab71044 /UOID/ 02 354d8011 
+		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 1841c0ae /Location/ 00000c1c 000006e0 00000edc 00000756 
+			{
+			}
+			"The Hibernate classes have been implemented but we would like to receive more feedback from Hibernate users."
+			0810 0002 cdcdcdcd 
+		/} class Annotation/ 
+		/{ class CClass/ 
+			01 000b 0a0f30b8 /Location/ 00000af0 00000578 00000f78 00000690 
+			{
+			}
+			/UOID/ 02 394d7000 00 00000078 
+			"HibernatePersistenceProviderFactory"
+			"RENAME"
+			"com\\sas\\framework\\expojo\\hibernate"
+			"Factory to supply HibernatePersistenceProvider instances as required."
+			"h"
+			"java"
+			0000 
+			""
+			00 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2a8180b9 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 0ab71044 00 /UOID/ 02 0a0f30b8 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 02ed60ce 0002 00 00 
+					"SessionFactory"
+					"sessionFactory"
+					"It is expensive to create these so only do it once."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class Function/ 
+					01 0010 11dad0ba 0001 00 00 
+					"PersistenceProvider"
+					"createPersistenceProvider"
+					"Overridden in derived classes to provide PersistenceProvider appropriate to the persistence technology used."
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 078a30d5 0001 00 00 
+					"void"
+					"close"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 2a8180b9 
+		/{ class AssociationChain/ 
+			01 0069 2c37f0bb 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 09b8b0bc 000005b4 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 144ae0bd ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 baadf00d /UOID/ 02 09b8b0bc 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 3afaf0be 000005b4 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 0b7b90bf 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 baadf00d /UOID/ 02 3afaf0be 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 144ae0bd /UOID/ 02 0b7b90bf 
+			}
+			0002 /Bend coords/ 
+			/NullObj/ 00 /UOID/ 02 354d8011 /UOID/ 02 0a0f30b8 
+		/} class AssociationChain/ 
+		/{ class AssociationChain/ 
+			01 0069 292440c0 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 0a51f0c1 00000b5e 
+					{
+					}
+					00 0002 00 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 237cf0c2 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 baadf00d /UOID/ 02 0a51f0c1 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 015ad0c3 000007c6 
+					{
+					}
+					01 0002 01 01 0002 0000 01 
+					""
+					/{ class RoleText/ 
+						01 0071 3e9450c4 00000014 00000003 00000028 00000008 
+						{
+						}
+						""
+						0925 0001 baadf00d /UOID/ 02 015ad0c3 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 237cf0c2 /UOID/ 02 3e9450c4 
+			}
+			0003 /Bend coords/ 00000b68 000007d0 
+			/NullObj/ 00 /UOID/ 02 1da32051 /UOID/ 02 0a0f30b8 
+		/} class AssociationChain/ 
+	}
+	0079 
+	"com\\sas\\framework\\expojo\\hibernate"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 325b4001 
+		""
+		0000 00000000 00000000 00 00 00 00 00 00 
+		"OpLckVersion"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 

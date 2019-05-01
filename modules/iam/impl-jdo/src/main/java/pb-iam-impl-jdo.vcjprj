@@ -1,0 +1,39 @@
+00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 00000024 01 
+/{ class ModelRepository/ 
+	01 2134 22102000 
+	{
+	}
+	"Chris Colman"
+	"Step Ahead Software"
+	"Entity Model Framework"
+	"(c) 2006, 2014 Step Ahead Software Pty Ltd. All rights reserved."
+	00 01 00 
+	"h"
+	"java"
+	0000012c 000000c8 
+	"com\\sas\\framework\\user"
+	""
+	""
+	{
+		/{ class ClassDiagramRef/ 
+			01 2135 0946f022 
+			"DEFAULT"
+			"User Expojo Components"
+			/UOID/ 02 22102000 
+			"user expojo components.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 341e2023 
+			"DEFAULT"
+			"Expojo Module"
+			/UOID/ 02 22102000 
+			"module.vcm"
+		/} class ClassDiagramRef/ 
+	}
+	/{ class MakeRunOptions/ 
+		01 048e 3dd51007 0004 0000 0000 01 
+		"ant compile"
+		"ant run"
+		01 00 
+	/} class MakeRunOptions/ 
+/} class ModelRepository/ 

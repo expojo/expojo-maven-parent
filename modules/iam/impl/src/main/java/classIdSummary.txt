@@ -1,0 +1,5 @@
+userAccessIf.vcm ClassId base: 0
+authentication.vcm ClassId base: 0
+user expojo components.vcm ClassId base: 0
+module.vcm ClassId base: 0
+credentials.vcm ClassId base: 0
