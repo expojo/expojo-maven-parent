@@ -15,7 +15,7 @@ ExPojo lets you claim back your right, as a Java developer, to write "awesome, l
 Why ExPojo?
 -----------
 
-Have you ever debugging in your favorite IDE and single stepped through code in an app built on Spring or any other reflection/annotation oriented framework? You soon realise that your app, when seemingly making a simple call from one of your classes to another usually ends up navigating 37 levels (ok, it varies but usually surprisingly high for what should be a single, direct call)  of stack frames before your calling class reaches the actual method that it calls.
+Have you ever been debugging in your favorite IDE and single stepped through code in an app built on Spring or any other reflection/annotation oriented framework? You soon realise that your app, when seemingly making a simple call from one of your classes to another usually ends up navigating 37 levels (ok, it varies but usually surprisingly high for what should be a single, direct call)  of stack frames before your calling class reaches the actual method that it calls.
 
 In the days before Spring that call ended up being a direct call like it should be - and virtually instant (sub microsecond) - like it should be.
 
