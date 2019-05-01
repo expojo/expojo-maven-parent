@@ -1,7 +1,7 @@
 Welcome to expojo!
 ------------------
 
-expojo is Step Ahead Software's open source lightweight, highly focussed, dependency provisision (NOT injecting, so no ugly annotations and no behind the scenes reflection, performance zapping, obsfuscating "magic") "Exposed Domain Model" pattern framework for POJOs (Plain Old Java Objects).
+expojo is an open source lightweight, high performance, dependency provisioning (NOT injecting, so no ugly annotations and no behind the scenes reflection, performance zapping, obsfuscating "magic") "Exposed Domain Model" pattern framework for POJOs (Plain Old Java Objects).
 
 The exposed domain model pattern is highly productive and is one of the most transparent methods of implementing persistence for your POJOs/domain model objects. You can read about it in Chris Richardson's excellent landscape changing book called "POJOs in Action".
 
