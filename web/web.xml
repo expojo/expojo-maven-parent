@@ -1,80 +1,90 @@
-<!DOCTYPE web-app 
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" 
-    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 
-<!-- This is an example of how to configure your web application's web.xml file to use exPOJO -->
+	
+	<!--
 
-<web-app>
+	NOTE: This is an example of how to configure your web application's web.xml file to use ExPojo
 
-	<display-name>MyApp</display-name>
-	<description>
-		"MyApp does what no other app does"
-	</description>
+	-->
 
-	<!-- chaining happens automatically for identical url-pattern values -->
+	<display-name>WexpojoApp</display-name>
+
 	<filter>
-		<filter-name>exPOJO Filter</filter-name>
+		<filter-name>Expojo Filter</filter-name>
 		<filter-class>com.sas.framework.expojo.servlet.ExpojoServletFilter</filter-class>
-		<!-- exPOJO uses 'startsWith' method to match, not any regular expression matching so 
-			don't use blah/* here -->
+
 		<init-param>
-			<!-- had resouces/ in here but resources/ apparently seem to perform DB access somehow -->
+			<param-name>expojoFoundationClassName</param-name>
+			<param-value>pathtomyfoundationclass.MyExPojoFoundationClass</param-value>
+		</init-param>
+
+		<!--
+			Expojo uses 'startsWith' method to match, not any regular expression matching so
+			don't use blah/* here
+		-->
+		<init-param>
+			<!--
+			If the app has a servlet or filter that you do not want to be wrapped in a persistence context
+			by Expojo (i.e. binding an ExpojoContext to the thread) then make sure the URL pattern of that
+			servlet or filter's path is added here or simply make sure its path starts with noexpojo/
+			-->
 			<param-name>ignorePaths</param-name>
-			<param-value>images/,fckeditor/,w3c/,admin?sid=Echo.Resource,admin?sid=Echo.Image,admin?sid=Echo.Boot,admin?sid=Echo.ContentPane,admin?sid=Echo.Label,admin?sid=Echo.ArrayContainer,admin?sid=Echo.Button,admin?sid=Echo.Grid,admin?sid=Echo.WindowPane,admin?sid=Echo.SplitPane,admin?sid=Echo.Text,admin?sid=Echo.List,admin?sid=echopoint,admin?sid=jq</param-value>
+			<param-value>robots.txt,index.html,static/,css/,images/,swf/,w3c/,noexpojo/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>exposerPerRequest</param-name>
+			<param-value>true</param-value>
 		</init-param>
 	</filter>
 
 
 	<!--
-		Set up the exPOJO filter for each servlet in your application that has its model object
-		persisted by a transparent persistence engine via the exposed POJO model pattern
+		Use the following if you are using the most excellent Wicket UI framewowrk:
+
+
+		There are three means to configure Wickets configuration mode and they 
+		are tested in the order given.
+		
+		1) A system property: -Dwicket.configuration 
+		2) servlet specific <init-param> 
+		3) context specific <context-param>
+
+		The value might be either "development" (reloading when templates change) or 
+		"deployment". If no configuration is found, "development" is the default. -->
+
+	<!-- Remove if not using a Wicket based UI framework - replace with your framework's config -->
+	<filter>
+		<filter-name>wicket.WexpojoApp</filter-name>
+		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+		<init-param>
+			<param-name>applicationClassName</param-name>
+			<param-value>pathtomyApplicationClass.MyWicketApplicationClass</param-value>
+		</init-param>
+	</filter>
+
+
+
+	<!--
+		Expojo filter mapping must appear before the WicketFilter mapping so that the ExpojoContext is bound
+		to the thread before Wicket services each request
 	-->
 	<filter-mapping>
-		<filter-name>exPOJO Filter</filter-name>
-		<servlet-name>MyAppServlet1</servlet-name>
-	</filter-mapping>
-
-
-	<filter-mapping>
-		<filter-name>exPOJO Filter</filter-name>
+		<filter-name>Expojo Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 		<!-- Don't wrap forwards otherwise we end up wrapping twice -->
 		<dispatcher>REQUEST</dispatcher>
+		<!-- <dispatcher>FORWARD</dispatcher> Don't wrap forwards - see comment above -->
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 
-	<!-- Listeners must appear after filters and before servlets -->
 
-	<!--
-		MyAppListener is a listener that extends ExpojoServletContextListener to
-		set up the persistence provider factory and add service and repository component
-		for new ModelExposers as they are created for each new session.
-	-->
-	<listener>
-		<listener-class>com.mycomp.myapp.context.MyAppListener</listener-class>
-	</listener>
-
-	<!-- servlet mappings -->
-
-	<servlet>
-		<servlet-name>MyAppServlet1</servlet-name>
-		<servlet-class>com.mycomp.myapp.ui.MyAppServlet1</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>MyAppServlet1</servlet-name>
-		<url-pattern>/app1</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>MyAppServlet2</servlet-name>
-		<servlet-class>com.mycomp.myapp.ui.MyAppServlet2</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>MyAppServlet2</servlet-name>
-		<url-pattern>/app2</url-pattern>
-	</servlet-mapping>
+	<!-- Remove if not using a Wicket based UI framework - replace with your framework's config -->
+	<filter-mapping>
+		<filter-name>wicket.WexpojoApp</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 </web-app>
