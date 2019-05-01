@@ -10,7 +10,7 @@ Traditional Java applications written in Spring are *almost* the defacto standar
 
 In the modern world innovation and the ability to allow yourself to think "outside the box" and dare to make a change for the better is what sets apart modern, agile companies from their more traditional peers.
 
-ExPojo lets you claim back your right as a Java developer to write "lightning fast apps!".
+ExPojo lets you claim back your right, as a Java developer, to write "awesome, lightning fast apps!" that are not crippled by the usual interminable behind the scenes reflection and other CPU hogging "obsfuscated magic" required to perform dependency injection.
 
 Why ExPojo?
 -----------
@@ -37,9 +37,13 @@ The ExpojoContext is then available to any of your code that is executed by that
 
 After the HTTP request has been serviced by your app execution returns to the ExpojoFilter filter which can perform any 'post request' processing (e.g. close transactions etc.,) and then detaches the ExpojoContext from the thread.
 
+In the context of Object Relational Mappers (ORMs) technologies like JPA/JDO/Hibernate this is commonly referred to "Open Session in View" or "Open Persistence Manager In View" but, while the ExpojoContext provides access to ORM dependencies (to perist objects, commit transactions etc.,) it can also provide instant access to services and repository classes that you have created.
+
 The ExpojoContext is the key to avoiding declaring dependencies as annotated attributes in each class where you might need to access a dependency. All of your dependencies are now available from this single ExpojoContext instance - instantly and without any runtime reflection and without jumping through 37 stack frames each time you access one component/class from another.
 
-The exposed domain model pattern is highly productive and is one of the most transparent methods of implementing persistence for your POJOs/domain model objects. You can read about it in Chris Richardson's excellent landscape changing book called "POJOs in Action".
+ExPojo also avoids another common issue with reflection based AOP mechanism as used in Spring and many other frameworks: reflection based AOP is implemented via proxies hobbled together at runtime and so silently fail when you call one method from another method inside the same class because that does not go via the proxy and hence the intended magic does not occur (silently!). You might have experienced this if you ever called a @Transactional method in a class from a non transactional method in that same class - that method will get called but the necessary magic to make the transactional method "transactional" is bypassed which is ... unintituitive and downright dangerous!
+
+You can see similar "wrinkles in the reflection based AOP duct tape" when you do things like mark a transactional method as synchronized ... a seemingly legitimate construct but one that was the cause of duplicating a $3 million dollar direct debit transaction in one case that I heard of. The customer was not amused!
 
 # Persistence Technologies
 ExPojo makes it easy for you to manage the persistence of your POJO based domain model in a persistence technology independent way.
@@ -51,7 +55,7 @@ See http://expojo.com for more details on how to compile the system and integrat
 Licensing
 ---------
 
-The expojo framework is released under LGPL, BSD or Apache 2.0 license according to your preference so it can be used in commercial applications without requiring you to make the source code of your application available.
+The expojo framework is released under Apache 2.0 license according to your preference so it can be used in commercial applications without requiring you to make the source code of your application available.
 
 expojo Documentation
 --------------------
