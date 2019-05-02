@@ -61,7 +61,7 @@ public LogoutPage(PageParameters parameters)
 {
 	super(parameters);
 	
-	// logout by inavalidating the session
+	// logout by invalidating the session
 	getSession().invalidate();
 
 
