@@ -61,7 +61,8 @@ class WebsitePage extends WebPage
 {
 // -[KeepWithinClass]-
 
-String wexpojoBaseUrl = "/pagebloom/";
+// Keep this relative so that it works when app is not running as the ROOT context
+String wexpojoBaseUrl = "pagebloom/";
 
 String styleBaseUrl = wexpojoBaseUrl + "css/";
 
