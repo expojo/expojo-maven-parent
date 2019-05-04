@@ -38,7 +38,7 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.sas.framework.expojo</groupId>
+				<groupId>com.expojo</groupId>
 				<artifactId>expojo-jdo</artifactId>
 				<version>${expojo.version}</version>
 			</dependency>

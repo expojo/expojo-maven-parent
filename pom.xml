@@ -69,12 +69,12 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.sas.framework.expojo</groupId>
+				<groupId>com.expojo</groupId>
 				<artifactId>expojo-core</artifactId>
 				<version>${expojo.core.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.sas.framework.expojo</groupId>
+				<groupId>com.expojo</groupId>
 				<artifactId>expojo-jdo</artifactId>
 				<version>${expojo.jdo.version}</version>
 			</dependency>
