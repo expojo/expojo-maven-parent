@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000000c 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000001d 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 34c1f000 
 	"Wicket Model References"
@@ -109,8 +109,206 @@
 			}
 		/} class CClass/ 
 		/UOID/ 02 1087a005 /UOID/ 02 35dd8004 /UOID/ 02 0aa2d00b /UOID/ 02 3cfc700a 
+		/{ class CClass/ 
+			01 000b 35fc500c /Location/ 000004ce 00000168 0000073a 0000049c 
+			{
+			}
+			/UOID/ 02 34c1f000 00 389d2f48 
+			"DetachableListModel"
+			"RENAME"
+			"com\\sas\\av\\ui\\wicket"
+			"A Wicket model that represents a list of IModel (implies detachable) objects. When the model is detached, all members of the list will also be detached.
+"
+			"h"
+			"java"
+			0001 
+			"T extends IDetachable"
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 3517801c 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 0aa2d00b 00 /UOID/ 02 35fc500c 
+					"List<T>"
+					00 7f 
+				/} class BaseClassRef/ 
+				/{ class BaseClassRef/ 
+					01 006b 3e8ee019 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0001 
+					/{ class CClass/ 
+						01 000b 285b001a /Location/ 00000578 00000028 00000690 000000c8 
+						{
+						}
+						/UOID/ 02 34c1f000 00 389d66e8 
+						"IModelList"
+						"RENAME"
+						"com\\sas\\av\\ui\\wicket"
+						"Describe here"
+						"h"
+						"java"
+						0003 
+						"T"
+						01 0001 0001 00 00 0000 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+							/{ class Function/ 
+								01 0010 17c5a01b 0001 00 00 
+								"void"
+								"add"
+								"Adds an item to the internal List"
+								0000 01 00000000 01 01 01 00 0003 
+								"T t"
+								0000 
+								""
+							/} class Function/ 
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 35fc500c 
+					"T"
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+				/{ class Data/ 
+					01 000d 1bbde00d 0002 00 00 
+					"List<T>"
+					"list"
+					"NoDesc"
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 146b300e 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 01 00 00 00 0000 
+					"List<T> list"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 339fc00f 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object with an empty list."
+					0000 01 00000000 01 00 00 00 0000 
+					""
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 359d3010 0001 00 00 
+					"void"
+					"clear"
+					"Clears items from the list."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 331ac011 0001 00 00 
+					"List<T>"
+					"getObject"
+					"Describe here"
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 27f65012 0001 00 00 
+					"void"
+					"setObject"
+					"Describe here"
+					0000 01 00000000 01 01 00 00 0003 
+					"List<T> list"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0803c013 0001 00 00 
+					"void"
+					"detach"
+					"Describe here"
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 16c91014 0001 00 00 
+					"void"
+					"add"
+					"Adds an item to the internal List"
+					0000 01 00000000 01 01 00 00 0003 
+					"T t"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3d9db015 0001 00 00 
+					"void"
+					"add"
+					"Adds an item to the internal List"
+					0000 01 00000000 01 01 00 00 0003 
+					"int index, T t"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 173cf016 0001 00 00 
+					"void"
+					"detachAndRemove"
+					"Detaches the given WickeModelRef and then removes it from the list."
+					0000 01 00000000 01 01 00 00 0003 
+					"T item"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 00890017 0001 00 00 
+					"Iterator<T>"
+					"iterator"
+					"Returns an iterator over the internal list."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1bc91018 0001 00 00 
+					"void"
+					"reverseOrder"
+					"Reverses the order of the items in the list."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 285b001a /UOID/ 02 3e8ee019 /UOID/ 02 3517801c 
 	}
-	0067 
+	0069 
 	"com\\sas\\app\\wexpojo\\modelref"
 	0000 
 	/{ class OODBGenerator/ 

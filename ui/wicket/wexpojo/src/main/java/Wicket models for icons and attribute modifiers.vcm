@@ -1,0 +1,271 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000da 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 261f9000 
+	"Wicket models for Icons and Attribute modifiers"
+	""
+	""
+	"Chris Colman"
+	{
+		/{ class CClass/ 
+			01 000b 0ddac0a5 /Location/ 000005b4 00000334 00000848 000004c4 
+			{
+			}
+			/UOID/ 02 261f9000 00 37145844 
+			"IconPropertyModel"
+			"RENAME"
+			"com\\sas\\ui\\wicket\\model"
+			"Displays an icon based on a the domain model object D.
+
+Currently implemented to use \"icofont\" but could be easily enhanced to be switchable between a range of different font icon libraries eg., Font-Awesome.
+
+The generics here are slightly confusing.
+
+The base class ChainingModel is instantiated with 'String' type for its T parameter type because we need to ensure that Component.getDefaultModelObjectAsString sees a String objet returned (not the domain model object which determines the value of that String via its current state or whatever).
+
+This class then has its own type parameter to specify the domain model object and that type is given the generic parameter 'D'.
+"
+			"h"
+			"java"
+			0001 
+			"D"
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 17bdd0bf 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 011f60c0 /Location/ 000003d4 00000154 000006a4 00000230 
+						{
+						}
+						/UOID/ 02 261f9000 00 37180332 
+						"ChainingPropertyModel"
+						"RENAME"
+						"com\\sas\\ui\\wicket\\model"
+						"Holds the getInnermostModelObject method that should have been in Wicket's ChainingModel, not AbstractPropertyModel."
+						"h"
+						"java"
+						0001 
+						"D"
+						01 0001 0000 00 00 0000 0000 0000 00 
+						{
+							/{ class BaseClassRef/ 
+								01 006b 1a6310c1 
+								{
+								}
+								0002 /Bend coords/ 
+								/NullObj/ 00 0001 0000 
+								/{ class CClass/ 
+									01 000b 254f90aa /Location/ 00000474 0000001e 00000604 00000082 
+									{
+									}
+									/UOID/ 02 261f9000 00 3718ebac 
+									"ChainingModel"
+									"RENAME"
+									"org\\apache\\wicket\\model"
+									"Describe here"
+									"h"
+									"java"
+									0001 
+									"T"
+									01 0001 0000 01 00 0004 0000 0000 00 
+									{
+									}
+									{
+									}
+									{
+									}
+									/NullObj/ 00 
+									{
+									}
+								/} class CClass/ 
+								00 /UOID/ 02 011f60c0 
+								"String"
+								00 7f 
+							/} class BaseClassRef/ 
+						}
+						{
+						}
+						{
+							/{ class FConstructor/ 
+								01 000c 399fb0c2 0001 00 00 
+								"no type"
+								"Constructor"
+								"Constructs the object"
+								0000 01 00000000 00 00 00 00 0000 
+								"Object modelObject"
+								0000 
+								""
+							/} class FConstructor/ 
+							/{ class Function/ 
+								01 0010 1fa8a0c3 0001 00 00 
+								"D"
+								"getInnermostModelObject"
+								"Returns the innermost object."
+								0000 01 00000000 01 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 0ddac0a5 
+					"D"
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 0af7b0a7 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"Object modelObject"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 377c00b3 0001 00 00 
+					"String"
+					"getObject"
+					"Returns a String object representing the icon."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 176da0b8 0001 00 00 
+					"String"
+					"getIconCssClasses"
+					"Returns the string that contains all the CSS classes required to display the icon."
+					0000 01 00000000 01 01 00 00 0003 
+					"D d"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 175840ba 0001 00 00 
+					"String"
+					"getIconSize"
+					"Returns the icon size suffix - this may be a suffix like 2x, 4x or sm, lg, xl etc., so not necessarily numeric for all icon font libraries.
+
+eg., for icofont the classes are 
+icofont-1x, icofont-2x, icofont-4x etc.,
+
+This method returns the 1x, 2x, 4x etc., suffix as appropriate."
+					0000 01 00000000 01 01 00 00 0003 
+					"D d"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2018f0ac 0001 00 00 
+					"String"
+					"getIconName"
+					"Provides the name of the icon to use based on the given object.
+If null is returned then a '?' icon will be displayed."
+					0000 01 00000000 00 01 01 00 0003 
+					"D object"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 254f90aa 
+		/{ class Annotation/ 
+			01 0064 256710ab /Location/ 0000001e 00000168 0000016c 000002b6 
+			{
+			}
+			"Could be done better with a Converter??
+Decision about which converter to use is by type - would need to introduce an enum type for state which is something well overdue anyway..."
+			0810 0002 00000000 
+		/} class Annotation/ 
+		/{ class CClass/ 
+			01 000b 0ac2b0bc /Location/ 00000262 00000348 0000046a 00000460 
+			{
+			}
+			/UOID/ 02 261f9000 00 3719fce8 
+			"StringPropertyModel"
+			"RENAME"
+			"com\\sas\\ui\\wicket\\model"
+			"A non reflection based property model class that can be extended to provide a String value required for a particular purpose.
+For example - providing the CSS style in an attribute modifier in model based way - i.e. will update the view during partial updates."
+			"h"
+			"java"
+			0001 
+			"D"
+			01 0001 0001 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 2e4300c4 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 011f60c0 00 /UOID/ 02 0ac2b0bc 
+					"D"
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 10ef10be 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"Object modelObject"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 128820c5 0001 00 00 
+					"String"
+					"getObject"
+					"Returns a String object representing the icon."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 18d8e0c6 0001 00 00 
+					"String"
+					"getValue"
+					"Provides the value of this StringPropertyModel instance."
+					0000 01 00000000 00 01 01 00 0003 
+					"D object"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 011f60c0 /UOID/ 02 1a6310c1 /UOID/ 02 17bdd0bf /UOID/ 02 2e4300c4 
+	}
+	0087 
+	"com\\sas\\framework\\projectmgr\\ui\\wicket\\goal"
+	0000 
+	/{ class GuiMgdRelationGen/ 
+		01 04b0 103a9006 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class GuiMgdRelationGen/ 
+/} class ClassDiagram/ 
