@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001af 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001c2 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Foundation, ServletFilter"
@@ -1997,8 +1997,218 @@ the Wicket application object's init() method that assumes that the ExpojoServle
 established the ORM will fail on such servlet containers."
 			0810 0002 00000003 
 		/} class Annotation/ 
+		/{ class CClass/ 
+			01 000b 1c4221af /Location/ 000016bc 00000b40 00001978 00000fdc 
+			{
+			}
+			/UOID/ 02 394d7000 00 3b242dc6 
+			"TcpHostAttributes"
+			"RENAME"
+			"com\\sas\\framework\\expojo\\servlet"
+			"The specifications of a host that supports TCP connections.
+Includes: 
+- hostname
+- subdomain name
+- port number
+- whether the connection supports TLS/SSL or not
+
+Also contains methods to configure the attributes from a given servlet context, the values of which are configurable in a context.xml file."
+			"h"
+			"java"
+			0000 
+			""
+			01 0001 0000 00 00 0000 0000 0000 00 
+			{
+			}
+			{
+				/{ class Data/ 
+					01 000d 28b511b0 0003 00 00 
+					"String"
+					"host"
+					"The hostname"
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 2a3491bd 0003 00 00 
+					"String"
+					"parameterPrefix"
+					"The prefix that appears at the start of every parameter. This is necessary to support multple TcpHostAttribute instances in the same application and configured in the same file.
+
+NOTE: The parameterPrefixes must be unique within any given application."
+					0000 01 00 7f 01 01 
+					"\"service\""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 286b51b1 0003 00 00 
+					"String"
+					"subdomain"
+					"The subdomain prefix that goes in front of the host name."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 25ba51b2 0003 00 00 
+					"int"
+					"port"
+					"Port number."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
+				/{ class Data/ 
+					01 000d 2ee311b3 0003 00 00 
+					"boolean"
+					"encrypted"
+					"true if the host supports TLS/SSL encryption."
+					0000 01 00 7f 01 01 
+					"false"
+					/NullObj/ 00 
+				/} class Data/ 
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 2fcb21be 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"String iParameterPrefix"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 220a81b4 0001 00 00 
+					"void"
+					"readConfigParameters"
+					"Reads the specs from parameters within the given ServletContext and assigns to the appropriate attribute."
+					0000 01 00000000 00 01 00 00 0003 
+					"ServletContext servletContext"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3c9af1c1 0001 00 00 
+					"String"
+					"getUrl"
+					"Forms a URL for the host using:
+
+[http|https]://subdomain.host:port"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 23f4e1bf 0001 00 00 
+					"String"
+					"getParameterPrefix"
+					"Returns parameterPrefix"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 037411c0 0001 00 00 
+					"void"
+					"setParameterPrefix"
+					"Sets parameterPrefix"
+					0000 01 00000000 00 01 00 00 0003 
+					"String parameterPrefix"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2b2861b5 0001 00 00 
+					"String"
+					"getHost"
+					"Returns host"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 27e2f1b6 0001 00 00 
+					"void"
+					"setHost"
+					"Sets host"
+					0000 01 00000000 00 01 00 00 0003 
+					"String host"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 14e521b7 0001 00 00 
+					"String"
+					"getSubdomain"
+					"Returns subdomain"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 244851b8 0001 00 00 
+					"void"
+					"setSubdomain"
+					"Sets subdomain"
+					0000 01 00000000 00 01 00 00 0003 
+					"String subdomain"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 39dd21b9 0001 00 00 
+					"int"
+					"getPort"
+					"Returns port"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1034f1ba 0001 00 00 
+					"void"
+					"setPort"
+					"Sets port"
+					0000 01 00000000 00 01 00 00 0003 
+					"int port"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 006b41bb 0001 00 00 
+					"boolean"
+					"getEncrypted"
+					"Returns encrypted"
+					0000 01 00000000 00 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 16e031bc 0001 00 00 
+					"void"
+					"setEncrypted"
+					"Sets encrypted"
+					0000 01 00000000 00 01 00 00 0003 
+					"boolean encrypted"
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
 	}
-	008a 
+	008b 
 	"com\\sas\\framework\\expojo\\servlet"
 	0000 
 	/{ class OODBGenerator/ 
