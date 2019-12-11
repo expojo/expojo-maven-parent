@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001c2 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001c3 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Foundation, ServletFilter"
@@ -1998,7 +1998,7 @@ established the ORM will fail on such servlet containers."
 			0810 0002 00000003 
 		/} class Annotation/ 
 		/{ class CClass/ 
-			01 000b 1c4221af /Location/ 000016bc 00000b40 00001978 00000fdc 
+			01 000b 1c4221af /Location/ 000016bc 00000b40 00001bbc 00001018 
 			{
 			}
 			/UOID/ 02 394d7000 00 3b242dc6 
@@ -2087,6 +2087,35 @@ NOTE: The parameterPrefixes must be unique within any given application."
 					"Reads the specs from parameters within the given ServletContext and assigns to the appropriate attribute."
 					0000 01 00000000 00 01 00 00 0003 
 					"ServletContext servletContext"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1d0601c2 0001 01 00 
+					"List<TcpHostAttributes>"
+					"readSetOfConfigParameters"
+					"Reads a set of parameters with a contiguously indexed parameter prefix within the given ServletContext and returns a list of TcpHostAttributes read in.
+
+Note: host is the only mandatory parameter for each set.
+
+For example:
+
+<Parameter name=\"entity.service.0.host\" value=\"pagebloom.com\"/>
+<Parameter name=\"entity.service.0.subdomain\" value= \"dev\"/>
+<Parameter name=\"entity.service.0.port\" value= \"80\"/>
+<Parameter name=\"entity.service.0.ssl\" value= \"false\"/>
+
+<Parameter name=\"entity.service.1.host\" value=\"employerstream.com.au\"/>
+<Parameter name=\"entity.service.1.subdomain\" value= \"dev\"/>
+<Parameter name=\"entity.service.1.port\" value= \"80\"/>
+<Parameter name=\"entity.service.1.ssl\" value= \"false\"/>
+
+The method repeatedly reads in the sets starting at index 0, then index 1 etc., stopping as soon as the next indexed prefixes return no host value.
+
+Implementation detail: It does not test for values other than 'host' as it is the only mandatory parameter so testing for the others will not be a reliable test for the presence of a parameter set.
+"
+					0000 01 00000000 00 01 00 00 0003 
+					"String parameterPrefix, ServletContext servletContext"
 					0000 
 					""
 				/} class Function/ 

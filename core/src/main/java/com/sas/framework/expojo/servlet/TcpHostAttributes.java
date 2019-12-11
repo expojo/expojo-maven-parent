@@ -20,6 +20,8 @@ import java.lang.*;
 
 
 // -[KeepBeforeClass]-
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -92,6 +94,57 @@ private boolean encrypted = false;
 
 
 // -[Methods]-
+
+
+
+
+/**
+ * Reads a set of parameters with a contiguously indexed parameter prefix within the
+ * given ServletContext and returns a list of TcpHostAttributes read in.
+ * 
+ * Note: host is the only mandatory parameter for each set.
+ * 
+ * For example:
+ * 
+ * <Parameter name="entity.service.0.host" value="pagebloom.com"/>
+ * <Parameter name="entity.service.0.subdomain" value= "dev"/>
+ * <Parameter name="entity.service.0.port" value= "80"/>
+ * <Parameter name="entity.service.0.ssl" value= "false"/>
+ * 
+ * <Parameter name="entity.service.1.host" value="employerstream.com.au"/>
+ * <Parameter name="entity.service.1.subdomain" value= "dev"/>
+ * <Parameter name="entity.service.1.port" value= "80"/>
+ * <Parameter name="entity.service.1.ssl" value= "false"/>
+ * 
+ * The method repeatedly reads in the sets starting at index 0, then index 1 etc., stopping
+ * as soon as the next indexed prefixes return no host value.
+ * 
+ * Implementation detail: It does not test for values other than 'host' as it is the
+ * only mandatory parameter so testing for the others will not be a reliable test for
+ * the presence of a parameter set.
+ * 
+ */
+public static List<TcpHostAttributes> readSetOfConfigParameters(String parameterPrefix, ServletContext servletContext)
+{
+	List<TcpHostAttributes> tcpHostAttributesList = new ArrayList<>();
+
+	for(int i = 0; ; i++)
+	{
+		// not worried about the performance of a small amount of string concats that will take place once at app start up
+		TcpHostAttributes tcpHostAttributes = new TcpHostAttributes(parameterPrefix + "." + i);
+
+		tcpHostAttributes.readConfigParameters(servletContext);
+
+		String host = tcpHostAttributes.getHost();
+
+		if (host == null)
+			break;  // no parameters set with the current index so abort
+
+		tcpHostAttributesList.add(tcpHostAttributes);
+	}
+
+	return tcpHostAttributesList;
+}
 
 /**
  * Forms a URL for the host using:
