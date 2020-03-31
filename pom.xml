@@ -30,20 +30,20 @@
 
 
 		<!-- ORM API Versions -->
-		<jdo.api.version>3.2.0-m12</jdo.api.version>
+		<jdo.api.version>3.2.0-m13</jdo.api.version>
 
 		<!-- ORM Implementation versions -->
 
 		<!-- DataNucleus versions -->
 
-		<datanucleus.api.jdo.version>5.2.1</datanucleus.api.jdo.version>
+		<datanucleus.api.jdo.version>5.2.3</datanucleus.api.jdo.version>
 		<datanucleus.cache.version>5.1.1</datanucleus.cache.version>
-		<datanucleus.core.version>5.2.1</datanucleus.core.version>
+		<datanucleus.core.version>5.2.2</datanucleus.core.version>
 		<datanucleus.guava.version>5.0.1</datanucleus.guava.version>
 		<datanucleus.jdo-query.version>5.0.9</datanucleus.jdo-query.version>
-		<datanucleus.jodatime.version>5.1.0-release</datanucleus.jodatime.version>
-		<datanucleus.rdbms.version>5.2.1</datanucleus.rdbms.version>
-		<datanucleus.maven.plugin.version>5.0.2</datanucleus.maven.plugin.version>
+		<datanucleus.jodatime.version>5.2.0-release</datanucleus.jodatime.version>
+		<datanucleus.rdbms.version>5.2.2</datanucleus.rdbms.version>
+		<datanucleus.maven.plugin.version>5.2.1</datanucleus.maven.plugin.version>
 
 		
 		<!-- Miscellaneous -->		

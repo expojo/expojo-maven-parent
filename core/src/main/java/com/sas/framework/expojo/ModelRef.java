@@ -17,11 +17,10 @@
 package com.sas.framework.expojo;
 
 import java.lang.*;
-import com.sas.framework.expojo.IModelRef;
+import com.sas.framework.expojo.ClsIdModelRef;
 
 
 // -[KeepBeforeClass]-
-
 
 
 // -[Class]-
@@ -38,7 +37,7 @@ import com.sas.framework.expojo.IModelRef;
  */
 public abstract 
 class ModelRef<T>
- implements IModelRef<T>
+ extends ClsIdModelRef<T>
 {
 // -[KeepWithinClass]-
 
@@ -53,37 +52,36 @@ class ModelRef<T>
 protected T object;
 
 
-
-/**
- * Stores the class type for later use in getObject.
- * We must store the class because primary key on it's own is not enough as it is usually
- * unique to an individual table only (in an ORM scenario).
- */
-protected Class cls;
-
-
-
-/**
- * Stores the ID (value of primary key) of the object to use when getting the object
- * again after it has been detached.
- * -1 indicates an invalid ID which implies a null object.
- */
-private long id;
-
-
 // -[Methods]-
 
+/**
+ * Constructs the object
+ */
+public ModelRef(T o)
+{
+	super(o);
+}
 
 
 
 /**
- * Returns cls
+ * Needs to be overridden because default equals plays all kinds of havoc.
  */
-public Class getCls()
-{
-	return cls;
-}
+public abstract boolean equals(Object o);
 
+
+
+/**
+ * Detaches the object.
+ */
+public void detach()
+
+{
+	if ( object != null && getId() == -1 )
+		System.out.println("An attempt was made to detach an object which has not yet been made persistent: " + (object != null ? object.getClass().toString() : "null"));
+
+	object = null;
+}
 
 
 
@@ -96,55 +94,9 @@ public Class getCls()
  * an implicit retrieval were to occur.
  */
 public T getObjectNoRetrieve()
+
 {
 	return object;
-}
-
-/**
- * Sets id
- */
-public void setId(long id)
-{
-    this.id = id;
-}
-
-/**
- * Returns id
- */
-public long getId()
-{
-    return id;
-}
-
-/**
- * Describe here
- */
-public int hashCode()
-{
-	return (int)id;
-}
-
-
-
-
-/**
- * Needs to be overridden because default equals plays all kinds of havoc.
- */
-public abstract boolean equals(Object o);
-
-/**
- * Sets object
- */
-public void setObject(T object)
-{
-    this.object = object;
-	if ( object != null )
-	{
-		cls = object.getClass();	
-		id = ModelExposer.pp().getObjectId(object);
-	}
-	else
-		id = -1;
 }
 
 /**
@@ -154,30 +106,19 @@ public T getObject()
 {
 	if ( object == null )
 	{
-		if ( id != -1 )
-			object = (T)ModelExposer.pp().getObject(cls, id);
+		return super.getObject();
 	}
 	
 	return object;
 }
 
 /**
- * Detaches the object.
+ * Sets object
  */
-public void detach()
+public void setObject(T object)
 {
-	if ( object != null && id == -1 )
-		System.out.println("An attempt was made to detach an object which has not yet been made persistent: " + (object != null ? object.getClass().toString() : "null"));
-
-	object = null;
-}
-
-/**
- * Constructs the object
- */
-public ModelRef(T o)
-{
-	setObject(o);
+	this.object = object;
+	super.setObject(object);
 }
 
 }

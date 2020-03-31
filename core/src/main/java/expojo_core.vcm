@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001d1 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001e1 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Core"
@@ -513,7 +513,7 @@ This form of the method is typically only required by ModelRef style objects whi
 			}
 		/} class CClass/ 
 		/{ class Annotation/ 
-			01 0064 01385050 /Location/ 00001856 000005b8 000019d6 0000072a 
+			01 0064 01385050 /Location/ 000018ba 00000626 00001a3a 00000798 
 			{
 			}
 			"The lifecycle of ModelRef objects spans beyond the lifecylce of a single http request and so it can end up being bound and unbound to a variety of threads but will never be bound to more than one thread at a time.
@@ -935,14 +935,14 @@ IBound objects can be registered with the ModelExposer. Whenever a ModelExposer 
 			}
 		/} class CClass/ 
 		/{ class CClass/ 
-			01 000b 36835150 /Location/ 00001518 0000051e 0000175c 0000088e 
+			01 000b 36835150 /Location/ 00001572 0000050a 00001702 0000078a 
 			{
 			}
 			/UOID/ 02 394d7000 00 11d0d663 
-			"ModelRef"
+			"ClsIdModelRef"
 			"RENAME"
 			"com\\sas\\framework\\expojo"
-			"An implementation of a IModelRef that uses features of the generic PersistenceProvider interface to detach/reload model objects."
+			"An IModelRef implementation that stores an OID and the class of the object being referenced."
 			"h"
 			"java"
 			0001 
@@ -956,7 +956,7 @@ IBound objects can be registered with the ModelExposer. Whenever a ModelExposer 
 					0002 /Bend coords/ 
 					/NullObj/ 00 0001 0000 
 					/{ class CClass/ 
-						01 000b 3757f15c /Location/ 00001572 0000032e 00001702 0000040a 
+						01 000b 3757f15c /Location/ 00001572 00000356 00001702 00000432 
 						{
 						}
 						/UOID/ 02 394d7000 00 11d1df55 
@@ -1015,15 +1015,6 @@ IBound objects can be registered with the ModelExposer. Whenever a ModelExposer 
 			}
 			{
 				/{ class Data/ 
-					01 000d 0a25e158 0002 00 00 
-					"T"
-					"object"
-					"Reference to the object that is detachable."
-					0000 01 00 7f 01 01 
-					""
-					/NullObj/ 00 
-				/} class Data/ 
-				/{ class Data/ 
 					01 000d 25f19166 0002 00 00 
 					"Class"
 					"cls"
@@ -1066,7 +1057,7 @@ We must store the class because primary key on it's own is not enough as it is u
 					""
 				/} class Function/ 
 				/{ class Function/ 
-					01 0010 33f79153 0001 00 00 
+					01 0010 346da1dd 0001 00 00 
 					"T"
 					"getObject"
 					"Returns object"
@@ -1080,17 +1071,6 @@ We must store the class because primary key on it's own is not enough as it is u
 					"Class"
 					"getCls"
 					"Returns cls"
-					0000 01 00000000 01 01 00 00 0003 
-					""
-					0000 
-					""
-				/} class Function/ 
-				/{ class Function/ 
-					01 0010 21a1c17e 0001 00 00 
-					"T"
-					"getObjectNoRetrieve"
-					"Returns object. This method works differently to getObject in that it will not  trigger an implicit retrieval of the object if object is null.
-It is useful for diagnostics and debugging to enable visibility of the 'object' attribute without triggering the implicit retrieval mechanism of getObject() which could be quite hazardous depending on at which point in, for example, a http request cycle, an implicit retrieval were to occur."
 					0000 01 00000000 01 01 00 00 0003 
 					""
 					0000 
@@ -1117,32 +1097,12 @@ It is useful for diagnostics and debugging to enable visibility of the 'object' 
 					""
 				/} class Function/ 
 				/{ class Function/ 
-					01 0010 2b604152 0001 00 00 
-					"void"
-					"detach"
-					"Detaches the object."
-					0000 01 00000000 01 01 00 00 0003 
-					""
-					0000 
-					""
-				/} class Function/ 
-				/{ class Function/ 
 					01 0010 33ca216a 0001 00 00 
 					"int"
 					"hashCode"
 					"Describe here"
 					0000 01 00000000 01 01 00 00 0003 
 					""
-					0000 
-					""
-				/} class Function/ 
-				/{ class Function/ 
-					01 0010 28607156 0001 00 00 
-					"boolean"
-					"equals"
-					"Needs to be overridden because default equals plays all kinds of havoc."
-					0000 01 00000000 01 01 01 00 0003 
-					"Object o"
 					0000 
 					""
 				/} class Function/ 
@@ -1153,7 +1113,7 @@ It is useful for diagnostics and debugging to enable visibility of the 'object' 
 		/} class CClass/ 
 		/UOID/ 02 3757f15c /UOID/ 02 27dc415d /UOID/ 02 2707c15b 
 		/{ class Annotation/ 
-			01 0064 2a848172 /Location/ 00001252 00000950 0000143d 00000b52 
+			01 0064 2a848172 /Location/ 0000120c 00000982 000013f7 00000b84 
 			{
 			}
 			"Todo:
@@ -1489,7 +1449,7 @@ Expojo is both highly productive during development time and highly performant a
 			/NullObj/ 00 /UOID/ 02 28e0e003 /UOID/ 02 0ab71044 
 		/} class AssociationChain/ 
 		/{ class CClass/ 
-			01 000b 25d801c2 /Location/ 00001518 00000942 0000175c 00000b4a 
+			01 000b 25d801c2 /Location/ 0000175c 00000abe 000019a0 00000cc6 
 			{
 			}
 			/UOID/ 02 394d7000 00 37b9d650 
@@ -1504,11 +1464,115 @@ Expojo is both highly productive during development time and highly performant a
 			01 0001 0000 00 00 0000 0000 0000 00 
 			{
 				/{ class BaseClassRef/ 
-					01 006b 327051c3 
+					01 006b 3c05f1d3 
 					{
 					}
 					0002 /Bend coords/ 
-					/NullObj/ 00 0001 0000 /UOID/ 02 36835150 00 /UOID/ 02 25d801c2 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 044751d4 /Location/ 0000175c 00000848 000019a0 00000a50 
+						{
+						}
+						/UOID/ 02 394d7000 00 3dc9bcd8 
+						"ModelRef"
+						"RENAME"
+						"com\\sas\\framework\\expojo"
+						"An implementation of a IModelRef that uses features of the generic PersistenceProvider interface to detach/reload model objects."
+						"h"
+						"java"
+						0001 
+						"T"
+						01 0001 0001 00 00 0000 0000 0000 00 
+						{
+							/{ class BaseClassRef/ 
+								01 006b 1cda31d5 
+								{
+								}
+								0002 /Bend coords/ 
+								/NullObj/ 00 0001 0000 /UOID/ 02 36835150 00 /UOID/ 02 044751d4 
+								"T"
+								00 7f 
+							/} class BaseClassRef/ 
+						}
+						{
+							/{ class Data/ 
+								01 000d 2462a1d7 0002 00 00 
+								"T"
+								"object"
+								"Reference to the object that is detachable."
+								0000 01 00 7f 01 01 
+								""
+								/NullObj/ 00 
+							/} class Data/ 
+						}
+						{
+							/{ class FConstructor/ 
+								01 000c 07c7e1df 0001 00 00 
+								"no type"
+								"Constructor"
+								"Constructs the object"
+								0000 01 00000000 01 00 00 00 0000 
+								"T o"
+								0000 
+								""
+							/} class FConstructor/ 
+							/{ class Function/ 
+								01 0010 1b6151d8 0001 00 00 
+								"void"
+								"setObject"
+								"Sets object"
+								0000 01 00000000 01 01 00 00 0003 
+								"T object"
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 2026d1d9 0001 00 00 
+								"T"
+								"getObject"
+								"Returns object"
+								0000 01 00000000 01 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 2ac091da 0001 00 00 
+								"T"
+								"getObjectNoRetrieve"
+								"Returns object. This method works differently to getObject in that it will not  trigger an implicit retrieval of the object if object is null.
+It is useful for diagnostics and debugging to enable visibility of the 'object' attribute without triggering the implicit retrieval mechanism of getObject() which could be quite hazardous depending on at which point in, for example, a http request cycle, an implicit retrieval were to occur."
+								0000 01 00000000 01 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 1c72b1db 0001 00 00 
+								"void"
+								"detach"
+								"Detaches the object."
+								0000 01 00000000 01 01 00 00 0003 
+								""
+								0000 
+								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 1f6501dc 0001 00 00 
+								"boolean"
+								"equals"
+								"Needs to be overridden because default equals plays all kinds of havoc."
+								0000 01 00000000 01 01 01 00 0003 
+								"Object o"
+								0000 
+								""
+							/} class Function/ 
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 25d801c2 
 					"T"
 					00 7f 
 				/} class BaseClassRef/ 
@@ -1594,9 +1658,64 @@ Expojo is both highly productive during development time and highly performant a
 				/} class LoggerCodeInjector/ 
 			}
 		/} class CClass/ 
-		/UOID/ 02 327051c3 
+		/{ class CClass/ 
+			01 000b 26b2a1d2 /Location/ 0000137e 00000848 000015ae 00000924 
+			{
+			}
+			/UOID/ 02 394d7000 00 3dc949ab 
+			"NonCachingModelRef"
+			"RENAME"
+			"com\\sas\\framework\\expojo"
+			"An IModelRef implementation that stores an OID and the class of the object being referenced but never stores/caches a reference to the actual model object - it will retrieve from the data store each time getObject() is called.
+
+This should be used for low frequency access, like storing a reference to a model object in the session object where caching references to real objects is undesirable because it is not each to detach in a safe way if multiple threads can execute for the same session object."
+			"h"
+			"java"
+			0001 
+			"T"
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 0dbd21d6 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 /UOID/ 02 36835150 00 /UOID/ 02 26b2a1d2 
+					"T"
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 1afa41e0 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 01 00 00 00 0000 
+					"T o"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 237631de 0001 00 00 
+					"void"
+					"detach"
+					"Detaches the object."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 044751d4 /UOID/ 02 1cda31d5 /UOID/ 02 0dbd21d6 /UOID/ 02 3c05f1d3 
 	}
-	008c 
+	008f 
 	"com\\sas\\framework\\expojo"
 	0000 
 	/{ class OODBGenerator/ 

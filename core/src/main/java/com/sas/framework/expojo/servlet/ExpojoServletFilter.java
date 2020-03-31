@@ -438,6 +438,9 @@ public void init(FilterConfig filterConfig)
 			exposerPerRequest = true;
 	}
 
+	logInfo("Using a separate Exposer per request: " + exposerPerRequest);
+
+
 /*
 	// Wait until Context is initilized before commencement
 	while ( !ExpojoFoundation.initialized )
