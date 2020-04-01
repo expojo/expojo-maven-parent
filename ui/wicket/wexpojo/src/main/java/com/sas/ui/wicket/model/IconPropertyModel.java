@@ -4,7 +4,8 @@
 // -[Copyright]-
 
 /**
- * (c) 2006, 2012 Step Ahead Software Pty Ltd. All rights reserved.
+ * (c) 2008,2019. Step Ahead Software Pty Ltd. All rights reserved.
+ * Usage is governed by the terms of the Apache 2 License.
  * 
  * Source file created and managed by Javelin (TM) Step Ahead Software.
  * To maintain code and model synchronization you may directly edit code in method bodies
@@ -27,7 +28,7 @@ import org.apache.wicket.markup.MarkupStream;
 /**
  * Class Name : IconPropertyModel
  * Diagram    : Wicket models for Icons and Attribute modifiers
- * Project    : Pagebloom
+ * Project    : WexPOJO - Wicket + exPOJO application core
  * Type       : abstract
  * Displays an icon based on a the domain model object D.
  * 
@@ -57,10 +58,35 @@ class IconPropertyModel<D>
 // -[Fields]-
 
 
+
+/**
+ * Provides an optional size suffix to use to size icons differently to the default for
+ * this class.
+ */
+private String size;
+
+
 // -[Methods]-
 
+/**
+ * Constructs the object
+ */
+public IconPropertyModel(Object modelObject, String iSize)
+{
+	super(modelObject);
+	size = iSize;
+}
 
 
+
+
+/**
+ * Sets size
+ */
+public void setIconSize(String size)
+{
+    this.size = size;
+}
 
 /**
  * Returns the icon size suffix - this may be a suffix like 2x, 4x or sm, lg, xl etc.,
@@ -73,7 +99,9 @@ class IconPropertyModel<D>
  */
 public String getIconSize(D d)
 {
-	return "2x";
+	if (size != null)
+		return size;
+	return "2x"; // default value
 }
 
 /**
@@ -118,7 +146,7 @@ public abstract String getIconName(D object);
  */
 public IconPropertyModel(Object modelObject)
 {
-	super(modelObject);
+	this(modelObject, null);
 }
 
 }

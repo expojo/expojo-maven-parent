@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000da 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000dd 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 261f9000 
 	"Wicket models for Icons and Attribute modifiers"
@@ -7,7 +7,7 @@
 	"Chris Colman"
 	{
 		/{ class CClass/ 
-			01 000b 0ddac0a5 /Location/ 000005b4 00000334 00000848 000004c4 
+			01 000b 0ddac0a5 /Location/ 000005b4 00000334 00000848 00000578 
 			{
 			}
 			/UOID/ 02 261f9000 00 37145844 
@@ -120,6 +120,15 @@ This class then has its own type parameter to specify the domain model object an
 				/} class BaseClassRef/ 
 			}
 			{
+				/{ class Data/ 
+					01 000d 18c4c0da 0003 00 00 
+					"String"
+					"size"
+					"Provides an optional size suffix to use to size icons differently to the default for this class."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
 			}
 			{
 				/{ class FConstructor/ 
@@ -129,6 +138,16 @@ This class then has its own type parameter to specify the domain model object an
 					"Constructs the object"
 					0000 01 00000000 00 00 00 00 0000 
 					"Object modelObject"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 3cc470db 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					"Object modelObject, String iSize"
 					0000 
 					""
 				/} class FConstructor/ 
@@ -164,6 +183,16 @@ icofont-1x, icofont-2x, icofont-4x etc.,
 This method returns the 1x, 2x, 4x etc., suffix as appropriate."
 					0000 01 00000000 01 01 00 00 0003 
 					"D d"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 22a040dc 0001 00 00 
+					"void"
+					"setIconSize"
+					"Sets size"
+					0000 01 00000000 01 01 00 00 0003 
+					"String size"
 					0000 
 					""
 				/} class Function/ 
