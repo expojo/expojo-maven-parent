@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001e1 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001e2 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Core"
@@ -1659,7 +1659,7 @@ It is useful for diagnostics and debugging to enable visibility of the 'object' 
 			}
 		/} class CClass/ 
 		/{ class CClass/ 
-			01 000b 26b2a1d2 /Location/ 0000137e 00000848 000015ae 00000924 
+			01 000b 26b2a1d2 /Location/ 0000137e 00000848 000015ae 00000960 
 			{
 			}
 			/UOID/ 02 394d7000 00 3dc949ab 
@@ -1703,6 +1703,16 @@ This should be used for low frequency access, like storing a reference to a mode
 					"void"
 					"detach"
 					"Detaches the object."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2f5bd1e1 0001 00 00 
+					"T"
+					"getObject"
+					"Override to avoid throwing Exception if object can no longer be retrieved - just catches any exception and returns null."
 					0000 01 00000000 01 01 00 00 0003 
 					""
 					0000 

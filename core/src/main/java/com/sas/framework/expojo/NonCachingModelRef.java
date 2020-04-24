@@ -54,6 +54,22 @@ class NonCachingModelRef<T>
 // -[Methods]-
 
 /**
+ * Override to avoid throwing Exception if object can no longer be retrieved - just catches
+ * any exception and returns null.
+ */
+public T getObject()
+{
+	try
+	{
+		return super.getObject();
+	}
+	catch(Exception e)
+	{
+		return null;
+	}
+}
+
+/**
  * Constructs the object
  */
 public NonCachingModelRef(T o)
