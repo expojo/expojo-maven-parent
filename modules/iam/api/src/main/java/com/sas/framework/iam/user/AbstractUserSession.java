@@ -14,6 +14,7 @@
 package com.sas.framework.iam.user;
 
 import java.lang.*;
+import java.io.Serializable;
 
 
 // -[KeepBeforeClass]-
@@ -34,7 +35,7 @@ import com.sas.framework.iam.user.IUser;
  * @author 
  */
 public abstract 
-interface AbstractUserSession
+interface AbstractUserSession extends Serializable
 {
 // -[KeepWithinClass]-
 public static String sessionId = "USER";
