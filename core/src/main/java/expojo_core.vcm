@@ -935,7 +935,7 @@ IBound objects can be registered with the ModelExposer. Whenever a ModelExposer 
 			}
 		/} class CClass/ 
 		/{ class CClass/ 
-			01 000b 36835150 /Location/ 00001572 0000050a 00001702 0000078a 
+			01 000b 36835150 /Location/ 00001572 0000050a 000017ca 0000078a 
 			{
 			}
 			/UOID/ 02 394d7000 00 11d0d663 
@@ -1016,7 +1016,7 @@ IBound objects can be registered with the ModelExposer. Whenever a ModelExposer 
 			{
 				/{ class Data/ 
 					01 000d 25f19166 0002 00 00 
-					"Class"
+					"Class<? extends T>"
 					"cls"
 					"Stores the class type for later use in getObject.
 We must store the class because primary key on it's own is not enough as it is usually unique to an individual table only (in an ORM scenario)."

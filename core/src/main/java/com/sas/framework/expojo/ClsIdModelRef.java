@@ -51,7 +51,7 @@ class ClsIdModelRef<T>
  * We must store the class because primary key on it's own is not enough as it is usually
  * unique to an individual table only (in an ORM scenario).
  */
-protected Class cls;
+protected Class<? extends T> cls;
 
 
 
@@ -118,7 +118,7 @@ public void setObject(T object)
 {
 	if ( object != null )
 	{
-		cls = object.getClass();	
+		cls = (Class<? extends T>)object.getClass();	
 		id = ModelExposer.pp().getObjectId(object);
 	}
 	else
