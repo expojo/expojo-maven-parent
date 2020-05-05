@@ -88,6 +88,17 @@ private transient ThreadLocal<JdoModelRef<T>> threadLocalModelRef = new ThreadLo
 // -[Methods]-
 
 /**
+ * Returns the thread local associated with this thread or creates one if there is none.
+ */
+public ThreadLocal<JdoModelRef<T>> getThreadLocalModelRef()
+{
+	if (threadLocalModelRef == null)
+		threadLocalModelRef = new ThreadLocal<JdoModelRef<T>>();
+		
+	return threadLocalModelRef;
+}
+
+/**
  * Typically detach on a ModelRef detaches the ModelRef and leaves it open to be reattachd
  * some time later. In this case the ModelRef instance associated with the current Thread
  * is detached and then dissassociated with the thread altogether as it is pointless
@@ -113,10 +124,13 @@ public void detach()
  */
 public void setObject(T object)
 {
+	ThreadLocal<JdoModelRef<T>> threadLocalModelRef = getThreadLocalModelRef();
+		
 	if (object != null)
 	{
 		cls = object.getClass();
 		oid = ExpojoContext.pp().getObjectId(object);
+		
 		JdoModelRef<T> modelRef = threadLocalModelRef.get();
 
 		if ( modelRef == null )
@@ -137,7 +151,7 @@ public void setObject(T object)
  */
 public T getObject()
 {
-	JdoModelRef<T> modelRef = threadLocalModelRef.get();
+	JdoModelRef<T> modelRef = getThreadLocalModelRef().get();
 	if ( modelRef == null )
 	{
 		if ( oid != -1 )

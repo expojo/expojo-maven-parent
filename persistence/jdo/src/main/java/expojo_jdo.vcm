@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000153 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000155 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo JDO specific classes"
@@ -1879,7 +1879,7 @@ This could have been implemented generically in the core and use methods in the 
 			}
 		/} class CClass/ 
 		/{ class CClass/ 
-			01 000b 10b8d0fd /Location/ 000014b4 00000280 000019dc 0000044c 
+			01 000b 10b8d0fd /Location/ 000014b4 00000280 00001a40 00000488 
 			{
 			}
 			/UOID/ 02 394d7000 00 26c08055 
@@ -1990,6 +1990,16 @@ We must store the class because primary key on it's own is not enough as it is u
 					"void"
 					"detach"
 					"Typically detach on a ModelRef detaches the ModelRef and leaves it open to be reattachd some time later. In this case the ModelRef instance associated with the current Thread is detached and then dissassociated with the thread altogether as it is pointless (and potentially insecure due to the nature of the shared thread pool in most web app containers) to keep a reference to it. The only data it holds is the OID and that is held as an attribute of this PerThreadModelRefCache anyway."
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3977c153 0001 00 00 
+					"ThreadLocal<JdoModelRef<T>>"
+					"getThreadLocalModelRef"
+					"Returns the thread local associated with this thread or creates one if there is none."
 					0000 01 00000000 01 01 00 00 0003 
 					""
 					0000 
@@ -2409,6 +2419,15 @@ We must store the class because primary key on it's own is not enough as it is u
 			0002 /Bend coords/ 
 			/NullObj/ 00 /UOID/ 02 128530ce /UOID/ 02 10b8d0fd 
 		/} class AssociationChain/ 
+		/{ class Annotation/ 
+			01 0064 0d760154 /Location/ 000018f6 000001c2 00001a48 000002a4 
+			{
+			}
+			"Could we not use the relatively new NonCachingModelRef instead of this class?
+
+"
+			0810 0002 20646900 
+		/} class Annotation/ 
 	}
 	0089 
 	"com\\sas\\framework\\expojo\\jdo"
