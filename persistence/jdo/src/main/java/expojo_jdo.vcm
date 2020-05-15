@@ -1906,7 +1906,7 @@ This class uses ThreadLocal to associate JdoModelRefS with the thread they were 
 					0002 /Bend coords/ 
 					/NullObj/ 00 0001 0000 
 					/{ class CClass/ 
-						01 000b 0cf890ff /Location/ 000016b2 0000014a 000017de 000001ae 
+						01 000b 0cf890ff /Location/ 000016e4 00000140 00001810 000001a4 
 						{
 						}
 						/UOID/ 02 394d7000 00 26c12f62 

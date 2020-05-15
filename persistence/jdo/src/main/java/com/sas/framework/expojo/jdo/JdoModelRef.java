@@ -59,6 +59,8 @@ public void detach()
 	// if the object is not null and it's either persistent or already detached, we null the object reference and avoid
 	// any stale object problems.
 	
+	T object = getObjectNoRetrieve();
+
 	boolean exPojoDetachable = JDOHelper.isPersistent(object) || JDOHelper.isDetached(object);
 	
 	if (object != null )
@@ -91,6 +93,8 @@ public String getStateDetails()
 	sb.append(" Ref JID=" + System.identityHashCode(this));
 	sb.append(" Obj->");
 	
+	T object = getObjectNoRetrieve();
+
 	if (object == null)
 		sb.append(" null");
 	else
@@ -159,6 +163,7 @@ public boolean equals(Object o)
 			// (Note: the above comparison of IDs ignores versions - is this an issue?)
 
 			JdoModelRef<T> other = ((JdoModelRef<T>)o);
+			T object = getObjectNoRetrieve();
 
 			if ( other.getObject() == null || object == null )
 				return false;

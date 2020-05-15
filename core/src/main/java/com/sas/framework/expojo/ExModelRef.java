@@ -131,11 +131,12 @@ public boolean equals(Object o)
 			// (Note: the above comparison of IDs ignores versions - is this an issue?)
 
 			ExModelRef<T> other = ((ExModelRef<T>)o);
+			T myObject = getObjectNoRetrieve();
 
-			if ( other.getObject() == null || object == null )
+			if ( other.getObject() == null || myObject == null )
 				return false;
 
-			if ( other.getObject().hashCode() != object.hashCode() )
+			if ( other.getObject().hashCode() != myObject.hashCode() )
 				return false;
 			
 			return ExpojoContextFactory.get().compareObjectVersions(getObject(), other.getObject());

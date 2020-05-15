@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001e2 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001e4 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Core"
@@ -1449,7 +1449,7 @@ Expojo is both highly productive during development time and highly performant a
 			/NullObj/ 00 /UOID/ 02 28e0e003 /UOID/ 02 0ab71044 
 		/} class AssociationChain/ 
 		/{ class CClass/ 
-			01 000b 25d801c2 /Location/ 0000175c 00000abe 000019a0 00000cc6 
+			01 000b 25d801c2 /Location/ 0000175c 00000b5e 000019a0 00000d66 
 			{
 			}
 			/UOID/ 02 394d7000 00 37b9d650 
@@ -1470,7 +1470,7 @@ Expojo is both highly productive during development time and highly performant a
 					0002 /Bend coords/ 
 					/NullObj/ 00 0001 0000 
 					/{ class CClass/ 
-						01 000b 044751d4 /Location/ 0000175c 00000848 000019a0 00000a50 
+						01 000b 044751d4 /Location/ 0000175c 00000834 000019a0 00000ab4 
 						{
 						}
 						/UOID/ 02 394d7000 00 3dc9bcd8 
@@ -1496,11 +1496,12 @@ Expojo is both highly productive during development time and highly performant a
 						}
 						{
 							/{ class Data/ 
-								01 000d 2462a1d7 0002 00 00 
+								01 000d 2462a1d7 0003 00 00 
 								"T"
 								"object"
-								"Reference to the object that is detachable."
-								0000 01 00 7f 01 01 
+								"Reference to the object that is detachable.
+Attribute MUST be transient to avoid serializing massive object trees."
+								0000 01 00 7f 01 00 
 								""
 								/NullObj/ 00 
 							/} class Data/ 
@@ -1566,6 +1567,26 @@ It is useful for diagnostics and debugging to enable visibility of the 'object' 
 								"Object o"
 								0000 
 								""
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 1d41e1e2 0003 00 00 
+								"void"
+								"writeObject"
+								"Does not change what is streamed but is here to provide a place to set a breakpoint when debugging streaming of model objects in the entity framework"
+								0000 01 00000000 00 01 00 00 0003 
+								"java.io.ObjectOutputStream out"
+								0000 
+								"IOException, ClassNotFoundException"
+							/} class Function/ 
+							/{ class Function/ 
+								01 0010 291ef1e3 0003 00 00 
+								"void"
+								"readObject"
+								""
+								0000 01 00000000 01 01 00 00 0003 
+								"java.io.ObjectInputStream stream"
+								0000 
+								"IOException, ClassNotFoundException"
 							/} class Function/ 
 						}
 						/NullObj/ 00 

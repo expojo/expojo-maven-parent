@@ -22,6 +22,9 @@ import com.sas.framework.expojo.ClsIdModelRef;
 
 // -[KeepBeforeClass]-
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 
 // -[Class]-
 
@@ -40,6 +43,7 @@ class ModelRef<T>
  extends ClsIdModelRef<T>
 {
 // -[KeepWithinClass]-
+public static final long serialVersionUID = 1L;
 
 
 // -[Fields]-
@@ -48,11 +52,32 @@ class ModelRef<T>
 
 /**
  * Reference to the object that is detachable.
+ * Attribute MUST be transient to avoid serializing massive object trees.
  */
-protected T object;
+private transient T object;
 
 
 // -[Methods]-
+
+/**
+ * 
+ */
+private void readObject(java.io.ObjectInputStream stream)
+  throws IOException, ClassNotFoundException
+{
+	object = null;
+}
+
+/**
+ * Does not change what is streamed but is here to provide a place to set a breakpoint
+ * when debugging streaming of model objects in the entity framework
+ */
+private void writeObject(java.io.ObjectOutputStream out)
+  throws IOException, ClassNotFoundException
+{
+	// Do nothing - object should not be serializable
+	// We mark it as transient but it still seems be getting serialized to the stream
+}
 
 /**
  * Constructs the object
