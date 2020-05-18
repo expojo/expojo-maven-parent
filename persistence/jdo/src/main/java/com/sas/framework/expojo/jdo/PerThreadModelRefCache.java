@@ -108,14 +108,18 @@ public ThreadLocal<JdoModelRef<T>> getThreadLocalModelRef()
  */
 public void detach()
 {
-	// Must detach MR from the actual model object and then
-	// unbind them from this current thread because threads are reused for many different http requeusts
-	// so for security reasons these security sensitive objects should never be left attached to the thread
-	JdoModelRef<T> modelRef = threadLocalModelRef.get();
-	if (modelRef != null)
+	// Only detach if threadLocalModelRef is not null. If null then there can't be any active attachment
+	if (threadLocalModelRef != null)
 	{
-		modelRef.detach();
-		threadLocalModelRef.set(null);
+		// Must detach MR from the actual model object and then
+		// unbind them from this current thread because threads are reused for many different http requeusts
+		// so for security reasons these security sensitive objects should never be left attached to the thread
+		JdoModelRef<T> modelRef = threadLocalModelRef.get();
+		if (modelRef != null)
+		{
+			modelRef.detach();
+			threadLocalModelRef.set(null);
+		}
 	}
 }
 
