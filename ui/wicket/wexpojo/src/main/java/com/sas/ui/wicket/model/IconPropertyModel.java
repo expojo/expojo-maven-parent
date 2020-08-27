@@ -53,6 +53,11 @@ class IconPropertyModel<D>
  extends ChainingPropertyModel<D>
 {
 // -[KeepWithinClass]-
+public enum IconLib
+{
+	icofont,
+	fontawsome
+}
 
 
 // -[Fields]-
@@ -66,7 +71,30 @@ class IconPropertyModel<D>
 private String size;
 
 
+
+/**
+ * The icon library used by this model.
+ */
+private IconLib iconLib;
+
+
 // -[Methods]-
+
+/**
+ * Sets iconLib
+ */
+public void setIconLib(IconLib iconLib)
+{
+    this.iconLib = iconLib;
+}
+
+/**
+ * Returns iconLib
+ */
+public IconLib getIconLib()
+{
+    return iconLib;
+}
 
 /**
  * Constructs the object
@@ -75,10 +103,8 @@ public IconPropertyModel(Object modelObject, String iSize)
 {
 	super(modelObject);
 	size = iSize;
+	iconLib = IconLib.icofont;
 }
-
-
-
 
 /**
  * Sets size
@@ -101,7 +127,15 @@ public String getIconSize(D d)
 {
 	if (size != null)
 		return size;
-	return "2x"; // default value
+
+	if (iconLib == IconLib.icofont)
+	{
+		return "2x"; // default value
+	}
+	else
+	{
+		return null;
+	}
 }
 
 /**
@@ -110,10 +144,29 @@ public String getIconSize(D d)
 public String getIconCssClasses(D d)
 {
 	String iconName = getIconName(d);
-	StringBuilder sb = new StringBuilder("icofont icofont-");
-	sb.append(getIconSize(d));
-	sb.append(" icofont-");
-	sb.append(iconName == null ? "question" : iconName);
+	StringBuilder sb;
+	
+	if (iconLib == IconLib.icofont)
+	{
+		sb = new StringBuilder("icofont icofont-");
+		sb.append(getIconSize(d));
+		sb.append(" icofont-");
+		sb.append(iconName == null ? "question" : iconName);
+	}
+	else
+	{
+		sb = new StringBuilder("fa");
+		String sz = getIconSize(d);
+		if (sz != null)
+		{
+			sb.append(" fa-");
+			sb.append(sz);
+		}
+		
+		sb.append(" fa-");
+		sb.append(iconName == null ? "question" : iconName);
+	}
+
 	return sb.toString();
 }
 
