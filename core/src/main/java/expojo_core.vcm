@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001e4 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001e9 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Core"
@@ -1689,7 +1689,7 @@ It is useful for diagnostics and debugging to enable visibility of the 'object' 
 			"com\\sas\\framework\\expojo"
 			"An IModelRef implementation that stores an OID and the class of the object being referenced but never stores/caches a reference to the actual model object - it will retrieve from the data store each time getObject() is called.
 
-This should be used for low frequency access, like storing a reference to a model object in the session object where caching references to real objects is undesirable because it is not each to detach in a safe way if multiple threads can execute for the same session object."
+This should be used for low frequency access, like storing a reference to a model object in the session object where caching references to real objects is undesirable because it is not easy to detach in a safe way if multiple threads can execute for the same session object."
 			"h"
 			"java"
 			0001 
@@ -1745,6 +1745,44 @@ This should be used for low frequency access, like storing a reference to a mode
 			}
 		/} class CClass/ 
 		/UOID/ 02 044751d4 /UOID/ 02 1cda31d5 /UOID/ 02 0dbd21d6 /UOID/ 02 3c05f1d3 
+		/{ class AssociationChain/ 
+			01 0069 21ebf1e4 
+			{
+				/{ class CardinalityAnchor/ 
+					01 006c 1396f1e5 00000cd0 
+					{
+					}
+					00 0002 00 01 0002 0000 03 
+					""
+					/{ class RoleText/ 
+						01 0071 1ec321e6 ffffffeb 00000003 ffffffff 00000008 
+						{
+						}
+						""
+						0925 0001 00000000 /UOID/ 02 1396f1e5 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/{ class CardinalityAnchor/ 
+					01 006c 251641e7 000001a4 
+					{
+					}
+					01 0002 01 01 0002 0000 02 
+					""
+					/{ class RoleText/ 
+						01 0071 23ff31e8 00000000 00000016 00000014 0000001b 
+						{
+						}
+						""
+						0925 0001 0a7d090a /UOID/ 02 251641e7 
+					/} class RoleText/ 
+					00 7f 01 01 01 01 /NullObj/ 00 
+				/} class CardinalityAnchor/ 
+				/UOID/ 02 1ec321e6 /UOID/ 02 23ff31e8 
+			}
+			0003 /Bend coords/ 000001ae 00000cda 
+			/NullObj/ 00 /UOID/ 02 354d8011 /UOID/ 02 25d801c2 
+		/} class AssociationChain/ 
 	}
 	008f 
 	"com\\sas\\framework\\expojo"

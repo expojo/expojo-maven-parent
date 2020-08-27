@@ -403,7 +403,10 @@ public void executeWrapped(IWrappedOperation operation, Object param1, Object pa
  */
 public static PersistenceProvider pp()
 {
-	return get().getPersistenceProvider();
+	ExpojoContext ec = get();
+	if (ec != null)
+		return ec.getPersistenceProvider();
+	return null;
 }
 
 /**

@@ -36,7 +36,7 @@ import com.sas.framework.expojo.ClsIdModelRef;
  * 
  * This should be used for low frequency access, like storing a reference to a model
  * object in the session object where caching references to real objects is undesirable
- * because it is not each to detach in a safe way if multiple threads can execute for
+ * because it is not easy to detach in a safe way if multiple threads can execute for
  * the same session object.
  * 
  * @author Chris Colman

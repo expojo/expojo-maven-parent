@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000dd 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000000e0 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 261f9000 
 	"Wicket models for Icons and Attribute modifiers"
@@ -7,7 +7,7 @@
 	"Chris Colman"
 	{
 		/{ class CClass/ 
-			01 000b 0ddac0a5 /Location/ 000005b4 00000334 00000848 00000578 
+			01 000b 0ddac0a5 /Location/ 000005b4 00000334 00000848 0000062c 
 			{
 			}
 			/UOID/ 02 261f9000 00 37145844 
@@ -129,6 +129,15 @@ This class then has its own type parameter to specify the domain model object an
 					""
 					/NullObj/ 00 
 				/} class Data/ 
+				/{ class Data/ 
+					01 000d 0729b0dd 0003 00 00 
+					"IconLib"
+					"iconLib"
+					"The icon library used by this model."
+					0000 01 00 7f 01 01 
+					""
+					/NullObj/ 00 
+				/} class Data/ 
 			}
 			{
 				/{ class FConstructor/ 
@@ -151,6 +160,26 @@ This class then has its own type parameter to specify the domain model object an
 					0000 
 					""
 				/} class FConstructor/ 
+				/{ class Function/ 
+					01 0010 010b80de 0001 00 00 
+					"IconLib"
+					"getIconLib"
+					"Returns iconLib"
+					0000 01 00000000 01 01 00 00 0003 
+					""
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 188300df 0001 00 00 
+					"void"
+					"setIconLib"
+					"Sets iconLib"
+					0000 01 00000000 01 01 00 00 0003 
+					"IconLib iconLib"
+					0000 
+					""
+				/} class Function/ 
 				/{ class Function/ 
 					01 0010 377c00b3 0001 00 00 
 					"String"

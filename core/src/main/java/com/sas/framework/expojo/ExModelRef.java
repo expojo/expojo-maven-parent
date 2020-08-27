@@ -18,6 +18,8 @@ package com.sas.framework.expojo;
 
 import java.lang.*;
 import com.sas.framework.expojo.ModelRef;
+    
+import com.sas.framework.expojo.PersistenceProvider;
 
 // [Added by Code Injection Wizard: Log4J Logging Support]
 // Do not edit code injected by the wizard directly in the source file as
@@ -67,7 +69,8 @@ public String toString()
 	T o;
 
 
-	if (Ex.pp().hasActiveTx())
+	PersistenceProvider pp = Ex.pp();
+	if (pp != null && pp.hasActiveTx())
 		o = getObject();
 	else
 		o = getObjectNoRetrieve();
