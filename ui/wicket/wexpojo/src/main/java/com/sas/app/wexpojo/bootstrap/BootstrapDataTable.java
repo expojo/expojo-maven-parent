@@ -15,7 +15,7 @@
 package com.sas.app.wexpojo.bootstrap;
 
 import java.lang.*;
-import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
+import org.apache.wicket.extensions.ajax.markup.html.repeater.data.table.AjaxFallbackDefaultDataTable;
 
 
 // -[KeepBeforeClass]-
@@ -28,7 +28,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.*;
 // -[Class]-
 
 /**
- * Class Name : BoostrapDataTable
+ * Class Name : BootstrapDataTable
  * Diagram    : Bootstrap capable components
  * Project    : WexPOJO - Wicket + exPOJO application core
  * Type       : concrete
@@ -37,8 +37,8 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.*;
  * @author 
  */
 public 
-class BoostrapDataTable<T,S>
- extends DataTable
+class BootstrapDataTable<T,S>
+ extends AjaxFallbackDefaultDataTable
 {
 // -[KeepWithinClass]-
 
@@ -48,14 +48,28 @@ class BoostrapDataTable<T,S>
 
 // -[Methods]-
 
+
+
+
 /**
  * Constructs the new table
  */
-public BoostrapDataTable(final String id, final List<? extends IColumn<T, S>> columns, final ISortableDataProvider<T, S> dataProvider, final int rowsPerPage)
+public BootstrapDataTable(final String id, final List<? extends IColumn<T, S>> columns, final ISortableDataProvider<T, S> dataProvider, final int rowsPerPage)
+{
+	this(id, columns, dataProvider, rowsPerPage, false);
+}
+
+/**
+ * Constructs the new table
+ */
+public BootstrapDataTable(final String id, final List<? extends IColumn<T, S>> columns, final ISortableDataProvider<T, S> dataProvider, final int rowsPerPage, boolean striped)
 {
 	super(id, columns, dataProvider, rowsPerPage);
 
-	add(new AttributeAppender("class", "table table-condensed table-hover table-stemless"));
+	String bootstrapTableClasses = " table table-condensed table-hover table-stemless";
+	if (striped)
+		bootstrapTableClasses += " table-striped";
+	add(new AttributeAppender("class", bootstrapTableClasses));
 }
 
 }

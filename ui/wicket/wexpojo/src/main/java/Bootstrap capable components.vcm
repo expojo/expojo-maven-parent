@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000008 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000009 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 3d15a000 
 	"Bootstrap capable components"
@@ -7,11 +7,11 @@
 	""
 	{
 		/{ class CClass/ 
-			01 000b 2e449003 /Location/ 000004a6 000001cc 0000069a 0000026c 
+			01 000b 2e449003 /Location/ 00000488 000001d6 00000690 000002b2 
 			{
 			}
 			/UOID/ 02 3d15a000 00 4097e695 
-			"BoostrapDataTable"
+			"BootstrapDataTable"
 			"RENAME"
 			"com\\sas\\app\\wexpojo\\bootstrap"
 			"Extends DataTable to add an appender that outputs bootstrap table (CSS) classes."
@@ -28,13 +28,13 @@
 					0002 /Bend coords/ 
 					/NullObj/ 00 0001 0000 
 					/{ class CClass/ 
-						01 000b 3a567005 /Location/ 0000050a 000000b4 00000636 00000118 
+						01 000b 3a567005 /Location/ 00000410 00000096 00000708 000000fa 
 						{
 						}
 						/UOID/ 02 3d15a000 00 4094083b 
-						"DataTable"
+						"AjaxFallbackDefaultDataTable"
 						"RENAME"
-						"org\\apache\\wicket\\extensions\\markup\\html\\repeater\\data\\table"
+						"org\\apache\\wicket\\extensions\\ajax\\markup\\html\\repeater\\data\\table"
 						"Describe here"
 						"h"
 						"java"
@@ -61,6 +61,16 @@
 			{
 				/{ class FConstructor/ 
 					01 000c 11424006 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the new table"
+					0000 01 00000000 01 00 00 00 0000 
+					"final String id, final List<? extends IColumn<T, S>> columns, final ISortableDataProvider<T, S> dataProvider, final int rowsPerPage, boolean striped"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 34e34008 0001 00 00 
 					"no type"
 					"Constructor"
 					"Constructs the new table"
