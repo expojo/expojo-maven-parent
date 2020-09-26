@@ -1,0 +1,89 @@
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000008 01 0001 
+/{ class ClassDiagram/ 
+	01 3afc 3d15a000 
+	"Bootstrap capable components"
+	""
+	""
+	""
+	{
+		/{ class CClass/ 
+			01 000b 2e449003 /Location/ 000004a6 000001cc 0000069a 0000026c 
+			{
+			}
+			/UOID/ 02 3d15a000 00 4097e695 
+			"BoostrapDataTable"
+			"RENAME"
+			"com\\sas\\app\\wexpojo\\bootstrap"
+			"Extends DataTable to add an appender that outputs bootstrap table (CSS) classes."
+			"h"
+			"java"
+			0001 
+			"T,S"
+			00 0001 0000 00 00 0000 0000 0000 00 
+			{
+				/{ class BaseClassRef/ 
+					01 006b 313ec004 
+					{
+					}
+					0002 /Bend coords/ 
+					/NullObj/ 00 0001 0000 
+					/{ class CClass/ 
+						01 000b 3a567005 /Location/ 0000050a 000000b4 00000636 00000118 
+						{
+						}
+						/UOID/ 02 3d15a000 00 4094083b 
+						"DataTable"
+						"RENAME"
+						"org\\apache\\wicket\\extensions\\markup\\html\\repeater\\data\\table"
+						"Describe here"
+						"h"
+						"java"
+						0001 
+						"T,S"
+						00 0001 0000 01 00 0004 0000 0000 00 
+						{
+						}
+						{
+						}
+						{
+						}
+						/NullObj/ 00 
+						{
+						}
+					/} class CClass/ 
+					00 /UOID/ 02 2e449003 
+					""
+					00 7f 
+				/} class BaseClassRef/ 
+			}
+			{
+			}
+			{
+				/{ class FConstructor/ 
+					01 000c 11424006 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the new table"
+					0000 01 00000000 01 00 00 00 0000 
+					"final String id, final List<? extends IColumn<T, S>> columns, final ISortableDataProvider<T, S> dataProvider, final int rowsPerPage"
+					0000 
+					""
+				/} class FConstructor/ 
+			}
+			/NullObj/ 00 
+			{
+			}
+		/} class CClass/ 
+		/UOID/ 02 3a567005 /UOID/ 02 313ec004 
+	}
+	0066 
+	"com\\sas\\app\\wexpojo\\bootstrap"
+	0000 
+	/{ class OODBGenerator/ 
+		01 046d 0f76b002 
+		""
+		0000 00000000 00000000 00 00 01 00 00 01 
+		"VERSION"
+		/NullObj/ 00 
+	/} class OODBGenerator/ 
+/} class ClassDiagram/ 
