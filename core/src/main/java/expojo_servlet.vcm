@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001c3 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001c4 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Foundation, ServletFilter"
@@ -1998,7 +1998,7 @@ established the ORM will fail on such servlet containers."
 			0810 0002 00000003 
 		/} class Annotation/ 
 		/{ class CClass/ 
-			01 000b 1c4221af /Location/ 000016bc 00000b40 00001bbc 00001018 
+			01 000b 1c4221af /Location/ 0000132e 00000be0 0000182e 000010b8 
 			{
 			}
 			/UOID/ 02 394d7000 00 3b242dc6 
@@ -2236,6 +2236,21 @@ Implementation detail: It does not test for values other than 'host' as it is th
 			{
 			}
 		/} class CClass/ 
+		/{ class Annotation/ 
+			01 0064 221d91c3 /Location/ 000018a6 00000c26 00001c88 00000d74 
+			{
+			}
+			"Thie class is now deprecated.
+
+It has functions have been separated into two separate classes:
+   - TcpHostProperties: a generic class with no dependency 
+     on javax.servlet.* which is used to hold the properties
+   - TcpHostPropertiesReader: creates TcpHostProperties 
+     instances by reading properties from a javax.servlet.ServletContext
+     
+     "
+			0810 0002 35313032 
+		/} class Annotation/ 
 	}
 	008b 
 	"com\\sas\\framework\\expojo\\servlet"

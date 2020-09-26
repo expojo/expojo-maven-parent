@@ -1,4 +1,4 @@
-00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 0000000b 01 
+00d0def1 7ffe 0000 00 00000002 00000001 00000002 0007 00000101 00000000 0000000c 01 
 /{ class ModelRepository/ 
 	01 2134 2c6bc000 
 	{
@@ -50,6 +50,13 @@ Usage is governed by the terms of the Apache 2 License."
 			"Wicket models for Icons and Attribute modifiers"
 			/UOID/ 02 2c6bc000 
 			"Wicket models for icons and attribute modifiers.vcm"
+		/} class ClassDiagramRef/ 
+		/{ class ClassDiagramRef/ 
+			01 2135 0518900b 
+			"DEFAULT"
+			"Bootstrap capable components"
+			/UOID/ 02 2c6bc000 
+			"Bootstrap capable components.vcm"
 		/} class ClassDiagramRef/ 
 	}
 	/{ class MakeRunOptions/ 
