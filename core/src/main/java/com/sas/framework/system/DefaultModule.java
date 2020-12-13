@@ -49,10 +49,13 @@ class DefaultModule implements IModule
 
 // -[Methods]-
 
+
+
+
 /**
  * Initializes the module
  */
-public void init()
+public void init(IModulesProvider modulesProvider)
 {
 }
 

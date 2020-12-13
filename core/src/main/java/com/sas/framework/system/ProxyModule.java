@@ -52,11 +52,11 @@ class ProxyModule implements IModule
 // Do not edit code injected by the wizard directly in the source file as
 // as it will be overwritten during subsequent updates. 
 
-public void init()
+public void init(IModulesProvider modulesProvider)
 {
 
 
-            impl.init();
+            impl.init(modulesProvider);
 
 
             return;

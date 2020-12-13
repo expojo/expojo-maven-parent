@@ -49,6 +49,14 @@ interface IModulesProvider
 
 
 
+
+/**
+ * Returns the property with the given name.
+ */
+public abstract Object getProperty(String name);
+
+
+
 /**
  * Adds an IModule.
  */

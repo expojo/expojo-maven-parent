@@ -105,7 +105,7 @@ public abstract String[] getMetaDataPackages();
  * If a module requires new objects to be created during the 'genesis' phase of a new
  * system then override establishGenesisObjects and create such new objects in that method.
  */
-public abstract void init();
+public abstract void init(IModulesProvider modulesProvider);
 
 
 

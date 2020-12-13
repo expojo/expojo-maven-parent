@@ -25,9 +25,10 @@ import com.sas.framework.system.IModule;
 
 
 // -[KeepBeforeClass]-
-
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
+import java.util.HashMap;
 
 // -[Class]-
 
@@ -47,11 +48,34 @@ class DefaultModulesProvider implements IModulesProvider
 
 
 // -[Fields]-
+
+
+
+/**
+ * Map of properties to be made available to modules via getProperty().
+ */
+private Map<String,Object> properties = new HashMap<>();
     
     protected Collection<IModule> modules;
 
 
 // -[Methods]-
+
+/**
+ * Describe here
+ */
+public void setProperty(String name, Object property)
+{
+	properties.put(name, property);
+}
+
+/**
+ * Returns the property with the given name.
+ */
+public Object getProperty(String name)
+{
+	return properties.get(name);
+}
 
 
 

@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 0000013f 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 00000144 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 1d179000 
 	"Exopjo Module System"
@@ -7,7 +7,7 @@
 	"Chris Colman"
 	{
 		/{ class CClass/ 
-			01 000b 3aeb20d5 /Location/ 0000001e 0000001e 00000316 00000226 
+			01 000b 3aeb20d5 /Location/ 0000001e 0000006e 00000316 00000276 
 			{
 			}
 			/UOID/ 02 1d179000 00 1c12269e 
@@ -45,7 +45,7 @@ destroy - called after application has stopped running
 If you need some code to be executed at start up of a module that requires these vital systems and operations then place that code in the start method.
 If a module requires new objects to be created during the 'genesis' phase of a new system then override establishGenesisObjects and create such new objects in that method."
 					0000 01 00000000 00 01 01 00 0003 
-					""
+					"IModulesProvider modulesProvider"
 					0000 
 					""
 				/} class Function/ 
@@ -150,7 +150,7 @@ This method is typically used by an application to ensure that all meta data is 
 			}
 		/} class CClass/ 
 		/{ class CClass/ 
-			01 000b 1f18e114 /Location/ 000004ce 00000014 0000065e 00000078 
+			01 000b 1f18e114 /Location/ 000004ce 00000046 0000065e 000000aa 
 			{
 			}
 			/UOID/ 02 1d179000 00 32a7cab8 
@@ -177,7 +177,7 @@ This method is typically used by an application to ensure that all meta data is 
 			01 0069 2cccb115 
 			{
 				/{ class CardinalityAnchor/ 
-					01 006c 291b1116 0000003c 
+					01 006c 291b1116 00000082 
 					{
 					}
 					00 0002 00 01 0002 0000 01 
@@ -192,7 +192,7 @@ This method is typically used by an application to ensure that all meta data is 
 					00 7f 01 01 01 01 /NullObj/ 00 
 				/} class CardinalityAnchor/ 
 				/{ class CardinalityAnchor/ 
-					01 006c 02632118 0000003c 
+					01 006c 02632118 00000082 
 					{
 					}
 					01 0002 01 01 0002 0000 03 
@@ -245,7 +245,7 @@ This method is typically used by an application to ensure that all meta data is 
 					"init"
 					"Initializes the module"
 					0000 01 00000000 00 01 00 00 0003 
-					""
+					"IModulesProvider modulesProvider"
 					0000 
 					""
 				/} class Function/ 
@@ -317,7 +317,7 @@ This method is typically used by an application to ensure that all meta data is 
 		/} class CClass/ 
 		/UOID/ 02 0128611b 
 		/{ class CClass/ 
-			01 000b 0f492123 /Location/ 0000085c 00000000 00000b90 000000dc 
+			01 000b 0f492123 /Location/ 00000866 ffffffec 00000b9a 00000104 
 			{
 			}
 			/UOID/ 02 1d179000 00 37511407 
@@ -355,13 +355,23 @@ This method is typically used by an application to ensure that all meta data is 
 					0000 
 					""
 				/} class Function/ 
+				/{ class Function/ 
+					01 0010 1821413f 0001 00 00 
+					"Object"
+					"getProperty"
+					"Returns the property with the given name."
+					0000 01 00000000 00 01 01 00 0003 
+					"String name"
+					0000 
+					""
+				/} class Function/ 
 			}
 			/NullObj/ 00 
 			{
 			}
 		/} class CClass/ 
 		/{ class CClass/ 
-			01 000b 33f0a125 /Location/ 0000085c 00000154 00000b90 0000026c 
+			01 000b 33f0a125 /Location/ 00000866 0000017c 00000b9a 00000348 
 			{
 			}
 			/UOID/ 02 1d179000 00 375270c8 
@@ -386,6 +396,15 @@ This method is typically used by an application to ensure that all meta data is 
 				/} class BaseClassRef/ 
 			}
 			{
+				/{ class Data/ 
+					01 000d 06e6a140 0003 00 00 
+					"Map<String,Object>"
+					"properties"
+					"Map of properties to be made available to modules via getProperty()."
+					0000 01 00 7f 01 01 
+					"new HashMap<>()"
+					/NullObj/ 00 
+				/} class Data/ 
 			}
 			{
 				/{ class FConstructor/ 
@@ -418,6 +437,26 @@ This method is typically used by an application to ensure that all meta data is 
 					0000 
 					""
 				/} class Function/ 
+				/{ class Function/ 
+					01 0010 2a21b141 0001 00 00 
+					"Object"
+					"getProperty"
+					"Returns the property with the given name."
+					0000 01 00000000 00 01 00 00 0003 
+					"String name"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 0225a142 0001 00 00 
+					"void"
+					"setProperty"
+					"Describe here"
+					0000 01 00000000 00 01 00 00 0003 
+					"String name, Object property"
+					0000 
+					""
+				/} class Function/ 
 			}
 			/NullObj/ 00 
 			{
@@ -427,7 +466,7 @@ This method is typically used by an application to ensure that all meta data is 
 			01 0069 1fd80128 
 			{
 				/{ class CardinalityAnchor/ 
-					01 006c 1ec39129 0000008c 
+					01 006c 1ec39129 000000be 
 					{
 					}
 					00 0002 00 01 0002 0000 03 
@@ -442,7 +481,7 @@ This method is typically used by an application to ensure that all meta data is 
 					00 7f 01 01 01 01 /NullObj/ 00 
 				/} class CardinalityAnchor/ 
 				/{ class CardinalityAnchor/ 
-					01 006c 3fd1812b 0000008c 
+					01 006c 3fd1812b 000000be 
 					{
 					}
 					01 0002 01 01 0002 0000 01 
@@ -466,7 +505,7 @@ This method is typically used by an application to ensure that all meta data is 
 			01 0069 2990912d 
 			{
 				/{ class CardinalityAnchor/ 
-					01 006c 0de1112e 0000015e 
+					01 006c 0de1112e 00000186 
 					{
 					}
 					00 0002 00 01 0002 0000 03 
@@ -481,7 +520,7 @@ This method is typically used by an application to ensure that all meta data is 
 					00 7f 01 01 01 01 /NullObj/ 00 
 				/} class CardinalityAnchor/ 
 				/{ class CardinalityAnchor/ 
-					01 006c 06951130 0000015e 
+					01 006c 06951130 00000186 
 					{
 					}
 					01 0001 01 01 0002 0006 01 
@@ -570,7 +609,7 @@ This method is typically used by an application to ensure that all meta data is 
 					00 7f 01 01 01 01 /NullObj/ 00 
 				/} class CardinalityAnchor/ 
 				/{ class CardinalityAnchor/ 
-					01 006c 170ed13b 000001ae 
+					01 006c 170ed13b 000001e0 
 					{
 					}
 					01 0002 01 01 0002 0001 01 
@@ -586,7 +625,7 @@ This method is typically used by an application to ensure that all meta data is 
 				/} class CardinalityAnchor/ 
 				/UOID/ 02 0759f13a /UOID/ 02 1f57913c 
 			}
-			0003 /Bend coords/ 00000582 000001b8 
+			0003 /Bend coords/ 00000582 000001ea 
 			/NullObj/ 00 /UOID/ 02 3aeb20d5 /UOID/ 02 232b4135 
 		/} class AssociationChain/ 
 		/{ class Annotation/ 
@@ -595,6 +634,13 @@ This method is typically used by an application to ensure that all meta data is 
 			}
 			"This class is a 'Custom Proxy' so methods of the interface it implements are auto generated at design time by Javelin rather than inefficiently synthesized via reflection at runtime."
 			0810 0002 20202020 
+		/} class Annotation/ 
+		/{ class Annotation/ 
+			01 0064 27940143 /Location/ 00000474 0000047e 00000488 00000488 
+			{
+			}
+			""
+			0810 0002 6a63762e 
 		/} class Annotation/ 
 	}
 	0084 
