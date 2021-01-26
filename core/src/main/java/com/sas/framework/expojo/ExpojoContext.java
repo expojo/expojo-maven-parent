@@ -453,10 +453,10 @@ public ExpojoComponent getComponent(Class key)
  */
 protected void addComponent(Class key, ExpojoComponent component)
 {
-	component.setExpojoContext(this);
-
 	if ( components.containsKey(key) )
-		throw new RuntimeException("ExpojoContext already contains component with ID: " + component.getId());
+		throw new RuntimeException("ExpojoContext already contains a component with key: " + key);
+
+	component.setExpojoContext(this);
 
 	components.put(key, component);
 }
