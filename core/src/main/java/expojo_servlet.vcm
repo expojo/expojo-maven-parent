@@ -1,4 +1,4 @@
-7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001c5 01 0001 
+7abbfab0 7ffe 0000 00 00000005 00000001 00000005 0241 00000101 00000000 000001c7 01 0001 
 /{ class ClassDiagram/ 
 	01 3afc 394d7000 
 	"Expojo Foundation, ServletFilter"
@@ -1998,7 +1998,7 @@ established the ORM will fail on such servlet containers."
 			0810 0002 00000003 
 		/} class Annotation/ 
 		/{ class CClass/ 
-			01 000b 1c4221af /Location/ 0000132e 00000be0 0000182e 000010b8 
+			01 000b 1c4221af /Location/ 0000132e 00000be0 0000182e 00001130 
 			{
 			}
 			/UOID/ 02 394d7000 00 3b242dc6 
@@ -2077,6 +2077,16 @@ NOTE: The parameterPrefixes must be unique within any given application."
 					"Constructs the object"
 					0000 01 00000000 00 00 00 00 0000 
 					"String iParameterPrefix"
+					0000 
+					""
+				/} class FConstructor/ 
+				/{ class FConstructor/ 
+					01 000c 33ba41c5 0001 00 00 
+					"no type"
+					"Constructor"
+					"Constructs the object"
+					0000 01 00000000 00 00 00 00 0000 
+					""
 					0000 
 					""
 				/} class FConstructor/ 
@@ -2228,6 +2238,16 @@ Implementation detail: It does not test for values other than 'host' as it is th
 					"Sets encrypted"
 					0000 01 00000000 00 01 00 00 0003 
 					"boolean encrypted"
+					0000 
+					""
+				/} class Function/ 
+				/{ class Function/ 
+					01 0010 3001e1c6 0001 00 00 
+					"String"
+					"toString"
+					"Returns details of the host."
+					0000 01 00000000 00 01 00 00 0003 
+					""
 					0000 
 					""
 				/} class Function/ 

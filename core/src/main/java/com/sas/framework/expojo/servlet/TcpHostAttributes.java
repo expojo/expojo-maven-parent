@@ -95,6 +95,22 @@ private boolean encrypted = false;
 
 // -[Methods]-
 
+/**
+ * Returns details of the host.
+ */
+public String toString()
+{
+	return "Host: [" + subdomain + ".]" + host + " Port: " + port + " Encrypted: " + (encrypted ? "Yes" : "No");
+}
+
+
+
+/**
+ * Constructs the object
+ */
+public TcpHostAttributes() {
+}
+
 
 
 
