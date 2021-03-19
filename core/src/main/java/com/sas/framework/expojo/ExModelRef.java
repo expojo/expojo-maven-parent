@@ -76,7 +76,7 @@ public String toString()
 		o = getObjectNoRetrieve();
 
 	if ( getId() == -1 )
-		logger.error("Sup wid dis no OID?: " + cls.getSimpleName());
+		logger.error("Sup wid dis no OID?: " + (cls != null ? cls.getSimpleName() : "<no cls>"));
 
 
 	return (o != null) ? o.toString() : "Null object: " + getId();
