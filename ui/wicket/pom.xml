@@ -47,7 +47,7 @@
 
 
 	<properties>
-		<wicket.version>6.29.0</wicket.version>
+		<wicket.version>7.17.0</wicket.version>
 		<expojo.version>3.2.1</expojo.version>
 	</properties>
 
